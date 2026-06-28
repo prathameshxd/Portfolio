@@ -1,0 +1,70 @@
+:root {
+  --bg-dark: #0B0B0C;
+  --bg-light: #F7F6F2;
+  --text-dark: #F7F6F2;
+  --text-light: #0B0B0C;
+  --accent: #D4FF3F;
+  --gray: #888888;
+  --font-display: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --nav-height: 80px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: none; /* Custom cursor handles this */
+}
+
+body {
+  font-family: var(--font-display);
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Light Theme overrides - handled via class */
+body.theme-light {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Base typography utilities */
+.h1-display {
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gray);
+}
+
+/* Prevent text selection */
+.no-select {
+  user-select: none;
+}
+
+/* Fallback for when custom cursor fails or for accessibility */
+@media (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+}

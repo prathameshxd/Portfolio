@@ -1,0 +1,137 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 100;
+  mix-blend-mode: difference;
+  color: var(--text-dark); /* difference will invert this correctly over white/black */
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 4rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.05em;
+  z-index: 101;
+}
+
+.desktopNav {
+  display: flex;
+  gap: 3rem;
+}
+
+.navLink {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.navLink:hover .underline {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.navLink.active .underline {
+  transform: scaleX(1);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.3s linear;
+}
+
+.lineOpen1 {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.lineOpen2 {
+  transform: rotate(-45deg) translate(7px, -8px);
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 99; /* below logo/hamburger */
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+}
+
+.mobileNavLink {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.mobileNavLink.active {
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .navContainer {
+    padding: 0 2rem;
+  }
+  .desktopNav {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .header {
+    mix-blend-mode: normal; /* Better for mobile menu */
+  }
+}

@@ -1,0 +1,267 @@
+.workPage {
+  /* Using light theme vars assuming body.theme-light is active */
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  padding: 15rem 4rem 10rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hook {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: rgba(11, 11, 12, 0.7);
+}
+
+.contextSection {
+  padding: 0 4rem 10rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.contextBlock h3, .sectionHeader {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.contextBlock p {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: rgba(11, 11, 12, 0.8);
+}
+
+.researchCallout {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+  padding: 4rem;
+  border-radius: 24px;
+}
+
+.calloutStat {
+  font-size: 5rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.researchCallout p {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+.resultsSection {
+  padding: 0 4rem 10rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.resultCard {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 3rem;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.02);
+}
+
+.resultCard h4 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.resultDesc {
+  color: rgba(11, 11, 12, 0.6);
+  margin-bottom: 2rem;
+}
+
+.metricRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.metricOld {
+  font-size: 1.5rem;
+  color: rgba(11, 11, 12, 0.4);
+  text-decoration: line-through;
+}
+
+.metricArrow {
+  color: var(--gray);
+}
+
+.metricNew {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--bg-dark);
+}
+
+.improvementTag {
+  background: var(--accent);
+  color: var(--bg-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.testingSection {
+  padding: 0 4rem 10rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.testingCard {
+  background: var(--accent);
+  color: var(--bg-dark);
+  padding: 6rem 4rem;
+  border-radius: 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hugeStat {
+  font-size: clamp(6rem, 15vw, 12rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  margin-bottom: 2rem;
+}
+
+.testingDesc {
+  font-size: 1.5rem;
+  font-weight: 500;
+  max-width: 600px;
+}
+
+.gallerySection {
+  padding: 0 4rem 10rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.galleryItem {
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.03);
+  transition: transform 0.3s;
+}
+
+.imgPlaceholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: rgba(0,0,0,0.05);
+}
+
+.caption {
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.behanceSection {
+  text-align: center;
+  padding: 0 4rem 10rem;
+}
+
+.behanceBtn {
+  display: inline-block;
+  background: var(--bg-dark);
+  color: var(--text-dark);
+  padding: 1.5rem 3rem;
+  border-radius: 100px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.behanceBtn:hover {
+  transform: translateY(-5px);
+  background: #222;
+}
+
+.ctaSection {
+  padding: 10rem 4rem;
+  text-align: center;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.nextProject {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nextProject h2 {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.ctaArrow {
+  font-size: clamp(3rem, 6vw, 5rem);
+  color: var(--bg-dark);
+  transition: transform 0.3s ease;
+}
+
+.nextProject:hover .ctaArrow {
+  transform: translateX(20px);
+}
+
+@media (max-width: 768px) {
+  .hero, .contextSection, .resultsSection, .testingSection, .gallerySection, .behanceSection, .ctaSection {
+    padding: 6rem 2rem;
+  }
+  .grid2 {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+  .researchCallout {
+    padding: 2rem;
+  }
+  .testingCard {
+    padding: 3rem 1.5rem;
+  }
+  .metricRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
