@@ -11,16 +11,15 @@ export default function Nav() {
 
   const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/stack', label: 'Stack' },
     { path: '/work', label: 'Work' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/stack', label: 'Stack' },
   ];
 
   return (
     <header className={styles.header}>
       <div className={styles.navContainer}>
         <NavLink to="/" className={styles.logo} onClick={closeMenu}>
-          PP
+          PRATHAMESH P
         </NavLink>
 
         {/* Desktop Nav */}
@@ -37,6 +36,13 @@ export default function Nav() {
               <span className={styles.underline}></span>
             </NavLink>
           ))}
+          <a href="/Prathamesh_Patil_resume.pdf" target="_blank" rel="noopener noreferrer" className={styles.resumeButton}>
+            Resume
+          </a>
+          <NavLink to="/contact" className={styles.ctaButton}>
+            Contact me
+            <span className={styles.arrow}>→</span>
+          </NavLink>
         </nav>
 
         {/* Mobile Hamburger */}
@@ -75,6 +81,35 @@ export default function Nav() {
                   </NavLink>
                 </motion.div>
               ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + navLinks.length * 0.1 }}
+              >
+                <a
+                  href="/Prathamesh_Patil_resume.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={styles.mobileResumeButton}
+                  onClick={closeMenu}
+                >
+                  Resume
+                </a>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + (navLinks.length + 1) * 0.1 }}
+              >
+                <NavLink
+                  to="/contact"
+                  className={styles.mobileCtaButton}
+                  onClick={closeMenu}
+                >
+                  Contact me
+                  <span className={styles.arrow}>→</span>
+                </NavLink>
+              </motion.div>
             </nav>
           </motion.div>
         )}

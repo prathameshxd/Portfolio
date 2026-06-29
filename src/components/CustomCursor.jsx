@@ -46,7 +46,7 @@ export default function CustomCursor() {
         x: mousePosition.x - (isHovering ? 20 : 8),
         y: mousePosition.y - (isHovering ? 20 : 8),
         scale: isHovering ? 2.5 : 1,
-        backgroundColor: isHovering ? 'var(--accent)' : 'var(--text-dark)',
+        backgroundColor: isHovering ? 'var(--accent)' : 'var(--cursor-color)',
         mixBlendMode: isHovering ? 'difference' : 'normal',
       }}
       transition={{

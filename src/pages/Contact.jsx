@@ -46,10 +46,34 @@ const MagneticButton = ({ children, href }) => {
 export default function Contact() {
   const [formState, setFormState] = useState('idle'); // idle, submitting, success
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormState('submitting');
-    setTimeout(() => setFormState('success'), 1500);
+    
+    const formData = new FormData(e.target);
+    // Web3Forms Access Key
+    formData.append("access_key", "be92650d-8d94-48e0-854f-8eefac5fad32");
+    
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setFormState('success');
+      } else {
+        console.error("Error submitting form", data);
+        setFormState('idle');
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+      setFormState('idle');
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -123,15 +147,15 @@ export default function Contact() {
           ) : (
             <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.inputGroup}>
-                <input type="text" id="name" required placeholder=" " />
+                <input type="text" id="name" name="name" required placeholder=" " />
                 <label htmlFor="name">Your Name</label>
               </div>
               <div className={styles.inputGroup}>
-                <input type="email" id="email" required placeholder=" " />
+                <input type="email" id="email" name="email" required placeholder=" " />
                 <label htmlFor="email">Your Email</label>
               </div>
               <div className={styles.inputGroup}>
-                <textarea id="message" required placeholder=" " rows={5}></textarea>
+                <textarea id="message" name="message" required placeholder=" " rows={5}></textarea>
                 <label htmlFor="message">Your Message</label>
               </div>
               <button 

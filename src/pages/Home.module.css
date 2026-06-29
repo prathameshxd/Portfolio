@@ -15,19 +15,65 @@
   padding-top: var(--nav-height);
 }
 
+.heroInner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .heroContent {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .heroInner {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 .heroTitle {
-  margin: 2rem 0;
+  font-size: clamp(2rem, 5vw, 5.5rem);
+  margin: 1rem 0 2rem 0;
   display: flex;
   flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.heroImageWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* transform is handled by framer-motion in the component */
+  width: clamp(120px, 15vw, 160px);
+  height: clamp(160px, 20vw, 220px);
+  border-radius: 200px; /* Full pill radius */
+  overflow: hidden;
+  z-index: 2; /* Layered over the text */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  pointer-events: none; /* Let clicks pass through if needed */
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .splitTextLine {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
 
 .wordWrapper {
@@ -46,7 +92,7 @@
   line-height: 1.6;
   max-width: 800px;
   color: rgba(247, 246, 242, 0.8); /* off-white with opacity */
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .ctaGroup {
@@ -236,5 +282,195 @@
   }
   .marqueeText {
     font-size: 2.5rem;
+  }
+}
+
+/* Stack Section */
+.stackSection {
+  padding: 8rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stackHeader {
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stackBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.stackTitle {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.stackDesc {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: 
+    "design code"
+    "ai ai";
+  gap: 1.5rem;
+  max-width: 1000px;
+  width: 100%;
+}
+
+@keyframes subtleGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.bentoCard {
+  position: relative;
+  background: linear-gradient(
+    135deg, 
+    rgba(255, 255, 255, 0.01) 0%, 
+    color-mix(in srgb, var(--card-color) 4%, transparent) 50%, 
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  background-size: 200% 200%;
+  animation: subtleGradient 15s ease infinite;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s ease;
+  backdrop-filter: blur(20px);
+}
+
+.bentoCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: linear-gradient(
+    135deg, 
+    rgba(255, 255, 255, 0.02) 0%, 
+    color-mix(in srgb, var(--card-color) 8%, transparent) 50%, 
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  background-size: 200% 200%;
+}
+
+/* Grid areas */
+.bentoCard.design { grid-area: design; }
+.bentoCard.code { grid-area: code; }
+.bentoCard.ai { grid-area: ai; }
+
+/* Subtle inner glow */
+.bentoGlow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 150px;
+  background: var(--card-color, var(--accent));
+  filter: blur(100px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bentoCard:hover .bentoGlow {
+  opacity: 0.15;
+}
+
+.bentoTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+  color: var(--card-color, var(--text-dark));
+  z-index: 1;
+}
+
+.bentoTools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  z-index: 1;
+}
+
+.bentoToolPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.bentoToolPill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.toolImage {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.bentoToolPill:hover .toolImage {
+  transform: scale(1.1);
+}
+
+.bentoToolIcon {
+  font-size: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .stackSection {
+    padding: 6rem 2rem;
+  }
+  .bentoGrid {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "design"
+      "code"
+      "ai";
+  }
+  .bentoCard {
+    padding: 2rem;
   }
 }

@@ -8,6 +8,7 @@
   --font-display: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --nav-height: 80px;
+  --cursor-color: var(--text-dark);
 }
 
 * {
@@ -30,6 +31,7 @@ body {
 body.theme-light {
   background-color: var(--bg-light);
   color: var(--text-light);
+  --cursor-color: var(--text-light);
 }
 
 a {

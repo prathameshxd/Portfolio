@@ -6,6 +6,7 @@ import Preloader from './components/Preloader';
 import Home from './pages/Home';
 import Stack from './pages/Stack';
 import Work from './pages/Work';
+import PathParcel from './pages/PathParcel';
 import Contact from './pages/Contact';
 
 function AnimatedRoutes() {
@@ -36,6 +37,14 @@ function AnimatedRoutes() {
             element={
               <PageWrapper>
                 <Work />
+              </PageWrapper>
+            } 
+          />
+          <Route 
+            path="work/pathparcel" 
+            element={
+              <PageWrapper>
+                <PathParcel />
               </PageWrapper>
             } 
           />
