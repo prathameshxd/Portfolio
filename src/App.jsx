@@ -11,6 +11,7 @@ const Stack = lazy(() => import('./pages/Stack'));
 const Work = lazy(() => import('./pages/Work'));
 const PathParcel = lazy(() => import('./pages/PathParcel'));
 const Contact = lazy(() => import('./pages/Contact'));
+import { Analytics } from "@vercel/analytics/react";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -100,6 +101,7 @@ export default function App() {
         {loading && <Preloader key="preloader" onComplete={() => setLoading(false)} />}
       </AnimatePresence>
       {!loading && <AnimatedRoutes />}
+      <Analytics />
     </>
   );
 }
