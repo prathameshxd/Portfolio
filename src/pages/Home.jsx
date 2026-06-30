@@ -149,7 +149,7 @@ export default function Home() {
               variants={textVariant}
             >
               <Link to="/work" className={styles.btnPrimary} data-cursor-hover="true">
-                See Work
+                View Projects
               </Link>
               <a href="/Prathamesh_Patil_resume.pdf" target="_blank" rel="noopener noreferrer" className={styles.btnSecondary} data-cursor-hover="true">
                 Resume

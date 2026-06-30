@@ -4,9 +4,11 @@ import Nav from './Nav';
 import CustomCursor from './CustomCursor';
 import NoiseOverlay from './NoiseOverlay';
 import FloatingNoteButton from './FloatingNoteButton';
+import SideRays from './SideRays/SideRays';
 
 export default function Layout() {
   const location = useLocation();
+  const isWorkPage = location.pathname.startsWith('/work');
 
   useEffect(() => {
     // Handle scroll to top or to hash
@@ -31,6 +33,26 @@ export default function Layout() {
 
   return (
     <>
+      <div 
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100vh',
+          zIndex: -1,
+          opacity: !isWorkPage ? 1 : 0,
+          pointerEvents: 'none',
+          transition: 'opacity 0.5s ease',
+        }}
+      >
+        <SideRays 
+          speed={3} 
+          rayColor1="#001636" 
+          rayColor2="#020f26" 
+          opacity={0.8}
+        />
+      </div>
       <NoiseOverlay />
       <CustomCursor />
       <Nav />

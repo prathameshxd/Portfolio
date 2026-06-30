@@ -56,11 +56,11 @@
   /* transform is handled by framer-motion in the component */
   width: clamp(120px, 15vw, 160px);
   height: clamp(160px, 20vw, 220px);
-  border-radius: 200px; /* Full pill radius */
+  border-radius: 200px;
   overflow: hidden;
-  z-index: 2; /* Layered over the text */
   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-  pointer-events: none; /* Let clicks pass through if needed */
+  pointer-events: auto;
+  z-index: 2;
 }
 
 .heroImage {
@@ -69,6 +69,8 @@
   object-fit: cover;
   display: block;
 }
+
+
 
 .splitTextLine {
   display: flex;
@@ -134,7 +136,7 @@
 /* Marquee Section */
 .marqueeSection {
   padding: 4rem 0;
-  background-color: var(--bg-dark);
+  background-color: transparent;
   border-top: 1px solid rgba(255,255,255,0.05);
   border-bottom: 1px solid rgba(255,255,255,0.05);
   overflow: hidden;
@@ -182,6 +184,7 @@
   letter-spacing: -0.03em;
   margin-bottom: 2rem;
 }
+
 
 .aboutText {
   font-size: 1.5rem;

@@ -15,12 +15,29 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  cursor: none; /* Custom cursor handles this */
+  cursor: none;
+  /* Custom cursor handles this */
+}
+
+@keyframes darkGradientAnim {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 body {
   font-family: var(--font-display);
-  background-color: var(--bg-dark);
+  background: linear-gradient(-45deg, #050505, #1a6264, #0B0B0C, #181824);
+  background-size: 400% 400%;
+  animation: darkGradientAnim 15s ease infinite;
   color: var(--text-dark);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -29,7 +46,7 @@ body {
 
 /* Light Theme overrides - handled via class */
 body.theme-light {
-  background-color: var(--bg-light);
+  background: var(--bg-light);
   color: var(--text-light);
   --cursor-color: var(--text-light);
 }
@@ -69,4 +86,10 @@ ul {
   * {
     cursor: auto !important;
   }
+}
+
+/* Hide Neat watermark */
+a[href*="neat.firecms.co"],
+a[href*="firecms"] {
+  display: none !important;
 }

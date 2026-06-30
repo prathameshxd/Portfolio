@@ -11,7 +11,7 @@ export default function Nav() {
 
   const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/work', label: 'Work' },
+    { path: '/work', label: 'Projects' },
     { path: '/stack', label: 'Stack' },
   ];
 

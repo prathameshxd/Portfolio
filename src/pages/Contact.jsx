@@ -49,19 +49,19 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormState('submitting');
-    
+
     const formData = new FormData(e.target);
     // Web3Forms Access Key
     formData.append("access_key", "be92650d-8d94-48e0-854f-8eefac5fad32");
-    
+
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData
       });
-      
+
       const data = await response.json();
-      
+
       if (data.success) {
         setFormState('success');
       } else {
@@ -79,7 +79,7 @@ export default function Contact() {
   return (
     <div className={styles.contact}>
       <section className={styles.hero}>
-        <motion.h1 
+        <motion.h1
           className="h1-display"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -102,16 +102,6 @@ export default function Contact() {
             </a>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            <p className="label-mono">Phone</p>
-            <a href="tel:+918928584724" className={styles.bigLink} data-cursor-hover="true">
-              +91 89285 84724
-            </a>
-          </motion.div>
 
           <motion.div
             className={styles.socialRow}
@@ -121,13 +111,13 @@ export default function Contact() {
           >
             <p className="label-mono">Socials</p>
             <div className={styles.socialLinks}>
-              <MagneticButton href="https://linkedin.com">LinkedIn</MagneticButton>
-              <MagneticButton href="https://behance.net">Behance</MagneticButton>
+              <MagneticButton href="https://www.linkedin.com/in/prathamesh-patil-5652a1358/">LinkedIn</MagneticButton>
+              <MagneticButton href="https://www.behance.net/prathmeshpatila5">Behance</MagneticButton>
             </div>
           </motion.div>
         </div>
 
-        <motion.div 
+        <motion.div
           className={styles.formWrapper}
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -135,8 +125,8 @@ export default function Contact() {
         >
           {formState === 'success' ? (
             <div className={styles.successMessage}>
-              <motion.h3 
-                initial={{ opacity: 0, scale: 0.9 }} 
+              <motion.h3
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--accent)' }}
               >
@@ -158,8 +148,8 @@ export default function Contact() {
                 <textarea id="message" name="message" required placeholder=" " rows={5}></textarea>
                 <label htmlFor="message">Your Message</label>
               </div>
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className={styles.submitBtn}
                 data-cursor-hover="true"
                 disabled={formState === 'submitting'}
@@ -170,8 +160,6 @@ export default function Contact() {
           )}
         </motion.div>
       </section>
-
-      <Footer />
     </div>
   );
 }

@@ -48,8 +48,7 @@ const WORKFLOW_STAGES = [
       { name: 'HTML5', stackIcon: "html5", desc: 'Semantic markup and accessibility.' },
       { name: 'CSS3', stackIcon: "css3", desc: 'Styling, layout, and animations.' },
       { name: 'JavaScript', stackIcon: "js", desc: 'Client-side logic and interactions.' },
-      { name: 'React', stackIcon: "reactjs", desc: 'Component-driven UI development.' },
-      { name: 'Git', stackIcon: "git", desc: 'Version control and collaboration.' },
+      { name: 'GitHub', stackIcon: "github", desc: 'Version control and collaboration.' },
       { name: 'Claude', icon: SiAnthropic, desc: 'Drafting UX copy and case study writing.', img: '/images/claude.svg' },
       { name: 'Gemini', icon: SiGooglegemini, desc: 'Multimodal analysis and rapid ideation.' },
       { name: 'ChatGPT', icon: SiOpenai, desc: 'Code generation and architectural drafting.' },
@@ -91,8 +90,8 @@ export default function Stack() {
 
   const lineVariants = {
     hidden: { pathLength: 0, opacity: 0 },
-    visible: { 
-      pathLength: 1, 
+    visible: {
+      pathLength: 1,
       opacity: 1,
       transition: { duration: 1.5, ease: "easeInOut" }
     }
@@ -101,7 +100,7 @@ export default function Stack() {
   const nodeVariants = {
     hidden: { opacity: 0, scale: 0.8, y: 20 },
     visible: (i) => ({
-      opacity: 1, 
+      opacity: 1,
       scale: 1,
       y: 0,
       transition: { delay: prefersReducedMotion ? 0 : 0.3 * i + 0.5, duration: 0.5 }
@@ -116,7 +115,7 @@ export default function Stack() {
   return (
     <div className={styles.stackPage}>
       <header className={styles.header}>
-        <motion.span 
+        <motion.span
           className="label-mono"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -131,7 +130,7 @@ export default function Stack() {
         >
           How I Actually Work
         </motion.h1>
-        <motion.p 
+        <motion.p
           className={styles.headerSubtitle}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -141,7 +140,7 @@ export default function Stack() {
         </motion.p>
       </header>
 
-      <motion.p 
+      <motion.p
         className={styles.flowcaption}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -151,37 +150,9 @@ export default function Stack() {
       </motion.p>
 
       <div className={styles.flowContainer}>
-        {/* SVG Track */}
-        {!prefersReducedMotion && (
-          <div className={styles.svgTrackWrapper}>
-            <svg className={styles.svgTrack} preserveAspectRatio="none" viewBox="0 0 100 2">
-              {!isMobile ? (
-                <motion.line 
-                  x1="0" y1="1" x2="100" y2="1" 
-                  className={styles.svgTrackPath}
-                  variants={lineVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-100px" }}
-                  vectorEffect="non-scaling-stroke"
-                />
-              ) : (
-                <motion.line 
-                  x1="1" y1="0" x2="1" y2="100" 
-                  className={styles.svgTrackPath}
-                  variants={lineVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  vectorEffect="non-scaling-stroke"
-                />
-              )}
-            </svg>
-          </div>
-        )}
 
-        <div 
-          className={styles.stagesWrapper} 
+        <div
+          className={styles.stagesWrapper}
           data-has-active={activeStage !== null}
         >
           {WORKFLOW_STAGES.map((stage, i) => (
@@ -198,15 +169,15 @@ export default function Stack() {
               onMouseLeave={() => !isMobile && setActiveStage(null)}
               onClick={() => handleStageInteraction(stage.id)}
             >
-              <div className={styles.nodeMarker} />
-              
+
+
               <div className={styles.stageNumber}>{stage.number}</div>
               <h2 className={styles.stageTitle}>{stage.title}</h2>
               <p className={styles.stagePhilosophy}>{stage.philosophy}</p>
 
               <AnimatePresence>
                 {(!isMobile || activeStage === stage.id) && (
-                  <motion.div 
+                  <motion.div
                     className={styles.toolsList}
                     initial={isMobile ? { height: 0, opacity: 0 } : false}
                     animate={isMobile ? { height: 'auto', opacity: 1 } : false}
@@ -220,7 +191,7 @@ export default function Stack() {
                           {tool.img ? (
                             <img src={tool.img} alt={tool.name} className={styles.toolImage} />
                           ) : tool.stackIcon ? (
-                            <div style={{width: 20, height: 20, display: 'flex'}}><StackIcon name={tool.stackIcon} /></div>
+                            <div style={{ width: 20, height: 20, display: 'flex' }}><StackIcon name={tool.stackIcon} /></div>
                           ) : (
                             <Icon className={styles.toolIcon} />
                           )}
