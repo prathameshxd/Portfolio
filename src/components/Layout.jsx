@@ -4,7 +4,7 @@ import Nav from './Nav';
 import CustomCursor from './CustomCursor';
 import NoiseOverlay from './NoiseOverlay';
 import FloatingNoteButton from './FloatingNoteButton';
-import SideRays from './SideRays/SideRays';
+import SideRays from '../sections/SideRays/SideRays';
 
 export default function Layout() {
   const location = useLocation();

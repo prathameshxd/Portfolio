@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, onValue, push } from 'firebase/database';
-import { db } from '../lib/firebase';
+import { db } from '../utils/firebase';
+import { sanitizeInput } from '../utils/sanitizeInput';
 import styles from './SignatureWall.module.css';
 
-const INITIAL_NOTES = [];
+
 
 const COLORS = ['Yellow', 'Pink', 'Blue', 'Green'];
 
@@ -14,6 +15,7 @@ export default function SignatureWall() {
   const [authorName, setAuthorName] = useState('');
   const [selectedColor, setSelectedColor] = useState('Yellow');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [pageIndex, setPageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -52,14 +54,22 @@ export default function SignatureWall() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!newNote.trim()) return;
+    setErrorMsg('');
+
+    const sanitizedMessage = sanitizeInput(newNote, 200);
+    const sanitizedName = sanitizeInput(authorName, 40);
+
+    if (!sanitizedMessage || sanitizedMessage.length < 1) {
+      setErrorMsg('Message is required.');
+      return;
+    }
 
     setIsSubmitting(true);
 
     const note = {
-      text: newNote.trim(),
+      text: sanitizedMessage,
       color: selectedColor,
-      author: authorName.trim() || 'Anonymous',
+      author: sanitizedName || 'Anonymous',
       rotation: Math.floor(Math.random() * 10) - 5, // -5 to 5 degrees
       timestamp: Date.now()
     };
@@ -71,7 +81,6 @@ export default function SignatureWall() {
       setNewNote('');
       setAuthorName('');
     } catch (error) {
-      console.error("Error adding note: ", error);
       alert("Failed to post note. Are your Firebase rules set to true?");
     } finally {
       setIsSubmitting(false);
@@ -122,6 +131,8 @@ export default function SignatureWall() {
 
       <div className={styles.formContainer}>
         <form className={styles.form} onSubmit={handleSubmit}>
+          {errorMsg && <div className={styles.errorMessage} style={{ color: 'red', marginBottom: '1rem', fontWeight: 'bold' }}>{errorMsg}</div>}
+          
           <div className={styles.inputGroup}>
             <label htmlFor="noteText" className={styles.label}>Your Message</label>
             <textarea
@@ -129,8 +140,11 @@ export default function SignatureWall() {
               className={styles.textarea}
               placeholder="What's on your mind?"
               value={newNote}
-              onChange={(e) => setNewNote(e.target.value)}
-              maxLength={150}
+              onChange={(e) => {
+                setNewNote(e.target.value);
+                setErrorMsg('');
+              }}
+              maxLength={200}
               required
             />
           </div>
@@ -143,8 +157,11 @@ export default function SignatureWall() {
               className={styles.input}
               placeholder="Your name"
               value={authorName}
-              onChange={(e) => setAuthorName(e.target.value)}
-              maxLength={30}
+              onChange={(e) => {
+                setAuthorName(e.target.value);
+                setErrorMsg('');
+              }}
+              maxLength={40}
             />
           </div>
 

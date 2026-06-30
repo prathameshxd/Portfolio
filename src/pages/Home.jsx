@@ -1,13 +1,11 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import SignatureWall from '../components/SignatureWall';
-import { SiAnthropic, SiGooglegemini, SiOpenai } from 'react-icons/si';
+import SignatureWall from '../sections/SignatureWall';
+import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCss, SiJavascript, SiGithub } from 'react-icons/si';
 
-import {
-  FiLayout, FiUsers, FiCheckCircle, FiMap, FiPenTool, FiTerminal
-} from 'react-icons/fi';
-import StackIcon from 'tech-stack-icons';
+import { FiLayout, FiUsers, FiCheckCircle, FiMap, FiPenTool, FiTerminal } from 'react-icons/fi';
+import PropTypes from 'prop-types';
 import styles from './Home.module.css';
 
 const bentoCategories = [
@@ -16,8 +14,8 @@ const bentoCategories = [
     title: 'Design & Research',
     color: '#D4FF3F',
     tools: [
-      { name: 'Figma', stackIcon: "figma", color: '#F24E1E', img: '/images/figma.svg' },
-      { name: 'Framer', stackIcon: "framer", color: '#0055FF' },
+      { name: 'Figma', icon: SiFigma, color: '#F24E1E', img: '/images/figma.svg' },
+      { name: 'Framer', icon: SiFramer, color: '#0055FF' },
       { name: 'Research', icon: FiUsers, color: '#E2E8F0' },
       { name: 'Wireframes', icon: FiPenTool, color: '#E2E8F0' },
       { name: 'Prototypes', icon: FiLayout, color: '#E2E8F0' },
@@ -41,10 +39,10 @@ const bentoCategories = [
     title: 'Core Technologies',
     color: '#FFB84D',
     tools: [
-      { name: 'HTML5', stackIcon: "html5", color: '#E34F26' },
-      { name: 'CSS3', stackIcon: "css3", color: '#1572B6' },
-      { name: 'JavaScript', stackIcon: "js", color: '#F7DF1E' },
-      { name: 'GitHub', stackIcon: "github", color: '#181717' },
+      { name: 'HTML5', icon: SiHtml5, color: '#E34F26' },
+      { name: 'CSS3', icon: SiCss, color: '#1572B6' },
+      { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
+      { name: 'GitHub', icon: SiGithub, color: '#181717' },
     ]
   }
 ];
@@ -83,6 +81,10 @@ const SplitText = ({ children }) => {
       ))}
     </span>
   );
+};
+
+SplitText.propTypes = {
+  children: PropTypes.string.isRequired,
 };
 
 export default function Home() {
@@ -127,7 +129,7 @@ export default function Home() {
                   y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.8 }
                 }}
               >
-                <img src="/photo.jpg" alt="Prathamesh Patil" className={styles.heroImage} />
+                <img src="/photo.webp" alt="Prathamesh Patil" className={styles.heroImage} />
               </motion.div>
             </motion.h1>
 
@@ -236,11 +238,9 @@ export default function Home() {
                   return (
                     <div key={tool.name} className={styles.bentoToolPill}>
                       {tool.img ? (
-                        <img src={tool.img} alt={tool.name} className={styles.toolImage} />
-                      ) : tool.stackIcon ? (
-                        <div style={{width: 24, height: 24, display: 'flex'}}><StackIcon name={tool.stackIcon} /></div>
+                        <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" />
                       ) : (
-                        <Icon className={styles.bentoToolIcon} color={tool.color} />
+                        <Icon className={styles.toolIcon} />
                       )}
                       <span>{tool.name}</span>
                     </div>

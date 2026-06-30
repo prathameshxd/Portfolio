@@ -39,9 +39,9 @@ export default function Work() {
             </div>
             <div className={styles.cardImagePlaceholder}>
               <div className={styles.mockupStack}>
-                <img src="/mockups/splash-screen.png" className={`${styles.stackedMockup} ${styles.mockup1}`} alt="Splash Screen" />
-                <img src="/mockups/onboarding-1.png" className={`${styles.stackedMockup} ${styles.mockup2}`} alt="Onboarding 1" />
-                <img src="/mockups/onboarding-2.png" className={`${styles.stackedMockup} ${styles.mockup3}`} alt="Onboarding 2" />
+                <img src="/mockups/splash-screen.webp" className={`${styles.stackedMockup} ${styles.mockup1}`} alt="Splash Screen" loading="lazy" />
+                <img src="/mockups/onboarding-1.webp" className={`${styles.stackedMockup} ${styles.mockup2}`} alt="Onboarding 1" loading="lazy" />
+                <img src="/mockups/onboarding-2.webp" className={`${styles.stackedMockup} ${styles.mockup3}`} alt="Onboarding 2" loading="lazy" />
               </div>
             </div>
           </Link>

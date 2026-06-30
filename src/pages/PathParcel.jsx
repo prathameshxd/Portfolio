@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiHeart, FiTarget, FiEdit3, FiPenTool, FiCheckSquare } from 'react-icons/fi';
@@ -360,8 +360,8 @@ export default function PathParcel() {
             viewport={{ once: true }}
           >
             <div className={styles.mockupDual}>
-              <img src="/mockups/home-sender.png" alt="Home - Sender Dashboard" className={styles.mockupImg} />
-              <img src="/mockups/home-commuter.png" alt="Home - Commuter Mode" className={styles.mockupImg} />
+              <img src="/mockups/home-sender.webp" alt="Home - Sender Dashboard" className={styles.mockupImg} loading="lazy" />
+              <img src="/mockups/home-commuter.webp" alt="Home - Commuter Mode" className={styles.mockupImg} loading="lazy" />
             </div>
             <p className={styles.caption}>Dual Modes: Sender Dashboard & Commuter Mode</p>
           </motion.div>
@@ -375,8 +375,8 @@ export default function PathParcel() {
             transition={{ delay: 0.1 }}
           >
             <div className={styles.mockupDual}>
-              <img src="/mockups/profile.png" alt="User Profile" className={styles.mockupImg} />
-              <img src="/mockups/profile-2.png" alt="Trust Settings" className={styles.mockupImg} />
+              <img src="/mockups/profile.webp" alt="User Profile" className={styles.mockupImg} loading="lazy" />
+              <img src="/mockups/profile-2.webp" alt="Trust Settings" className={styles.mockupImg} loading="lazy" />
             </div>
             <p className={styles.caption}>User Profiles & Trust Settings</p>
           </motion.div>
@@ -389,7 +389,7 @@ export default function PathParcel() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <img src="/mockups/tracking.png" alt="Live Tracking & OTP" className={styles.mockupImg} />
+            <img src="/mockups/tracking.webp" alt="Live Tracking & OTP" className={styles.mockupImg} loading="lazy" />
             <p className={styles.caption}>Live Tracking & OTP</p>
           </motion.div>
 
@@ -401,7 +401,7 @@ export default function PathParcel() {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <img src="/mockups/delivery-complete.png" alt="Delivery Complete" className={styles.mockupImg} />
+            <img src="/mockups/delivery-complete.webp" alt="Delivery Complete" className={styles.mockupImg} loading="lazy" />
             <p className={styles.caption}>Delivery Complete</p>
           </motion.div>
 
@@ -413,7 +413,7 @@ export default function PathParcel() {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            <img src="/mockups/activity.png" alt="Past Deliveries" className={styles.mockupImg} />
+            <img src="/mockups/activity.webp" alt="Past Deliveries" className={styles.mockupImg} loading="lazy" />
             <p className={styles.caption}>Past Deliveries</p>
           </motion.div>
 
@@ -425,7 +425,7 @@ export default function PathParcel() {
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
           >
-            <img src="/mockups/commuter-wallet.png" alt="Commuter Earnings Wallet" className={styles.mockupImg} />
+            <img src="/mockups/commuter-wallet.webp" alt="Commuter Earnings Wallet" className={styles.mockupImg} loading="lazy" />
             <p className={styles.caption}>Commuter Earnings Wallet</p>
           </motion.div>
         </div>

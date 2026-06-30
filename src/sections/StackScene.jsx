@@ -1,7 +1,8 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Text, Float, Billboard, RoundedBox } from '@react-three/drei';
 import * as THREE from 'three';
+import PropTypes from 'prop-types';
 
 const TOOLS = [
   // Design & Prototyping
@@ -87,6 +88,16 @@ function Card({ tool, setActiveTool, activeToolId }) {
   );
 }
 
+Card.propTypes = {
+  tool: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    pos: PropTypes.arrayOf(PropTypes.number).isRequired,
+  }).isRequired,
+  setActiveTool: PropTypes.func.isRequired,
+  activeToolId: PropTypes.string,
+};
+
 function CameraRig() {
   useFrame((state) => {
     state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, state.mouse.x * 2, 0.05);
@@ -97,8 +108,33 @@ function CameraRig() {
 }
 
 export default function StackScene({ setActiveTool, activeToolId }) {
+  const sceneRef = useRef();
+
+  useEffect(() => {
+    return () => {
+      if (sceneRef.current) {
+        sceneRef.current.traverse((child) => {
+          if (child.isMesh) {
+            if (child.geometry) child.geometry.dispose();
+            if (child.material) {
+              if (Array.isArray(child.material)) {
+                child.material.forEach(material => material.dispose());
+              } else {
+                child.material.dispose();
+              }
+            }
+          }
+        });
+      }
+    };
+  }, []);
+
   return (
-    <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
+    <div aria-label="Interactive 3D representation of technical skills and tools" role="img" style={{width: '100%', height: '100%'}}>
+      <span style={{ position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', border: 0 }}>
+        Interactive 3D visualization of tools. Use mouse to rotate cards.
+      </span>
+      <Canvas camera={{ position: [0, 0, 8], fov: 60 }} ref={sceneRef}>
       <ambientLight intensity={1.5} />
       <directionalLight position={[10, 10, 5]} intensity={2} />
       <directionalLight position={[-10, -10, -5]} intensity={1} />
@@ -115,8 +151,12 @@ export default function StackScene({ setActiveTool, activeToolId }) {
         <planeGeometry args={[100, 100]} />
         <meshBasicMaterial />
       </mesh>
-    </Canvas>
+      </Canvas>
+    </div>
   );
 }
 
-
+StackScene.propTypes = {
+  setActiveTool: PropTypes.func.isRequired,
+  activeToolId: PropTypes.string,
+};

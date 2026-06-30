@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { Renderer, Program, Triangle, Mesh } from 'ogl';
+import PropTypes from 'prop-types';
 import './SideRays.css';
 
 const hexToRgb = hex => {
@@ -256,3 +257,14 @@ void main() {
 };
 
 export default SideRays;
+
+SideRays.propTypes = {
+  speed: PropTypes.number,
+  rayColor1: PropTypes.string,
+  rayColor2: PropTypes.string,
+  intensity: PropTypes.number,
+  spread: PropTypes.number,
+  origin: PropTypes.oneOf(['top-left', 'top-right', 'bottom-left', 'bottom-right']),
+  dirMultiplier: PropTypes.number,
+  className: PropTypes.string,
+};

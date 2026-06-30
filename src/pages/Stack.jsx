@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react';
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
 import Footer from '../components/Footer';
 import styles from './Stack.module.css';
-import { SiAnthropic, SiGooglegemini, SiOpenai } from 'react-icons/si';
+import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCss, SiJavascript, SiGithub } from 'react-icons/si';
 
 import {
   FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye
 } from 'react-icons/fi';
-import StackIcon from 'tech-stack-icons';
 
 const WORKFLOW_STAGES = [
   {
@@ -31,8 +30,8 @@ const WORKFLOW_STAGES = [
     philosophy: 'Shape it in Figma before it\'s anywhere else.',
     color: '#D4FF3F',
     tools: [
-      { name: 'Figma', stackIcon: "figma", desc: 'End-to-end UI design and interactive prototyping.', img: '/images/figma.svg' },
-      { name: 'Framer', stackIcon: "framer", desc: 'High-fidelity interactions and web publishing.' },
+      { name: 'Figma', icon: SiFigma, desc: 'End-to-end UI design and interactive prototyping.', img: '/images/figma.svg' },
+      { name: 'Framer', icon: SiFramer, desc: 'High-fidelity interactions and web publishing.' },
       { name: 'Wireframing', icon: FiLayout, desc: 'Low-fidelity structural layouts.' },
       { name: 'Prototyping', icon: FiLayout, desc: 'Connecting screens for user testing.' },
       { name: 'Design Systems', icon: FiLayout, desc: 'Building scalable UI component libraries.' },
@@ -45,10 +44,10 @@ const WORKFLOW_STAGES = [
     philosophy: 'Design and code converge here, with AI as a collaborator.',
     color: '#FFB84D',
     tools: [
-      { name: 'HTML5', stackIcon: "html5", desc: 'Semantic markup and accessibility.' },
-      { name: 'CSS3', stackIcon: "css3", desc: 'Styling, layout, and animations.' },
-      { name: 'JavaScript', stackIcon: "js", desc: 'Client-side logic and interactions.' },
-      { name: 'GitHub', stackIcon: "github", desc: 'Version control and collaboration.' },
+      { name: 'HTML5', icon: SiHtml5, desc: 'Semantic markup and accessibility.' },
+      { name: 'CSS3', icon: SiCss, desc: 'Styling, layout, and animations.' },
+      { name: 'JavaScript', icon: SiJavascript, desc: 'Client-side logic and interactions.' },
+      { name: 'GitHub', icon: SiGithub, desc: 'Version control and collaboration.' },
       { name: 'Claude', icon: SiAnthropic, desc: 'Drafting UX copy and case study writing.', img: '/images/claude.svg' },
       { name: 'Gemini', icon: SiGooglegemini, desc: 'Multimodal analysis and rapid ideation.' },
       { name: 'ChatGPT', icon: SiOpenai, desc: 'Code generation and architectural drafting.' },
@@ -88,14 +87,6 @@ export default function Stack() {
     }
   };
 
-  const lineVariants = {
-    hidden: { pathLength: 0, opacity: 0 },
-    visible: {
-      pathLength: 1,
-      opacity: 1,
-      transition: { duration: 1.5, ease: "easeInOut" }
-    }
-  };
 
   const nodeVariants = {
     hidden: { opacity: 0, scale: 0.8, y: 20 },
@@ -189,9 +180,7 @@ export default function Stack() {
                       return (
                         <div key={tool.name} className={styles.toolPill}>
                           {tool.img ? (
-                            <img src={tool.img} alt={tool.name} className={styles.toolImage} />
-                          ) : tool.stackIcon ? (
-                            <div style={{ width: 20, height: 20, display: 'flex' }}><StackIcon name={tool.stackIcon} /></div>
+                            <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" />
                           ) : (
                             <Icon className={styles.toolIcon} />
                           )}

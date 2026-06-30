@@ -73,8 +73,8 @@ export default function Footer() {
           <div className={`${styles.gridItem} ${styles.socialsItem}`}>
             <span className={styles.label}>Socials</span>
             <div className={styles.socialLinks}>
-              <a href="https://linkedin.com/in/prathamesh-patil-5652a1358/" target="_blank" rel="noreferrer" className={styles.socialBlock}>LinkedIn</a>
-              <a href="https://www.behance.net/prathmeshpatila5" target="_blank" rel="noreferrer" className={styles.socialBlock}>Behance</a>
+              <a href="https://linkedin.com/in/prathamesh-patil-5652a1358/" target="_blank" rel="noopener noreferrer" className={styles.socialBlock}>LinkedIn</a>
+              <a href="https://www.behance.net/prathmeshpatila5" target="_blank" rel="noopener noreferrer" className={styles.socialBlock}>Behance</a>
               <a href="mailto:prathmeshpatila5@gmail.com" className={styles.socialBlock}>Email</a>
             </div>
           </div>

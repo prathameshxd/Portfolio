@@ -1,6 +1,12 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 
+// ENVIRONMENT VARIABLES:
+// These VITE_FIREBASE_* variables are exposed to the client bundle by Vite.
+// They are safe to be public for Firebase as long as Firebase Security Rules are correctly configured.
+// However, any private API keys MUST NEVER be committed to source control.
+// Ensure your actual .env file is in .gitignore.
+
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 import styles from './Preloader.module.css';
 
 const words = [
@@ -60,3 +61,7 @@ export default function Preloader({ onComplete }) {
     </motion.div>
   );
 }
+
+Preloader.propTypes = {
+  onComplete: PropTypes.func.isRequired,
+};

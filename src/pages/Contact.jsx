@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import Footer from '../components/Footer';
+import PropTypes from 'prop-types';
+
 import styles from './Contact.module.css';
 
 const MagneticButton = ({ children, href }) => {
@@ -43,6 +44,11 @@ const MagneticButton = ({ children, href }) => {
   );
 };
 
+MagneticButton.propTypes = {
+  children: PropTypes.node.isRequired,
+  href: PropTypes.string,
+};
+
 export default function Contact() {
   const [formState, setFormState] = useState('idle'); // idle, submitting, success
 
@@ -65,12 +71,10 @@ export default function Contact() {
       if (data.success) {
         setFormState('success');
       } else {
-        console.error("Error submitting form", data);
         setFormState('idle');
         alert("Something went wrong. Please try again.");
       }
     } catch (error) {
-      console.error("Error submitting form", error);
       setFormState('idle');
       alert("Something went wrong. Please try again.");
     }

@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useState, Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 import Layout from './components/Layout';
 import Preloader from './components/Preloader';
+import Loader from './components/Loader';
 import Home from './pages/Home';
-import Stack from './pages/Stack';
-import Work from './pages/Work';
-import PathParcel from './pages/PathParcel';
-import Contact from './pages/Contact';
+
+const Stack = lazy(() => import('./pages/Stack'));
+const Work = lazy(() => import('./pages/Work'));
+const PathParcel = lazy(() => import('./pages/PathParcel'));
+const Contact = lazy(() => import('./pages/Contact'));
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -28,7 +31,9 @@ function AnimatedRoutes() {
             path="stack" 
             element={
               <PageWrapper>
-                <Stack />
+                <Suspense fallback={<Loader />}>
+                  <Stack />
+                </Suspense>
               </PageWrapper>
             } 
           />
@@ -36,7 +41,9 @@ function AnimatedRoutes() {
             path="work" 
             element={
               <PageWrapper>
-                <Work />
+                <Suspense fallback={<Loader />}>
+                  <Work />
+                </Suspense>
               </PageWrapper>
             } 
           />
@@ -44,7 +51,9 @@ function AnimatedRoutes() {
             path="work/pathparcel" 
             element={
               <PageWrapper>
-                <PathParcel />
+                <Suspense fallback={<Loader />}>
+                  <PathParcel />
+                </Suspense>
               </PageWrapper>
             } 
           />
@@ -52,7 +61,9 @@ function AnimatedRoutes() {
             path="contact" 
             element={
               <PageWrapper>
-                <Contact />
+                <Suspense fallback={<Loader />}>
+                  <Contact />
+                </Suspense>
               </PageWrapper>
             } 
           />
@@ -75,6 +86,10 @@ function PageWrapper({ children }) {
     </motion.div>
   );
 }
+
+PageWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default function App() {
   const [loading, setLoading] = useState(true);
