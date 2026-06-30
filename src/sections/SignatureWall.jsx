@@ -76,12 +76,19 @@ export default function SignatureWall() {
 
     try {
       const notesRef = ref(db, 'notes');
-      await push(notesRef, note);
+      
+      const pushPromise = push(notesRef, note);
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Firebase connection timeout')), 8000);
+      });
+
+      await Promise.race([pushPromise, timeoutPromise]);
       
       setNewNote('');
       setAuthorName('');
     } catch (error) {
-      alert("Failed to post note. Are your Firebase rules set to true?");
+      console.error('Firebase error:', error);
+      setErrorMsg('Something went wrong, try again.');
     } finally {
       setIsSubmitting(false);
     }
