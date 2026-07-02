@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ref, onValue, push } from 'firebase/database';
 import { db } from '../utils/firebase';
 import { sanitizeInput } from '../utils/sanitizeInput';
@@ -18,12 +18,14 @@ export default function SignatureWall() {
   const [errorMsg, setErrorMsg] = useState('');
   const [pageIndex, setPageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const wallRef = useRef(null);
+  const isInView = useInView(wallRef, { amount: 0.2 }); // starts when 20% visible
 
   const notesPerPage = 8;
-  const rotationInterval = 3000; // 5 seconds
+  const rotationInterval = 3000; // 3 seconds
 
   useEffect(() => {
-    if (isHovered || notes.length <= notesPerPage) return;
+    if (isHovered || !isInView || notes.length <= notesPerPage) return;
 
     const maxPages = Math.ceil(notes.length / notesPerPage);
     const interval = setInterval(() => {
@@ -31,7 +33,7 @@ export default function SignatureWall() {
     }, rotationInterval);
 
     return () => clearInterval(interval);
-  }, [isHovered, notes.length, notesPerPage]);
+  }, [isHovered, isInView, notes.length, notesPerPage]);
 
   useEffect(() => {
     const notesRef = ref(db, 'notes');
@@ -95,7 +97,7 @@ export default function SignatureWall() {
   };
 
   return (
-    <section id="signature-wall" className={styles.container}>
+    <section id="signature-wall" ref={wallRef} className={styles.container}>
       <div className={styles.header}>
         <h2 className={styles.title}>Leave a Note for Me</h2>
         <p className={styles.subtitle}>
@@ -108,6 +110,19 @@ export default function SignatureWall() {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
+        {notes.length > notesPerPage && (
+          <div className={styles.progressBarContainer}>
+            <div
+              key={`${pageIndex}-${isHovered ? 'paused' : 'running'}-${isInView}`}
+              className={styles.progressBar}
+              style={{
+                animationDuration: `${rotationInterval}ms`,
+                animationPlayState: (isHovered || !isInView) ? 'paused' : 'running'
+              }}
+            />
+          </div>
+        )}
+
         <AnimatePresence mode="wait">
           {(() => {
             const maxPages = Math.ceil(notes.length / notesPerPage);

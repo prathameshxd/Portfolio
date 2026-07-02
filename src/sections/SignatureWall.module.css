@@ -36,7 +36,7 @@
   justify-content: center;
   width: 100%;
   margin-bottom: 4rem;
-  min-height: 400px;
+  min-height: 600px;
   /* subtle dot grid for the wall */
   background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
   background-size: 30px 30px;
@@ -45,6 +45,27 @@
   position: relative;
   background-color: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.progressBarContainer {
+  position: absolute;
+  top: 0;
+  left: 27px;
+  right: 27px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  border-radius: 0 0 2px 2px;
+  z-index: 10;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: var(--accent);
+  width: 0%;
+  animation-name: progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 .note {
@@ -227,4 +248,9 @@
     width: 100%;
     max-width: 250px;
   }
+}
+
+@keyframes progress {
+  from { width: 0%; }
+  to { width: 100%; }
 }
