@@ -110,7 +110,11 @@ export default function Home() {
               transition={{ staggerChildren: 0.1, delayChildren: 0.2 }}
             >
               <SplitText>Designing Digital</SplitText>
-              <SplitText>Experiences That Solves</SplitText>
+              <span className={styles.splitTextLine}>
+                <SplitText>Experiences</SplitText>
+                <span className={styles.textSpacer} />
+                <SplitText>That Solves</SplitText>
+              </span>
               <SplitText>Human Problems.</SplitText>
               
               <motion.div 

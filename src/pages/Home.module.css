@@ -60,7 +60,7 @@
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
   pointer-events: auto;
-  z-index: 2;
+  z-index: 0; /* Image behind the text */
 }
 
 .heroImage {
@@ -70,12 +70,17 @@
   display: block;
 }
 
-
-
 .splitTextLine {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
+  position: relative;
+  z-index: 2; /* Text in front of the image */
+}
+
+.textSpacer {
+  width: clamp(130px, 16vw, 180px); /* Slightly wider than the image to provide space */
+  display: inline-block;
 }
 
 .wordWrapper {
