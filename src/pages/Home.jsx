@@ -133,7 +133,7 @@ export default function Home() {
                   y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.8 }
                 }}
               >
-                <img src="/photo.webp" alt="Prathamesh Patil" className={styles.heroImage} />
+                <img src="/avatar.webp" alt="Prathamesh Patil" className={styles.heroImage} />
               </motion.div>
             </motion.h1>
 
