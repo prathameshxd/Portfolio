@@ -44,7 +44,15 @@ export default function SignatureWall() {
           id: key,
           ...data[key]
         }));
-        loadedNotes.sort((a, b) => b.timestamp - a.timestamp);
+        loadedNotes.sort((a, b) => {
+          const isAPrathamesh = a.author === 'Prathamesh Patil';
+          const isBPrathamesh = b.author === 'Prathamesh Patil';
+          
+          if (isAPrathamesh && !isBPrathamesh) return -1;
+          if (!isAPrathamesh && isBPrathamesh) return 1;
+          
+          return b.timestamp - a.timestamp;
+        });
         setNotes(loadedNotes);
       } else {
         setNotes([]);
