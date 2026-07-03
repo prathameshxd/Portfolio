@@ -26,6 +26,30 @@ badwords.add(ua);
 badwords.add(pl);
 badwords.add(ch);
 
+// Custom Indonesian dictionary
+badwords.add({
+  id: 'id',
+  words: [
+    'jancok', 'jancuk', 'dancok', 'dancuk', 'yancok', 'yancuk',
+    'kontol', 'memek', 'jembut', 'pepek',
+    'bangsat', 'bajingan', 'anjing', 'babi', 'monyet', 'kunyuk',
+    'tai', 'ngentot', 'ngewe', 'pantek', 'perek', 'lonte',
+    'kampret', 'tolol', 'goblok', 'bego', 'idiot', 'bodoh', 'geblek',
+    'asu', 'celeng', 'jingan', 'kimak', 'puki', 'pukimak', 'koentol'
+  ],
+  lookalike: {
+    '@': 'a',
+    '0': 'o',
+    '1': 'i',
+    '3': 'e',
+    '4': 'a',
+    '5': 's',
+    '7': 't',
+    '8': 'b',
+    '$': 's'
+  }
+});
+
 const COLORS = ['Yellow', 'Pink', 'Blue', 'Green'];
 
 export default function SignatureWall() {

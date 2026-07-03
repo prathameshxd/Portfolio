@@ -16,6 +16,7 @@
     "bad-words-next": "^3.2.0",
     "firebase": "^12.15.0",
     "framer-motion": "^12.42.0",
+    "glin-profanity": "^3.3.0",
     "leo-profanity": "^1.9.0",
     "lucide-react": "^1.21.0",
     "ogl": "^1.0.11",
