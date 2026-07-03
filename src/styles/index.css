@@ -3,6 +3,11 @@
   --bg-light: #F7F6F2;
   --text-dark: #F7F6F2;
   --text-light: #0B0B0C;
+  
+  /* Theme-aware variables */
+  --bg-primary: var(--bg-dark);
+  --text-primary: var(--text-dark);
+  
   --accent: #D4FF3F;
   --gray: #888888;
   --font-display: 'Inter', sans-serif;
@@ -34,7 +39,7 @@
 }
 
 html {
-  background-color: var(--bg-dark);
+  background-color: var(--bg-primary);
 }
 
 body {
@@ -42,7 +47,7 @@ body {
   background: linear-gradient(-45deg, #050505, #1a6264, #0B0B0C, #181824);
   background-size: 400% 400%;
   animation: darkGradientAnim 15s ease infinite;
-  color: var(--text-dark);
+  color: var(--text-primary);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -50,8 +55,10 @@ body {
 
 /* Light Theme overrides - handled via class */
 body.theme-light {
-  background: var(--bg-light);
-  color: var(--text-light);
+  --bg-primary: var(--bg-light);
+  --text-primary: var(--text-light);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   --cursor-color: var(--text-light);
 }
 
