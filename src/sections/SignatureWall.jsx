@@ -4,8 +4,27 @@ import { ref, onValue, push } from 'firebase/database';
 import { db } from '../utils/firebase';
 import { sanitizeInput } from '../utils/sanitizeInput';
 import styles from './SignatureWall.module.css';
+import BadWordsNext from 'bad-words-next';
+import en from 'bad-words-next/lib/en';
+import es from 'bad-words-next/lib/es';
+import fr from 'bad-words-next/lib/fr';
+import de from 'bad-words-next/lib/de';
+import ru from 'bad-words-next/lib/ru';
+import rl from 'bad-words-next/lib/ru_lat';
+import ua from 'bad-words-next/lib/ua';
+import pl from 'bad-words-next/lib/pl';
+import ch from 'bad-words-next/lib/ch';
 
-
+const badwords = new BadWordsNext();
+badwords.add(en);
+badwords.add(es);
+badwords.add(fr);
+badwords.add(de);
+badwords.add(ru);
+badwords.add(rl);
+badwords.add(ua);
+badwords.add(pl);
+badwords.add(ch);
 
 const COLORS = ['Yellow', 'Pink', 'Blue', 'Green'];
 
@@ -65,6 +84,11 @@ export default function SignatureWall() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
+
+    if (badwords.check(newNote) || (authorName && badwords.check(authorName))) {
+      setErrorMsg('Please keep the language clean! Vulgar words are not allowed.');
+      return;
+    }
 
     const sanitizedMessage = sanitizeInput(newNote, 200);
     const sanitizedName = sanitizeInput(authorName, 40);
