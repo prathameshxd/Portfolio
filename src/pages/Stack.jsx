@@ -137,7 +137,7 @@ export default function Stack() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
       >
-        Discover → Design → Build → Refine — every project moves through this loop.
+        Discover → Design → Build → Refine every project moves through this loop.
       </motion.p>
 
       <div className={styles.flowContainer}>

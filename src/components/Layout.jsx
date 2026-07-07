@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Nav from './Nav';
 import CustomCursor from './CustomCursor';
-import NoiseOverlay from './NoiseOverlay';
 import FloatingNoteButton from './FloatingNoteButton';
 import SideRays from '../sections/SideRays/SideRays';
 
@@ -53,7 +52,6 @@ export default function Layout() {
           opacity={0.8}
         />
       </div>
-      <NoiseOverlay />
       <CustomCursor />
       <Nav />
       <FloatingNoteButton />

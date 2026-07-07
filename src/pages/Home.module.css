@@ -40,7 +40,7 @@
 
 .heroTitle {
   font-size: clamp(2rem, 5vw, 5.5rem);
-  margin: 1rem 0 2rem 0;
+  margin: 1rem 0 6rem 0;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -79,6 +79,7 @@
 }
 
 .textSpacer {
+  position: relative;
   width: clamp(130px, 16vw, 180px); /* Slightly wider than the image to provide space */
   display: inline-block;
 }
@@ -95,6 +96,7 @@
 }
 
 .heroSubtext {
+  font-family: var(--font-space);
   font-size: 1.25rem;
   line-height: 1.6;
   max-width: 800px;
@@ -273,7 +275,17 @@
     padding: 6rem 2rem;
   }
   .heroTitle {
-    font-size: 14vw;
+    font-size: 11vw;
+  }
+  .splitTextLine {
+    flex-wrap: wrap;
+  }
+  .textSpacer {
+    width: 90px;
+  }
+  .heroImageWrapper {
+    width: 80px;
+    height: 110px;
   }
   .heroSubtext {
     font-size: 1.125rem;

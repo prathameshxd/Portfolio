@@ -112,40 +112,31 @@ export default function Home() {
               <SplitText>Designing Digital</SplitText>
               <span className={styles.splitTextLine}>
                 <SplitText>Experiences</SplitText>
-                <span className={styles.textSpacer} />
-                <SplitText>That Solves</SplitText>
+                <span className={styles.textSpacer}>
+                  <motion.div
+                    className={styles.heroImageWrapper}
+                    initial={{ opacity: 0, scale: 0.8, x: '-50%', y: '-50%' }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      x: ['-50%', '-50%', '-50%', '-50%'],
+                      y: ['-50%', '-55%', '-45%', '-50%']
+                    }}
+                    transition={{
+                      opacity: { duration: 0.8, delay: 0.8, ease: "easeOut" },
+                      scale: { duration: 0.8, delay: 0.8, ease: "easeOut" },
+                      x: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.8 },
+                      y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.8 }
+                    }}
+                  >
+                    <img src="/avatar.webp" alt="Prathamesh Patil" className={styles.heroImage} />
+                  </motion.div>
+                </span>
+                <SplitText>That Solve</SplitText>
               </span>
               <SplitText>Human Problems.</SplitText>
-              
-              <motion.div 
-                className={styles.heroImageWrapper}
-                initial={{ opacity: 0, scale: 0.8, x: '-50%', y: '-50%' }}
-                animate={{ 
-                  opacity: 1, 
-                  scale: 1, 
-                  x: ['-50%', '-50%', '-50%', '-50%'],
-                  y: ['-50%', '-55%', '-45%', '-50%']
-                }}
-                transition={{ 
-                  opacity: { duration: 0.8, delay: 0.8, ease: "easeOut" },
-                  scale: { duration: 0.8, delay: 0.8, ease: "easeOut" },
-                  x: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.8 },
-                  y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.8 }
-                }}
-              >
-                <img src="/avatar.webp" alt="Prathamesh Patil" className={styles.heroImage} />
-              </motion.div>
             </motion.h1>
 
-            <motion.p
-              className={styles.heroSubtext}
-              initial="hidden"
-              animate="visible"
-              custom={4}
-              variants={textVariant}
-            >
-              I specialize in data-driven product strategy and user research to craft accessible, high-fidelity interfaces. My focus is on understanding human behavior to design intuitive digital solutions that genuinely help people and remove friction from their daily lives.
-            </motion.p>
 
             <motion.div
               className={styles.ctaGroup}
@@ -195,7 +186,7 @@ export default function Home() {
           <div className={styles.aboutTextCol}>
             <h2 className={styles.sectionTitle}>About</h2>
             <p className={styles.aboutText}>
-              My foundation in computer science allows me to approach UX design with a highly structured, analytical mindset—ensuring the interfaces I conceptualize are built on logical, accessible systems rather than just aesthetics. When I am off the grid, I am usually trekking the Sahyadri mountains or capturing landscape photography.
+              My foundation in computer science allows me to approach UX design with a highly structured, analytical mindset ensuring the interfaces I conceptualize are built on logical, accessible systems rather than just aesthetics. When I am off the grid, I am usually trekking the Sahyadri mountains or capturing landscape photography.
             </p>
           </div>
           <div className={styles.statsGrid}>
@@ -225,7 +216,7 @@ export default function Home() {
 
         <div className={styles.bentoGrid}>
           {bentoCategories.map((category, index) => (
-            <motion.div 
+            <motion.div
               key={category.id}
               className={`${styles.bentoCard} ${styles[category.id]}`}
               initial={{ opacity: 0, y: 30 }}

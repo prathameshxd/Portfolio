@@ -179,7 +179,7 @@ export default function SignatureWall() {
           </div>
         )}
 
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           {(() => {
             const maxPages = Math.ceil(notes.length / notesPerPage);
             const validPageIndex = maxPages > 0 && pageIndex >= maxPages ? maxPages - 1 : pageIndex;

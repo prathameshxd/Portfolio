@@ -3,11 +3,13 @@ import { motion } from 'framer-motion';
 import styles from './CustomCursor.module.css';
 
 export default function CustomCursor() {
+  const [hasMoved, setHasMoved] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     const updateMousePosition = (e) => {
+      setHasMoved(true);
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
@@ -43,6 +45,7 @@ export default function CustomCursor() {
     <motion.div
       className={styles.cursor}
       animate={{
+        opacity: hasMoved ? 1 : 0,
         x: mousePosition.x - (isHovering ? 20 : 8),
         y: mousePosition.y - (isHovering ? 20 : 8),
         scale: isHovering ? 2.5 : 1,
