@@ -179,7 +179,7 @@ export default function SignatureWall() {
           </div>
         )}
 
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
           {(() => {
             const maxPages = Math.ceil(notes.length / notesPerPage);
             const validPageIndex = maxPages > 0 && pageIndex >= maxPages ? maxPages - 1 : pageIndex;
@@ -187,6 +187,7 @@ export default function SignatureWall() {
 
             return visibleNotes.map((note) => (
               <motion.div
+                layout
                 key={note.id}
                 className={`${styles.note} ${styles[`color${note.color}`]}`}
                 initial={{ opacity: 0, scale: 0.8, y: -50 }}
