@@ -1,0 +1,205 @@
+/* 
+  The scroll track dictates how long the pinning lasts.
+  We give it a large height so the user scrolls "through" it.
+*/
+.scrollTrack {
+  position: relative;
+  height: 250vh; /* 2.5 screens worth of scrolling */
+  width: 100%;
+}
+
+/* 
+  The sticky frame holds the visible elements fixed to the viewport 
+  while the user scrolls down the track.
+*/
+.stickyFrame {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+.stageCardWrapper {
+  flex: 1;
+  display: flex;
+}
+
+.stackHeader {
+  position: absolute;
+  top: 30%; /* Offset slightly to make room for cards */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 0;
+}
+
+.stackTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+}
+
+.stackDesc {
+  font-size: 1.25rem;
+  color: var(--gray);
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* 
+  Container that slides up over the title 
+*/
+.cardsContainer {
+  position: relative;
+  width: 100%;
+  z-index: 10;
+  margin-top: 15vh; /* Initial gap before cards slide up */
+}
+
+/* From here down: copied from Home.module.css to isolate the experiment */
+
+.stagesWrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+}
+
+.stageNode {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease, background 0.4s ease;
+  cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--node-color) 40%, transparent);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  background: var(--bg-dark); /* Keeps the cards dark/solid so they overlap nicely */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.stageNode:hover {
+  transform: translateY(-8px);
+  background: #000;
+  border-color: var(--node-color);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+}
+
+.stagesWrapper[data-has-active="true"] .stageNode:not(.active) {
+  opacity: 0.3;
+  filter: grayscale(0.8);
+  transform: scale(0.95);
+}
+
+.stageNumber {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--node-color, var(--accent));
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.stageTitle {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+  color: var(--text-dark);
+}
+
+.stagePhilosophy {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.toolsList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.toolPill {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.stageNode:hover .toolPill {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.toolPill:hover {
+  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.toolIcon {
+  font-size: 1.25rem;
+  color: var(--node-color);
+}
+
+.toolImage {
+  width: 1.25rem;
+  height: 1.25rem;
+  object-fit: contain;
+}
+
+@media (max-width: 1024px) {
+  .scrollTrack {
+    height: auto; /* Disable heavy scroll hijacking on mobile */
+    padding: 4rem 1.5rem;
+  }
+  
+  .stickyFrame {
+    position: relative;
+    height: auto;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .stackHeader {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+
+  .stackTitle {
+    font-size: 2.5rem;
+  }
+
+  .cardsContainer {
+    margin-top: 0;
+  }
+
+  .stagesWrapper {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .stageNode {
+    padding: 1.5rem;
+  }
+}

@@ -3,6 +3,7 @@ import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import SignatureWall from '../sections/SignatureWall';
+import StickyStackSection from '../sections/StickyStackSection';
 import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCss, SiJavascript, SiGithub } from 'react-icons/si';
 
 import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye, FiPenTool } from 'react-icons/fi';
@@ -255,66 +256,7 @@ export default function Home() {
       </section>
 
       {/* Stack Section */}
-      <section className={styles.stackSection}>
-        <div className={styles.stackHeader}>
-          <h2 className={styles.stackTitle}>Tools I Build With</h2>
-        </div>
-
-
-        <div className={styles.flowContainer}>
-          <div
-            className={styles.stagesWrapper}
-            data-has-active={activeStage !== null}
-          >
-            {WORKFLOW_STAGES.map((stage, i) => (
-              <div key={stage.id} style={{ display: "block", flex: 1 }}>
-                <motion.div
-                  className={`${styles.stageNode} ${activeStage === stage.id ? styles.active : ''}`}
-                  style={{ '--node-color': stage.color }}
-                  custom={i}
-                  variants={prefersReducedMotion ? containerVariants : nodeVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-100px" }}
-                  onMouseEnter={() => !isMobile && setActiveStage(stage.id)}
-                  onMouseLeave={() => !isMobile && setActiveStage(null)}
-                  onClick={() => handleStageInteraction(stage.id)}
-                >
-                  <div className={styles.stageNumber}>{stage.number}</div>
-                  <h2 className={styles.stageTitle}>{stage.title}</h2>
-                  <p className={styles.stagePhilosophy}>{stage.philosophy}</p>
-
-                  <AnimatePresence>
-                    {(!isMobile || activeStage === stage.id) && (
-                      <motion.div
-                        className={styles.toolsList}
-                        initial={isMobile ? { height: 0, opacity: 0 } : false}
-                        animate={isMobile ? { height: 'auto', opacity: 1 } : false}
-                        exit={isMobile ? { height: 0, opacity: 0 } : false}
-                        transition={{ duration: 0.3 }}
-                      >
-                        {stage.tools.map(tool => {
-                          const Icon = tool.icon;
-                          return (
-                            <div key={tool.name} className={styles.toolPill}>
-                              {tool.img ? (
-                                <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" />
-                              ) : (
-                                <Icon className={styles.toolIcon} />
-                              )}
-                              <span>{tool.name}</span>
-                            </div>
-                          );
-                        })}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StickyStackSection />
 
       <SignatureWall />
 
