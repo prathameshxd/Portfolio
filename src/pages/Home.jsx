@@ -6,7 +6,6 @@ import SignatureWall from '../sections/SignatureWall';
 import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCss, SiJavascript, SiGithub } from 'react-icons/si';
 
 import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye, FiPenTool } from 'react-icons/fi';
-import Tilt from 'react-parallax-tilt';
 import PropTypes from 'prop-types';
 import styles from './Home.module.css';
 
@@ -268,13 +267,7 @@ export default function Home() {
             data-has-active={activeStage !== null}
           >
             {WORKFLOW_STAGES.map((stage, i) => (
-              <Tilt
-                key={stage.id}
-                tiltMaxAngleX={4}
-                tiltMaxAngleY={4}
-                tiltReverse={true}
-                style={{ display: 'block', flex: 1 }}
-              >
+              <div key={stage.id} style={{ display: "block", flex: 1 }}>
                 <motion.div
                   className={`${styles.stageNode} ${activeStage === stage.id ? styles.active : ''}`}
                   style={{ '--node-color': stage.color }}
@@ -317,7 +310,7 @@ export default function Home() {
                     )}
                   </AnimatePresence>
                 </motion.div>
-              </Tilt>
+              </div>
             ))}
           </div>
         </div>

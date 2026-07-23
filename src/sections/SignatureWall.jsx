@@ -187,7 +187,6 @@ export default function SignatureWall() {
 
             return visibleNotes.map((note) => (
               <motion.div
-                layout
                 key={note.id}
                 className={`${styles.note} ${styles[`color${note.color}`]}`}
                 initial={{ opacity: 0, scale: 0.8, y: -50 }}
