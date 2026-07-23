@@ -69,19 +69,19 @@
   font-weight: 500;
   display: inline-block;
   padding: 1rem 2rem;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(0,0,0,0.2);
   border-radius: 100px;
   transition: border-color 0.3s;
 }
 
 .magneticLink:hover {
-  border-color: var(--text-dark);
+  border-color: var(--text-primary);
 }
 
 /* Form Styles */
 .formWrapper {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.05);
   padding: 4rem;
   border-radius: 24px;
 }
@@ -101,9 +101,9 @@
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.2);
   padding: 1rem 0;
-  color: var(--text-dark);
+  color: var(--text-primary);
   font-family: var(--font-display);
   font-size: 1.25rem;
   outline: none;
@@ -116,7 +116,7 @@
   left: 0;
   top: 1rem;
   font-size: 1.25rem;
-  color: rgba(247, 246, 242, 0.5);
+  color: color-mix(in srgb, var(--text-primary) 50%, transparent);
   transition: all 0.3s ease;
   pointer-events: none;
 }
@@ -136,8 +136,8 @@
 }
 
 .submitBtn {
-  background-color: var(--text-dark);
-  color: var(--bg-dark);
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
   border: none;
   padding: 1.5rem;
   border-radius: 100px;

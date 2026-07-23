@@ -50,7 +50,7 @@
 }
 
 .gridItem:hover {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(30, 30, 30, 0.7);
 }
 
 /* Specific Grid Item Placements */
@@ -210,7 +210,7 @@
 }
 
 :global(body.theme-light) .gridItem:hover {
-  background: rgba(0, 0, 0, 0.02);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 :global(body.theme-light) .massiveText {
@@ -218,8 +218,8 @@
 }
 
 :global(body.theme-light) .massiveText:hover {
-  color: var(--bg-dark);
-  -webkit-text-stroke: 1px var(--bg-dark);
+  color: var(--text-primary);
+  -webkit-text-stroke: 1px var(--text-primary);
 }
 
 :global(body.theme-light) .label,
@@ -230,18 +230,18 @@
 
 :global(body.theme-light) .timeValue,
 :global(body.theme-light) .statusText {
-  color: var(--bg-dark);
+  color: var(--text-primary);
 }
 
 :global(body.theme-light) .socialBlock {
   border-color: rgba(0, 0, 0, 0.1);
-  color: var(--bg-dark);
+  color: var(--text-primary);
 }
 
 :global(body.theme-light) .socialBlock:hover {
-  background: var(--bg-dark);
-  color: var(--text-dark);
-  border-color: var(--bg-dark);
+  background: var(--text-primary);
+  color: var(--bg-dark);
+  border-color: var(--text-primary);
 }
 
 

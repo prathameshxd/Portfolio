@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import Layout from './components/Layout';
 import Preloader from './components/Preloader';
+import CustomCursor from './components/CustomCursor';
 import Loader from './components/Loader';
 import Home from './pages/Home';
 
-const Stack = lazy(() => import('./pages/Stack'));
 const Work = lazy(() => import('./pages/Work'));
 const PathParcel = lazy(() => import('./pages/PathParcel'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -25,16 +25,6 @@ function AnimatedRoutes() {
             element={
               <PageWrapper>
                 <Home />
-              </PageWrapper>
-            } 
-          />
-          <Route 
-            path="stack" 
-            element={
-              <PageWrapper>
-                <Suspense fallback={<Loader />}>
-                  <Stack />
-                </Suspense>
               </PageWrapper>
             } 
           />
@@ -102,6 +92,7 @@ export default function App() {
       </AnimatePresence>
       {!loading && <AnimatedRoutes />}
       <Analytics />
+      <CustomCursor />
     </>
   );
 }

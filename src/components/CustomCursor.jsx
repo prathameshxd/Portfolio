@@ -41,11 +41,18 @@ export default function CustomCursor() {
     return null;
   }
 
+  if (!hasMoved) return null;
+
   return (
     <motion.div
       className={styles.cursor}
+      initial={{
+        opacity: 0,
+        x: mousePosition.x - 8,
+        y: mousePosition.y - 8,
+      }}
       animate={{
-        opacity: hasMoved ? 1 : 0,
+        opacity: 1,
         x: mousePosition.x - (isHovering ? 20 : 8),
         y: mousePosition.y - (isHovering ? 20 : 8),
         scale: isHovering ? 2.5 : 1,

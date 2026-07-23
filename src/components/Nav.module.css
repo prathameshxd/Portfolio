@@ -1,117 +1,186 @@
 .header {
   position: fixed;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  transition: padding 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
   top: 0;
   left: 0;
-  width: 100%;
-  height: var(--nav-height);
-  z-index: 100;
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
+  pointer-events: none;
+}
+
+.header.top {
+  padding: 0;
+}
+
+.header.scrolled {
+  padding-top: 1.5rem;
 }
 
 .navContainer {
+  pointer-events: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
-  padding: 0 4rem;
+  width: 100%;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.header.top .navContainer {
+  width: 100%;
   max-width: 1600px;
-  margin: 0 auto;
+  height: 80px;
+  padding: 0 4rem;
+  background-color: transparent;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.header.scrolled .navContainer {
+  max-width: 680px;
+  height: 60px;
+  padding: 0 0.5rem 0 1.5rem;
+  background-color: #000;
+  border-radius: 9999px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
 }
 
 .logo {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.5rem;
-  letter-spacing: -0.05em;
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: 0;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
   z-index: 101;
+}
+
+.header.scrolled .logo {
+  color: #fff;
+}
+
+.logoIcon {
+  font-size: 1.4rem;
 }
 
 .desktopNav {
   display: flex;
-  gap: 3rem;
   align-items: center;
+  transition: gap 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.header.top .desktopNav {
+  gap: 3rem;
+}
+
+.header.scrolled .desktopNav {
+  gap: 1.5rem;
 }
 
 .navLink {
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-family: var(--font-space), sans-serif;
+  font-size: 0.9rem;
+  text-transform: none;
+  color: color-mix(in srgb, var(--text-primary) 70%, transparent);
   position: relative;
-  padding: 0.5rem 0;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.underline {
+.header.scrolled .navLink {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.navLink:hover {
+  color: var(--text-primary);
+}
+
+.header.scrolled .navLink:hover {
+  color: #fff;
+}
+
+.navLink.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.header.scrolled .navLink.active {
+  color: #fff;
+}
+
+.magicUnderline {
   position: absolute;
-  bottom: 0;
+  bottom: -4px;
   left: 0;
-  width: 100%;
+  right: 0;
   height: 2px;
-  background-color: var(--accent);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+  background-color: var(--text-primary);
+  border-radius: 2px;
 }
 
-.navLink:hover .underline {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-.navLink.active .underline {
-  transform: scaleX(1);
+.header.scrolled .magicUnderline {
+  background-color: #fff;
 }
 
 .resumeButton {
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.5rem 1.2rem;
-  background-color: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--text-primary);
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  transition: all 0.3s cubic-bezier(0.86, 0, 0.07, 1);
+  font-family: var(--font-space), sans-serif;
+  font-size: 0.9rem;
+  text-transform: none;
+  color: color-mix(in srgb, var(--text-primary) 70%, transparent);
+  border: none;
+  background: transparent;
+  padding: 0;
+  transition: color 0.2s ease;
   text-decoration: none;
 }
 
+.header.scrolled .resumeButton {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .resumeButton:hover {
-  background-color: var(--text-primary);
-  color: var(--bg-primary);
-  transform: translateY(-2px);
+  color: var(--text-primary);
+}
+
+.header.scrolled .resumeButton:hover {
+  color: #fff;
 }
 
 .ctaButton {
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.6rem 1.5rem;
+  font-family: var(--font-space), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: none;
+  padding: 0.6rem 1.2rem;
   background-color: var(--text-primary);
   color: var(--bg-primary);
   border-radius: 9999px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  transition: transform 0.3s cubic-bezier(0.86, 0, 0.07, 1);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  margin-left: 0.5rem;
+}
+
+.header.scrolled .ctaButton {
+  background-color: #fff;
+  color: #000;
 }
 
 .ctaButton:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
+  opacity: 0.9;
 }
 
 .arrow {
-  display: inline-block;
-  transition: transform 0.3s ease;
-  font-size: 1.1em;
-}
-
-.ctaButton:hover .arrow, .mobileCtaButton:hover .arrow {
-  transform: translateX(4px);
+  display: none;
 }
 
 .hamburger {
@@ -206,8 +275,13 @@
 }
 
 @media (max-width: 768px) {
-  .navContainer {
-    padding: 0 2rem;
+  .header.top .navContainer {
+    padding: 0 1.5rem;
+  }
+  .header.scrolled .navContainer {
+    padding: 0 1rem;
+    height: 56px;
+    max-width: 95vw;
   }
   .desktopNav {
     display: none;
@@ -215,4 +289,20 @@
   .hamburger {
     display: flex;
   }
+}
+
+/* Dynamic Text Colors for Scroll State */
+.header.scrolled .logo,
+.header.scrolled .navLink {
+  color: #fff;
+}
+.header.top .logo,
+.header.top .navLink {
+  color: var(--text-primary);
+}
+.header.scrolled .resumeButton {
+  color: #fff;
+}
+.header.top .resumeButton {
+  color: var(--text-primary);
 }

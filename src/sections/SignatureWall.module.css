@@ -45,8 +45,8 @@
   padding: 4rem 2rem;
   border-radius: 24px;
   position: relative;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: var(--bg-dark);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .progressBarContainer {
@@ -140,7 +140,7 @@
 }
 
 .formContainer {
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: var(--bg-dark);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 2rem;
   border-radius: 24px;

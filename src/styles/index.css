@@ -2,21 +2,21 @@
 
 :root {
   --bg-dark: #0B0B0C;
-  --bg-light: #F7F6F2;
+  --bg-light: #F5F2E9;
   --text-dark: #F7F6F2;
   --text-light: #0B0B0C;
   
-  /* Theme-aware variables */
-  --bg-primary: var(--bg-dark);
-  --text-primary: var(--text-dark);
+  /* Theme-aware variables (CREAM EXPERIMENT) */
+  --bg-primary: var(--bg-light);
+  --text-primary: var(--text-light);
   
-  --accent: #D4FF3F;
-  --gray: #888888;
+  --accent: #E94F37; /* A nice red/orange that pops on cream */
+  --gray: #666666;
   --font-display: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-space: 'Space Grotesk', sans-serif;
   --nav-height: 80px;
-  --cursor-color: var(--text-dark);
+  --cursor-color: var(--text-light);
 }
 
 * {
@@ -47,7 +47,7 @@ html {
 
 body {
   font-family: var(--font-display);
-  background: linear-gradient(-45deg, #050505, #1a6264, #0B0B0C, #181824);
+  background: linear-gradient(-45deg, #F5F2E9, #EBE6D8, #F7F4EB, #E2DCC8);
   background-size: 400% 400%;
   animation: darkGradientAnim 15s ease infinite;
   color: var(--text-primary);
