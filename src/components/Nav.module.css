@@ -303,11 +303,13 @@
 
 /* Dynamic Text Colors for Scroll State */
 .header.scrolled .logo,
-.header.scrolled .navLink {
+.header.scrolled .navLink,
+.header.scrolled .hamburger {
   color: #fff;
 }
 .header.top .logo,
-.header.top .navLink {
+.header.top .navLink,
+.header.top .hamburger {
   color: var(--text-primary);
 }
 .header.scrolled .resumeButton {

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { motion, AnimatePresence, useInView, useAnimation } from 'framer-motion';
 import { ref, onValue, push } from 'firebase/database';
 import { db } from '../utils/firebase';
 import { sanitizeInput } from '../utils/sanitizeInput';
@@ -64,6 +64,30 @@ export default function SignatureWall() {
   const wallRef = useRef(null);
   const isInView = useInView(wallRef, { amount: 0.2 }); // starts when 20% visible
   const [isMobile, setIsMobile] = useState(false);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!wallRef.current) return;
+      const rect = wallRef.current.getBoundingClientRect();
+      
+      // If the section is completely below the viewport (user went back UP to previous sections), reset it.
+      if (rect.top > window.innerHeight) {
+        controls.set("hidden");
+      }
+      
+      // If the section is entering the viewport from the bottom (user is scrolling DOWN into it), trigger it.
+      if (rect.top < window.innerHeight * 0.85) {
+        controls.start("visible");
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [controls]);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -165,8 +189,7 @@ export default function SignatureWall() {
       <motion.div 
         className={styles.header}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, margin: "-50px" }}
+        animate={controls}
       >
         <motion.h2 
           className={styles.title}
@@ -192,8 +215,7 @@ export default function SignatureWall() {
       <motion.div
         className={styles.wall}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, margin: "-50px" }}
+        animate={controls}
         variants={{
           hidden: { 
             opacity: 0, 
@@ -257,13 +279,7 @@ export default function SignatureWall() {
         </AnimatePresence>
       </motion.div>
 
-      <motion.div 
-        className={styles.formContainer}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, margin: "-50px" }}
-        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-      >
+      <div className={styles.formContainer}>
         <form className={styles.form} onSubmit={handleSubmit}>
           {errorMsg && <div className={styles.errorMessage} style={{ color: 'red', marginBottom: '1rem', fontWeight: 'bold' }}>{errorMsg}</div>}
           
@@ -322,7 +338,7 @@ export default function SignatureWall() {
             {isSubmitting ? 'Pinning...' : 'Post Note'}
           </button>
         </form>
-      </motion.div>
+      </div>
     </section>
   );
 }
