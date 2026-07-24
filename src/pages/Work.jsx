@@ -25,9 +25,10 @@ export default function Work() {
 
       <section className={styles.projectsSection}>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
+          initial={{ opacity: 0, y: 80, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
           <Tilt tiltMaxAngleX={3} tiltMaxAngleY={3} tiltReverse={true} style={{ display: 'block' }}>
             <Link 

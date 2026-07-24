@@ -1,53 +1,6 @@
-import { useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
-import PropTypes from 'prop-types';
-
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import styles from './Contact.module.css';
-
-const MagneticButton = ({ children, href }) => {
-  const ref = useRef(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const springConfig = { damping: 15, stiffness: 150, mass: 0.1 };
-  const springX = useSpring(x, springConfig);
-  const springY = useSpring(y, springConfig);
-
-  const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
-    const { height, width, left, top } = ref.current.getBoundingClientRect();
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    x.set(middleX * 0.3);
-    y.set(middleY * 0.3);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.a
-      ref={ref}
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={styles.magneticLink}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ x: springX, y: springY }}
-      data-cursor-hover="true"
-    >
-      {children}
-    </motion.a>
-  );
-};
-
-MagneticButton.propTypes = {
-  children: PropTypes.node.isRequired,
-  href: PropTypes.string,
-};
 
 export default function Contact() {
   const [formState, setFormState] = useState('idle'); // idle, submitting, success
@@ -57,7 +10,6 @@ export default function Contact() {
     setFormState('submitting');
 
     const formData = new FormData(e.target);
-    // Web3Forms Access Key
     formData.append("access_key", "be92650d-8d94-48e0-854f-8eefac5fad32");
 
     const object = Object.fromEntries(formData);
@@ -88,89 +40,86 @@ export default function Contact() {
   };
 
   return (
-    <div className={styles.contact}>
-      <section className={styles.hero}>
-        <motion.h1
-          className="h1-display"
-          initial={{ opacity: 0, y: 50 }}
+    <div className={styles.contactSection}>
+      <div className={styles.contentWrapper}>
+        
+        <motion.div 
+          className={styles.headerRow}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          Let's Talk.
-        </motion.h1>
-      </section>
+          <h1 className={styles.title}>Let's Talk.</h1>
+          <div className={styles.socials}>
+            <a href="mailto:prathmeshpatila5@gmail.com" className={styles.socialLink}>Email</a>
+            <a href="https://www.linkedin.com/in/prathamesh-patil-5652a1358/" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>LinkedIn</a>
+            <a href="https://www.behance.net/prathmeshpatila5" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>Behance</a>
+          </div>
+        </motion.div>
 
-      <section className={styles.content}>
-        <div className={styles.directContact}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
+        {formState === 'success' ? (
+          <motion.div 
+            className={styles.successMessage}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
           >
-            <p className="label-mono">Email</p>
-            <a href="mailto:prathmeshpatila5@gmail.com" className={styles.bigLink} data-cursor-hover="true">
-              prathmeshpatila5@gmail.com
-            </a>
+            Thank you. Your message has been sent.<br/>
+            <span style={{ fontSize: '1.5rem', opacity: 0.6, color: '#111' }}>I will get back to you shortly.</span>
           </motion.div>
-
-
-          <motion.div
-            className={styles.socialRow}
-            initial={{ opacity: 0, y: 30 }}
+        ) : (
+          <motion.form 
+            className={styles.conversationalForm} 
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="label-mono">Socials</p>
-            <div className={styles.socialLinks}>
-              <MagneticButton href="https://www.linkedin.com/in/prathamesh-patil-5652a1358/">LinkedIn</MagneticButton>
-              <MagneticButton href="https://www.behance.net/prathmeshpatila5">Behance</MagneticButton>
-            </div>
-          </motion.div>
-        </div>
+            <span className={styles.formText}>Hello Prathamesh! My name is</span>
+            <input 
+              type="text" 
+              name="name" 
+              required 
+              className={styles.blankInput} 
+              placeholder="Your Name"
+            />
+            <span className={styles.formText}>from</span>
+            <input 
+              type="text" 
+              name="company" 
+              className={styles.blankInput} 
+              placeholder="Company / School (Optional)"
+            />
+            <span className={styles.formText}>. I am reaching out because I want to talk about</span>
+            <input 
+              type="text" 
+              name="message" 
+              required 
+              className={`${styles.blankInput} ${styles.messageInput}`} 
+              placeholder="a new website / a bold idea / hiring you"
+            />
+            <span className={styles.formText}>. You can reach me back at</span>
+            <input 
+              type="email" 
+              name="email" 
+              required 
+              className={styles.blankInput} 
+              placeholder="Your Email"
+            />
+            <span className={styles.formText}>. Let's build something amazing.</span>
 
-        <motion.div
-          className={styles.formWrapper}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
-          {formState === 'success' ? (
-            <div className={styles.successMessage}>
-              <motion.h3
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--accent)' }}
-              >
-                Message Sent!
-              </motion.h3>
-              <p style={{ color: 'rgba(247, 246, 242, 0.7)' }}>I'll get back to you as soon as possible.</p>
-            </div>
-          ) : (
-            <form className={styles.form} onSubmit={handleSubmit}>
-              <div className={styles.inputGroup}>
-                <input type="text" id="name" name="name" required placeholder=" " />
-                <label htmlFor="name">Your Name</label>
-              </div>
-              <div className={styles.inputGroup}>
-                <input type="email" id="email" name="email" required placeholder=" " />
-                <label htmlFor="email">Your Email</label>
-              </div>
-              <div className={styles.inputGroup}>
-                <textarea id="message" name="message" required placeholder=" " rows={5}></textarea>
-                <label htmlFor="message">Your Message</label>
-              </div>
-              <button
-                type="submit"
-                className={styles.submitBtn}
-                data-cursor-hover="true"
+            <div className={styles.submitContainer}>
+              <button 
+                type="submit" 
+                className={styles.submitBtn} 
                 disabled={formState === 'submitting'}
               >
                 {formState === 'submitting' ? 'Sending...' : 'Send Message'}
               </button>
-            </form>
-          )}
-        </motion.div>
-      </section>
+            </div>
+          </motion.form>
+        )}
+
+      </div>
     </div>
   );
 }
