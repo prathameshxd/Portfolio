@@ -13,6 +13,9 @@
   margin: 0 auto;
   width: 100%;
   padding-top: var(--nav-height);
+  position: sticky;
+  top: 0;
+  z-index: 0;
 }
 
 .heroInner {
@@ -148,13 +151,20 @@
   color: var(--bg-primary);
 }
 
+.curtainWrapper {
+  position: relative;
+  z-index: 1;
+  background-color: var(--bg-primary);
+  box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.08); /* shadow behind the curtain */
+}
+
 /* Marquee Section */
 .marqueeSection {
   padding: 4rem 0;
-  background-color: transparent;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   overflow: hidden;
+  position: relative;
 }
 
 .marqueeContainer {
@@ -181,9 +191,8 @@
 /* About Section */
 .about {
   padding: 10rem 4rem;
-  max-width: 1600px;
-  margin: 0 auto;
   width: 100%;
+  position: relative;
 }
 
 .aboutContent {
@@ -191,6 +200,9 @@
   grid-template-columns: 1fr 1fr;
   gap: 8rem;
   align-items: start;
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .sectionTitle {

@@ -1,0 +1,62 @@
+.cardWrapper {
+  perspective: 1000px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* since it wraps the stat card which might be aligned to the right */
+}
+
+.cardInner {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  will-change: transform;
+}
+
+.cardWrapper:not(:hover) .cardInner {
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    800px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.3),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.cardInner:hover .shine {
+  opacity: 1;
+}
+
+/* Add an extra glow to the border itself based on mouse position */
+.cardInner::before {
+  content: "";
+  position: absolute;
+  inset: -1px; /* slightly outside to cover border */
+  border-radius: inherit;
+  padding: 1px; /* border thickness */
+  background: radial-gradient(
+    400px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(233, 79, 55, 1), /* Bright red/orange accent */
+    transparent 50%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 20;
+}
+
+.cardInner:hover::before {
+  opacity: 1;
+}

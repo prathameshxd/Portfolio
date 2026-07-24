@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import SignatureWall from '../sections/SignatureWall';
 import StickyStackSection from '../sections/StickyStackSection';
+import HoverTiltCard from '../components/HoverTiltCard';
 import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCss, SiJavascript, SiGithub } from 'react-icons/si';
 
 import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye, FiPenTool } from 'react-icons/fi';
@@ -212,8 +213,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Marquee Section */}
-      <section className={styles.marqueeSection}>
+      <div className={styles.curtainWrapper}>
+        {/* Marquee Section */}
+        <section className={styles.marqueeSection}>
         <div className={styles.marqueeContainer}>
           <motion.div
             className={styles.marqueeTrack}
@@ -240,17 +242,44 @@ export default function Home() {
           transition={{ duration: 0.8 }}
         >
           <div className={styles.aboutTextCol}>
-            <h2 className={styles.sectionTitle}>About</h2>
-            <p className={styles.aboutText}>
-              My foundation in computer science allows me to approach UX design with a highly structured, analytical mindset ensuring the interfaces I conceptualize are built on logical, accessible systems rather than just aesthetics. When I am off the grid, I am usually trekking the Sahyadri mountains or capturing landscape photography.
-            </p>
+            <motion.h2 
+              className={styles.sectionTitle}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
+            >
+              About
+            </motion.h2>
+            <motion.p 
+              className={styles.aboutText}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-250px" }}
+              variants={{
+                visible: {
+                  transition: {
+                    staggerChildren: 0.015,
+                    delayChildren: 0.2
+                  }
+                }
+              }}
+            >
+              {"My foundation in computer science allows me to approach UX design with a highly structured, analytical mindset ensuring the interfaces I conceptualize are built on logical, accessible systems rather than just aesthetics. When I am off the grid, I am usually trekking the Sahyadri mountains or capturing landscape photography.".split(" ").map((word, i) => (
+                <span key={i} className={styles.wordWrapper}>
+                  <motion.span variants={wordAnimation} className={styles.word}>
+                    {word}&nbsp;
+                  </motion.span>
+                </span>
+              ))}
+            </motion.p>
           </div>
           <div className={styles.statsGrid}>
-            <div className={styles.statCard}>
+            <HoverTiltCard className={styles.statCard}>
               <h3 className={styles.statValue}>2026</h3>
               <p className={styles.statLabel}>B.Sc. Computer Science</p>
               <p className={styles.statDesc}>Mumbai University<br />(2023–2026)</p>
-            </div>
+            </HoverTiltCard>
           </div>
         </motion.div>
       </section>
@@ -274,6 +303,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      </div>
     </div>
   );
 }
