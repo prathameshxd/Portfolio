@@ -64,17 +64,73 @@ function AnimatedRoutes() {
   );
 }
 
+const sliceVariants = {
+  initial: {
+    y: "0%"
+  },
+  animate: (i) => ({
+    y: "-100%",
+    transition: {
+      duration: 0.7,
+      ease: [0.76, 0, 0.24, 1],
+      delay: i * 0.05
+    }
+  }),
+  exit: (i) => ({
+    y: ["100%", "0%"],
+    transition: {
+      duration: 0.7,
+      ease: [0.76, 0, 0.24, 1],
+      delay: i * 0.05
+    }
+  })
+};
+
 function PageWrapper({ children }) {
+  const slices = 5;
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      style={{ flex: 1, display: 'flex', flexDirection: 'column' }}
-    >
-      {children}
-    </motion.div>
+    <>
+      <div 
+        style={{ 
+          position: "fixed", 
+          top: 0, 
+          left: 0, 
+          width: "100vw", 
+          height: "100vh", 
+          display: "flex", 
+          zIndex: 99999, 
+          pointerEvents: "none",
+          overflow: "hidden"
+        }}
+      >
+        {Array.from({ length: slices }).map((_, i) => (
+          <motion.div
+            key={i}
+            custom={i}
+            variants={sliceVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            style={{
+              flex: 1,
+              backgroundColor: "#050505", // Slick dark brand color
+              willChange: "transform"
+            }}
+          />
+        ))}
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        style={{ flex: 1, display: 'flex', flexDirection: 'column' }}
+      >
+        {children}
+      </motion.div>
+    </>
   );
 }
 
