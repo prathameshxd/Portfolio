@@ -86,7 +86,13 @@ const StageCard = ({ stage, index, scrollYProgress, activeStage, setActiveStage,
   return (
     <motion.div 
       className={styles.stageCardWrapper} 
-      style={{ display: "block", flex: 1, y, opacity, rotate }}
+      style={{ 
+        display: "block", 
+        flex: 1, 
+        y: isMobile ? 0 : y, 
+        opacity: isMobile ? 1 : opacity, 
+        rotate: isMobile ? 0 : rotate 
+      }}
     >
       <motion.div
         className={`${styles.stageNode} ${activeStage === stage.id ? styles.active : ''}`}
@@ -147,10 +153,10 @@ export default function StickyStackSection() {
     offset: ["start start", "end end"]
   });
 
-  // Title animations: start slightly faded and lower, then snap to center, then fade out at the very end
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
-  const titleScale = useTransform(scrollYProgress, [0, 0.1], [0.9, 1]);
-  const titleY = useTransform(scrollYProgress, [0, 0.1], ["50px", "0px"]);
+  // Title animations: start slightly faded and lower, then snap to center quickly
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.05, 0.9, 1], [0, 1, 1, 0]);
+  const titleScale = useTransform(scrollYProgress, [0, 0.05], [0.9, 1]);
+  const titleY = useTransform(scrollYProgress, [0, 0.05], ["30px", "0px"]);
 
   const handleStageInteraction = (id) => {
     if (isMobile) {
@@ -165,7 +171,11 @@ export default function StickyStackSection() {
         {/* Pinned Title */}
         <motion.div 
           className={styles.stackHeader}
-          style={{ opacity: titleOpacity, scale: titleScale, y: titleY }}
+          style={{ 
+            opacity: isMobile ? 1 : titleOpacity, 
+            scale: isMobile ? 1 : titleScale, 
+            y: isMobile ? 0 : titleY 
+          }}
         >
           <h2 className={styles.stackTitle}>The Arsenal</h2>
           <p className={styles.stackDesc}>Where design precision meets engineering scale. The instruments I use to forge digital experiences.</p>

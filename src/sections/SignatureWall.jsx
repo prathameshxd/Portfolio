@@ -63,6 +63,14 @@ export default function SignatureWall() {
   const [isHovered, setIsHovered] = useState(false);
   const wallRef = useRef(null);
   const isInView = useInView(wallRef, { amount: 0.2 }); // starts when 20% visible
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const notesPerPage = 8;
   const rotationInterval = 3000; // 3 seconds
@@ -194,7 +202,7 @@ export default function SignatureWall() {
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ type: 'spring', stiffness: 200, damping: 15 }}
                 whileHover={{ scale: 1.05, zIndex: 10, rotate: 0 }}
-                drag
+                drag={!isMobile}
                 dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
                 dragElastic={0.1}
               >

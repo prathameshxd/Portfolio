@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
@@ -113,6 +113,7 @@ SplitText.propTypes = {
 };
 
 export default function Home() {
+  const curtainRef = useRef(null);
   const [activeStage, setActiveStage] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -213,7 +214,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className={styles.curtainWrapper}>
+      <div className={styles.curtainWrapper} ref={curtainRef}>
         {/* Marquee Section */}
         <section className={styles.marqueeSection}>
         <div className={styles.marqueeContainer}>

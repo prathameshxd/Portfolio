@@ -1,0 +1,21 @@
+.scrambleSection {
+  min-height: 40vh; /* Takes up space between sections */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.scrambleText {
+  font-family: var(--font-mono); /* Monospace gives it that hacker terminal feel */
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  word-break: break-word;
+  max-width: 1200px;
+}

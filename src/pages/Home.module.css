@@ -136,7 +136,7 @@
 }
 
 .btnPrimary:hover {
-  background-color: #e5ff7a;
+  opacity: 0.9;
   transform: translateY(-2px);
 }
 
@@ -157,6 +157,7 @@
   background-color: var(--bg-primary);
   box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.08); /* shadow behind the curtain */
 }
+
 
 /* Marquee Section */
 .marqueeSection {
@@ -190,7 +191,7 @@
 
 /* About Section */
 .about {
-  padding: 10rem 4rem;
+  padding: 6rem 4rem 2rem 4rem; /* Tightened bottom padding to reduce empty space */
   width: 100%;
   position: relative;
 }

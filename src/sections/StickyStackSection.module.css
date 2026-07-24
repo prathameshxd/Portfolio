@@ -64,7 +64,7 @@
   position: relative;
   width: 100%;
   z-index: 10;
-  margin-top: 15vh; /* Initial gap before cards slide up */
+  margin-top: 5vh; /* Greatly reduced gap before cards slide up */
 }
 
 /* From here down: copied from Home.module.css to isolate the experiment */
