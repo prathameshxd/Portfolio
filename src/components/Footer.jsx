@@ -56,14 +56,6 @@ export default function Footer() {
             <h2 className={styles.massiveText}>LET'S TALK.</h2>
           </div>
 
-          <div className={`${styles.gridItem} ${styles.statusItem}`}>
-            <span className={styles.label}>Status</span>
-            <div className={styles.statusInner}>
-              <div className={styles.statusDot}></div>
-              <span className={styles.statusText}>Available for Work</span>
-            </div>
-          </div>
-
           <div className={`${styles.gridItem} ${styles.timeItem}`}>
             <span className={styles.label}>Local Time</span>
             <span className={styles.timeValue}>{time}</span>

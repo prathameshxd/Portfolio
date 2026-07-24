@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import SignatureWall from '../sections/SignatureWall';
 import StickyStackSection from '../sections/StickyStackSection';
+import AboutBento from '../sections/AboutBento';
 import HoverTiltCard from '../components/HoverTiltCard';
 import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCss, SiJavascript, SiGithub } from 'react-icons/si';
 
@@ -217,23 +218,26 @@ export default function Home() {
       <div className={styles.curtainWrapper} ref={curtainRef}>
         {/* Marquee Section */}
         <section className={styles.marqueeSection}>
-        <div className={styles.marqueeContainer}>
-          <motion.div
-            className={styles.marqueeTrack}
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              repeat: Infinity,
-              ease: "linear",
-              duration: 20
-            }}
-          >
-            <span className={styles.marqueeText}>FIGMA · USER RESEARCH · PROTOTYPING · DESIGN SYSTEMS · AI-ASSISTED DESIGN · FIGMA · USER RESEARCH · PROTOTYPING · DESIGN SYSTEMS · AI-ASSISTED DESIGN ·</span>
-            <span className={styles.marqueeText}>FIGMA · USER RESEARCH · PROTOTYPING · DESIGN SYSTEMS · AI-ASSISTED DESIGN · FIGMA · USER RESEARCH · PROTOTYPING · DESIGN SYSTEMS · AI-ASSISTED DESIGN ·</span>
-          </motion.div>
-        </div>
-      </section>
+          <div className={styles.marqueeContainer}>
+            <motion.div
+              className={styles.marqueeTrack}
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{
+                repeat: Infinity,
+                ease: "linear",
+                duration: 20
+              }}
+            >
+              <span className={styles.marqueeText}>FIGMA · USER RESEARCH · PROTOTYPING · DESIGN SYSTEMS · AI-ASSISTED DESIGN · FIGMA · USER RESEARCH · PROTOTYPING · DESIGN SYSTEMS · AI-ASSISTED DESIGN ·</span>
+              <span className={styles.marqueeText}>FIGMA · USER RESEARCH · PROTOTYPING · DESIGN SYSTEMS · AI-ASSISTED DESIGN · FIGMA · USER RESEARCH · PROTOTYPING · DESIGN SYSTEMS · AI-ASSISTED DESIGN ·</span>
+            </motion.div>
+          </div>
+        </section>
 
-      {/* About Section */}
+        {/* About Section - EXPERIMENT: Bento Grid */}
+        <AboutBento />
+
+        {/* ORIGINAL ABOUT SECTION (Commented out for safe keeping)
       <section className={styles.about}>
         <motion.div
           className={styles.aboutContent}
@@ -284,26 +288,27 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+      */}
 
-      {/* Stack Section */}
-      <StickyStackSection />
+        {/* Stack Section */}
+        <StickyStackSection />
 
-      <SignatureWall />
+        <SignatureWall />
 
-      {/* Teaser */}
-      <section className={styles.teaser}>
-        <Link to="/contact" data-cursor-hover="true">
-          <motion.h2
-            className="h1-display"
-            whileHover={{ scale: 0.98, opacity: 0.8 }}
-            transition={{ duration: 0.3 }}
-          >
-            Let's build something <span className={styles.arrow}>→</span>
-          </motion.h2>
-        </Link>
-      </section>
+        {/* Teaser */}
+        <section className={styles.teaser}>
+          <Link to="/contact" data-cursor-hover="true">
+            <motion.h2
+              className="h1-display"
+              whileHover={{ scale: 0.98, opacity: 0.8 }}
+              transition={{ duration: 0.3 }}
+            >
+              Let's build something <span className={styles.arrow}>→</span>
+            </motion.h2>
+          </Link>
+        </section>
 
-      <Footer />
+        <Footer />
       </div>
     </div>
   );
