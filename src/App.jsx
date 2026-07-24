@@ -114,6 +114,7 @@ function PageWrapper({ children }) {
             exit="exit"
             style={{
               flex: 1,
+              marginLeft: i > 0 ? "-1px" : "0",
               backgroundColor: "#050505", // Slick dark brand color
               willChange: "transform"
             }}
