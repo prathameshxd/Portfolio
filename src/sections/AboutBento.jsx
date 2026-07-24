@@ -31,7 +31,10 @@ const cardVariants = {
     scale: 1, 
     filter: 'blur(0px)',
     y: 0,
-    transition: { type: 'spring', stiffness: 100, damping: 20 }
+    transition: { 
+      type: 'spring', stiffness: 100, damping: 20,
+      filter: { type: 'tween', duration: 0.6, ease: 'easeOut' }
+    }
   }
 };
 
@@ -41,7 +44,10 @@ const wordVariants = {
     opacity: 1, 
     y: 0, 
     filter: 'blur(0px)',
-    transition: { type: 'spring', stiffness: 120, damping: 14 }
+    transition: { 
+      type: 'spring', stiffness: 120, damping: 14,
+      filter: { type: 'tween', duration: 0.4, ease: 'easeOut' }
+    }
   }
 };
 

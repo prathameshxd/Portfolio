@@ -1,0 +1,21 @@
+.waveContainer {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4rem 0;
+  position: relative;
+  z-index: 10;
+}
+
+.svgWave {
+  height: 100%;
+  max-width: 100%;
+  overflow: visible;
+}
+
+/* Light theme support */
+:global(body.theme-light) .svgWave path:first-child {
+  stroke: rgba(0, 0, 0, 0.08);
+}

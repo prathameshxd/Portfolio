@@ -162,15 +162,57 @@ export default function SignatureWall() {
 
   return (
     <section id="signature-wall" ref={wallRef} className={styles.container}>
-      <div className={styles.header}>
-        <h2 className={styles.title}>Leave a Note for Me</h2>
-        <p className={styles.subtitle}>
+      <motion.div 
+        className={styles.header}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, margin: "-50px" }}
+      >
+        <motion.h2 
+          className={styles.title}
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+          }}
+        >
+          Leave a Note for Me
+        </motion.h2>
+        
+        <motion.p 
+          className={styles.subtitle}
+          variants={{
+            hidden: { opacity: 0, y: 10 },
+            visible: { opacity: 1, y: 0, transition: { delay: 0.2, duration: 0.4 } }
+          }}
+        >
           Drop a quick message on the wall. Pick a color, pin it up, and make your mark!
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
 
-      <div
+      <motion.div
         className={styles.wall}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, margin: "-50px" }}
+        variants={{
+          hidden: { 
+            opacity: 0, 
+            rotateX: 40,
+            y: 150,
+            scale: 0.9
+          },
+          visible: { 
+            opacity: 1, 
+            rotateX: 0, 
+            y: 0,
+            scale: 1,
+            transition: { 
+              duration: 1.4, 
+              ease: [0.16, 1, 0.3, 1] // Ultra-smooth Apple-like easeOut
+            } 
+          }
+        }}
+        style={{ transformPerspective: 1200, transformStyle: "preserve-3d" }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -213,9 +255,15 @@ export default function SignatureWall() {
             ));
           })()}
         </AnimatePresence>
-      </div>
+      </motion.div>
 
-      <div className={styles.formContainer}>
+      <motion.div 
+        className={styles.formContainer}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-50px" }}
+        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+      >
         <form className={styles.form} onSubmit={handleSubmit}>
           {errorMsg && <div className={styles.errorMessage} style={{ color: 'red', marginBottom: '1rem', fontWeight: 'bold' }}>{errorMsg}</div>}
           
@@ -274,7 +322,7 @@ export default function SignatureWall() {
             {isSubmitting ? 'Pinning...' : 'Post Note'}
           </button>
         </form>
-      </div>
+      </motion.div>
     </section>
   );
 }

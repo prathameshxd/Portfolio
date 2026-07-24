@@ -61,6 +61,11 @@
   gap: 0.5rem;
   text-decoration: none;
   z-index: 101;
+  outline: none; /* Remove browser default focus border */
+}
+
+.logo:focus-visible {
+  outline: none;
 }
 
 .header.scrolled .logo {
@@ -93,6 +98,11 @@
   position: relative;
   text-decoration: none;
   transition: color 0.2s ease;
+  outline: none;
+}
+
+.navLink:focus-visible {
+  outline: none;
 }
 
 .header.scrolled .navLink {
