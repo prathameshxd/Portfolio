@@ -10,7 +10,6 @@ import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCs
 
 import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye, FiPenTool } from 'react-icons/fi';
 import PropTypes from 'prop-types';
-import DistortedText from '../components/DistortedText';
 import styles from './Home.module.css';
 
 const WORKFLOW_STAGES = [
