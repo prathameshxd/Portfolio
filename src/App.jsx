@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import Layout from './components/Layout';
 import Preloader from './components/Preloader';
+import CustomCursor from './components/CustomCursor';
 import Loader from './components/Loader';
 import Home from './pages/Home';
 
@@ -148,6 +149,7 @@ export default function App() {
       </AnimatePresence>
       {!loading && <AnimatedRoutes />}
       <Analytics />
+      <CustomCursor />
     </>
   );
 }
