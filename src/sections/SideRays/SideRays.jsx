@@ -76,12 +76,23 @@ const SideRays = ({
 
       if (!containerRef.current) return;
 
-      const renderer = new Renderer({
-        dpr: Math.min(window.devicePixelRatio, 2),
-        alpha: true
-      });
-      rendererRef.current = renderer;
+      let renderer;
+      try {
+        renderer = new Renderer({
+          dpr: Math.min(window.devicePixelRatio, 2),
+          alpha: true
+        });
+      } catch (error) {
+        console.warn("WebGL is not supported or context creation failed.", error);
+        return;
+      }
 
+      if (!renderer || !renderer.gl) {
+        console.warn("WebGL is not supported or context creation failed.");
+        return;
+      }
+
+      rendererRef.current = renderer;
       const gl = renderer.gl;
       gl.canvas.style.width = '100%';
       gl.canvas.style.height = '100%';

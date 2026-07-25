@@ -109,8 +109,19 @@ function CameraRig() {
 
 export default function StackScene({ setActiveTool, activeToolId }) {
   const sceneRef = useRef();
+  const [webglSupported, setWebglSupported] = useState(true);
 
   useEffect(() => {
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) {
+        setWebglSupported(false);
+      }
+    } catch (e) {
+      setWebglSupported(false);
+    }
+
     return () => {
       if (sceneRef.current) {
         sceneRef.current.traverse((child) => {
@@ -128,6 +139,14 @@ export default function StackScene({ setActiveTool, activeToolId }) {
       }
     };
   }, []);
+
+  if (!webglSupported) {
+    return (
+      <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', textAlign: 'center', color: '#666' }}>
+        <p>Interactive 3D visualization requires WebGL support.</p>
+      </div>
+    );
+  }
 
   return (
     <div aria-label="Interactive 3D representation of technical skills and tools" role="img" style={{width: '100%', height: '100%'}}>
