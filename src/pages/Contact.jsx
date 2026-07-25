@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import AnimatedHeading from '../components/AnimatedHeading';
 import styles from './Contact.module.css';
 
 export default function Contact() {
@@ -49,7 +50,7 @@ export default function Contact() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h1 className={styles.title}>Let's Talk.</h1>
+          <AnimatedHeading className={styles.title} />
           <div className={styles.socials}>
             <a href="mailto:prathmeshpatila5@gmail.com" className={styles.socialLink}>Email</a>
             <a href="https://www.linkedin.com/in/prathamesh-patil-5652a1358/" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>LinkedIn</a>

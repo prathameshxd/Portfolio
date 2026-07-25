@@ -157,7 +157,7 @@ export default function StackScene({ setActiveTool, activeToolId }) {
         camera={{ position: [0, 0, 8], fov: 60 }} 
         ref={sceneRef}
         dpr={[1, 1.5]}
-        gl={{ powerPreference: 'default' }}
+        gl={{ powerPreference: 'high-performance', antialias: false, alpha: false }}
       >
       <ambientLight intensity={1.5} />
       <directionalLight position={[10, 10, 5]} intensity={2} />

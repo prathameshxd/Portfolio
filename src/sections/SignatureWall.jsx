@@ -62,33 +62,19 @@ export default function SignatureWall() {
   const [pageIndex, setPageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const wallRef = useRef(null);
-  const isInView = useInView(wallRef, { amount: 0.2 }); // starts when 20% visible
   const [isMobile, setIsMobile] = useState(false);
   const [notesPerPage, setNotesPerPage] = useState(8);
   const controls = useAnimation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!wallRef.current) return;
-      const rect = wallRef.current.getBoundingClientRect();
-      
-      // If the section is completely below the viewport (user went back UP to previous sections), reset it.
-      if (rect.top > window.innerHeight) {
-        controls.set("hidden");
-      }
-      
-      // If the section is entering the viewport from the bottom (user is scrolling DOWN into it), trigger it.
-      if (rect.top < window.innerHeight * 0.85) {
-        controls.start("visible");
-      }
-    };
+  const isInView = useInView(wallRef, { amount: 0.15 });
 
-    window.addEventListener('scroll', handleScroll);
-    // Initial check
-    handleScroll();
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [controls]);
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    } else {
+      controls.set("hidden");
+    }
+  }, [isInView, controls]);
 
   useEffect(() => {
     const checkMobile = () => {

@@ -1,0 +1,47 @@
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.headingFlex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3em; /* space between words */
+}
+
+.wordWrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden; /* clip the sliding animation so it looks like a mechanical flip */
+  vertical-align: bottom;
+  padding: 0 0.1em; /* slight padding for the colored text */
+  margin: 0 -0.1em;
+}
+
+.ghostWord {
+  visibility: hidden;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.animatingWord {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--accent); /* Brand red for the rotating word to make it pop */
+  font-weight: 500;
+  will-change: transform, opacity;
+}
