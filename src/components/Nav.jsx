@@ -7,12 +7,21 @@ export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const [animKey, setAnimKey] = useState(0);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimKey(prev => prev + 1);
+    }, 6000);
+    return () => clearInterval(interval);
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -23,11 +32,25 @@ export default function Nav() {
     { path: '/work', label: 'Projects' },
   ];
 
+  const signatureText = "Prathamesh";
+
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : styles.top}`}>
       <div className={styles.navContainer}>
-        <NavLink to="/" className={styles.logo} onClick={closeMenu}>
-          PRATHAMESH P
+        <NavLink to="/" className={styles.logo} onClick={closeMenu} aria-label="Home">
+          <svg key={animKey} width="200" height="40" viewBox="0 0 200 40" className={styles.logoSvg}>
+            <text x="0" y="26" className={styles.logoTextGroup}>
+              {signatureText.split("").map((char, index) => (
+                <tspan
+                  key={index}
+                  className={styles.charDraw}
+                  style={{ animationDelay: `${index * 0.15}s` }}
+                >
+                  {char}
+                </tspan>
+              ))}
+            </text>
+          </svg>
         </NavLink>
 
         {/* Desktop Nav */}
@@ -40,8 +63,18 @@ export default function Nav() {
                 isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
               }
             >
-              {link.label}
-              <span className={styles.underline}></span>
+              {({ isActive }) => (
+                <>
+                  {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="navUnderline"
+                      className={styles.magicUnderline}
+                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </>
+              )}
             </NavLink>
           ))}
           <a href="/Prathamesh_Patil_resume.pdf" target="_blank" rel="noopener noreferrer" className={styles.resumeButton}>
@@ -95,8 +128,8 @@ export default function Nav() {
                 transition={{ delay: 0.3 + navLinks.length * 0.1 }}
               >
                 <a
-                  href="/Prathamesh_Patil_resume.pdf" 
-                  target="_blank" 
+                  href="/Prathamesh_Patil_resume.pdf"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className={styles.mobileResumeButton}
                   onClick={closeMenu}

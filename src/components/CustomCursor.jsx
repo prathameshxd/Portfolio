@@ -1,16 +1,23 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import styles from './CustomCursor.module.css';
 
 export default function CustomCursor() {
   const [hasMoved, setHasMoved] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  const springConfig = { damping: 35, stiffness: 250, mass: 0.1 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
     const updateMousePosition = (e) => {
       setHasMoved(true);
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
     const handleMouseOver = (e) => {
@@ -34,9 +41,8 @@ export default function CustomCursor() {
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, []);
+  }, [cursorX, cursorY]);
 
-  // Hide on touch devices
   if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
     return null;
   }
@@ -44,27 +50,31 @@ export default function CustomCursor() {
   if (!hasMoved) return null;
 
   return (
-    <motion.div
-      className={styles.cursor}
-      initial={{
-        opacity: 0,
-        x: mousePosition.x - 8,
-        y: mousePosition.y - 8,
-      }}
-      animate={{
-        opacity: 1,
-        x: mousePosition.x - (isHovering ? 20 : 8),
-        y: mousePosition.y - (isHovering ? 20 : 8),
-        scale: isHovering ? 2.5 : 1,
-        backgroundColor: isHovering ? 'var(--accent)' : 'var(--cursor-color)',
-        mixBlendMode: isHovering ? 'difference' : 'normal',
-      }}
-      transition={{
-        type: 'spring',
-        stiffness: 500,
-        damping: 28,
-        mass: 0.5,
-      }}
-    />
+    <>
+      <motion.div
+        className={styles.dot}
+        style={{
+          x: cursorX,
+          y: cursorY,
+        }}
+        animate={{
+          scale: isHovering ? 0 : 1,
+          opacity: isHovering ? 0 : 1
+        }}
+        transition={{ duration: 0.2 }}
+      />
+      <motion.div
+        className={styles.ring}
+        style={{
+          x: cursorXSpring,
+          y: cursorYSpring,
+        }}
+        animate={{
+          scale: isHovering ? 1.5 : 1,
+          backgroundColor: isHovering ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0)',
+        }}
+        transition={{ duration: 0.2 }}
+      />
+    </>
   );
 }

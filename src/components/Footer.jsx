@@ -1,9 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import styles from './Footer.module.css';
 import { SiGoogle } from 'react-icons/si';
 
 export default function Footer() {
   const containerRef = useRef(null);
+
+
 
   return (
     <footer className={styles.footerWrapper} ref={containerRef}>

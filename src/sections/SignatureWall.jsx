@@ -64,6 +64,7 @@ export default function SignatureWall() {
   const wallRef = useRef(null);
   const isInView = useInView(wallRef, { amount: 0.2 }); // starts when 20% visible
   const [isMobile, setIsMobile] = useState(false);
+  const [notesPerPage, setNotesPerPage] = useState(8);
   const controls = useAnimation();
 
   useEffect(() => {
@@ -90,13 +91,15 @@ export default function SignatureWall() {
   }, [controls]);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      setNotesPerPage(mobile ? 4 : 8);
+    };
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-
-  const notesPerPage = 8;
   const rotationInterval = 3000; // 3 seconds
 
   useEffect(() => {
