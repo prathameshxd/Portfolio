@@ -81,7 +81,7 @@ export default function Nav() {
             Resume
           </a>
           <NavLink to="/contact" className={styles.ctaButton}>
-            Contact me
+            <span>Contact me</span>
             <span className={styles.arrow}>→</span>
           </NavLink>
         </nav>
@@ -147,7 +147,7 @@ export default function Nav() {
                   className={styles.mobileCtaButton}
                   onClick={closeMenu}
                 >
-                  Contact me
+                  <span>Contact me</span>
                   <span className={styles.arrow}>→</span>
                 </NavLink>
               </motion.div>

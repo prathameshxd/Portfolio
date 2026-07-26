@@ -332,10 +332,13 @@ export default function SignatureWall() {
 
           <button
             type="submit"
-            className={styles.submitBtn}
+            className={`${styles.submitBtn} btn-wave-hover`}
+            style={{ '--wave-color': '#111', '--wave-text-color': '#fff' }}
             disabled={isSubmitting || !newNote.trim()}
           >
-            {isSubmitting ? 'Pinning...' : 'Post Note'}
+            <span className="btn-wave-text">
+              {isSubmitting ? 'Pinning...' : 'Post Note'}
+            </span>
           </button>
         </form>
       </div>

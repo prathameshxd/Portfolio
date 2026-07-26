@@ -52,9 +52,9 @@ export default function Contact() {
         >
           <AnimatedHeading className={styles.title} />
           <div className={styles.socials}>
-            <a href="mailto:prathmeshpatila5@gmail.com" className={styles.socialLink}>Email</a>
-            <a href="https://www.linkedin.com/in/prathamesh-patil-5652a1358/" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>LinkedIn</a>
-            <a href="https://www.behance.net/prathmeshpatila5" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>Behance</a>
+            <a href="mailto:prathmeshpatila5@gmail.com" className={`${styles.socialLink} btn-wave-hover`} style={{ '--wave-color': '#111', '--wave-text-color': '#fff' }}><span className="btn-wave-text">Email</span></a>
+            <a href="https://www.linkedin.com/in/prathamesh-patil-5652a1358/" target="_blank" rel="noopener noreferrer" className={`${styles.socialLink} btn-wave-hover`} style={{ '--wave-color': '#111', '--wave-text-color': '#fff' }}><span className="btn-wave-text">LinkedIn</span></a>
+            <a href="https://www.behance.net/prathmeshpatila5" target="_blank" rel="noopener noreferrer" className={`${styles.socialLink} btn-wave-hover`} style={{ '--wave-color': '#111', '--wave-text-color': '#fff' }}><span className="btn-wave-text">Behance</span></a>
           </div>
         </motion.div>
 
@@ -111,10 +111,13 @@ export default function Contact() {
             <div className={styles.submitContainer}>
               <button 
                 type="submit" 
-                className={styles.submitBtn} 
+                className={`${styles.submitBtn} btn-wave-hover`}
+                style={{ '--wave-color': 'var(--accent)', '--wave-text-color': '#111' }}
                 disabled={formState === 'submitting'}
               >
-                {formState === 'submitting' ? 'Sending...' : 'Send Message'}
+                <span className="btn-wave-text">
+                  {formState === 'submitting' ? 'Sending...' : 'Send Message'}
+                </span>
               </button>
             </div>
           </motion.form>
