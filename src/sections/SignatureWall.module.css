@@ -62,10 +62,10 @@
   gap: 2rem;
   justify-content: center;
   align-items: center;
-  align-content: flex-start;
+  align-content: center;
   width: 100%;
   margin-bottom: 4rem;
-  height: 650px;
+  height: 700px;
   /* subtle dot grid for the wall */
   background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
   background-size: 30px 30px;
@@ -165,6 +165,83 @@
   left: 50%;
   transform: translateX(-50%);
 }
+
+@keyframes ambientGlow {
+  0% { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.1); }
+  50% { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 60px rgba(255, 215, 0, 0.4); }
+  100% { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.1); }
+}
+
+@keyframes foilShift {
+  0% { background-position: 0% 50%, 0% 0%; }
+  100% { background-position: 100% 50%, 0% 0%; }
+}
+
+.ownerNoteGold {
+  background-image: 
+    linear-gradient(
+      105deg, 
+      transparent 20%, 
+      rgba(255, 255, 255, 0.6) 25%, 
+      rgba(255, 255, 255, 0.1) 45%, 
+      rgba(255, 255, 255, 0.8) 50%, 
+      rgba(255, 255, 255, 0.2) 55%, 
+      transparent 80%
+    ),
+    linear-gradient(145deg, #FFDF73 0%, #D4AF37 40%, #DAA520 70%, #FFF8DC 100%) !important;
+  background-size: 200% 200%, 100% 100% !important;
+  color: #111;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  animation: foilShift 5s ease infinite alternate, ambientGlow 4s infinite ease-in-out;
+}
+
+.ownerNoteGold:hover {
+  animation: foilShift 2s linear infinite, ambientGlow 2s infinite ease-in-out;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), 0 0 80px rgba(255, 215, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.ownerNoteGold .noteMessage {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: #111;
+  letter-spacing: 0.01em;
+  font-weight: 500;
+}
+
+.ownerPinGold {
+  background: radial-gradient(circle at 30% 30%, #444, #0a0a0a) !important;
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.3) !important;
+}
+
+.ownerFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-weight: 700;
+  color: #111;
+}
+
+.ownerBadgeGold {
+  background: #111;
+  color: #FFDF73;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.6rem;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-left: 0;
+}
+
+
 
 .formContainer {
   background-color: var(--bg-dark);
@@ -272,11 +349,22 @@
   .wall {
     padding: 2rem 1rem;
     gap: 1rem;
-    height: 700px;
+    height: 550px;
   }
   .note {
-    width: 100%;
-    max-width: 250px;
+    width: calc(50% - 0.5rem);
+    max-width: 180px;
+    min-height: 160px;
+    padding: 1rem;
+  }
+  .noteMessage {
+    font-size: 0.85rem;
+  }
+  .noteHeader {
+    font-size: 0.65rem;
+  }
+  .noteFooter {
+    font-size: 0.65rem;
   }
 }
 

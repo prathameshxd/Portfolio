@@ -246,24 +246,35 @@ export default function SignatureWall() {
             const validPageIndex = maxPages > 0 && pageIndex >= maxPages ? maxPages - 1 : pageIndex;
             const visibleNotes = notes.slice(validPageIndex * notesPerPage, (validPageIndex + 1) * notesPerPage);
 
-            return visibleNotes.map((note) => (
-              <motion.div
-                key={note.id}
-                className={`${styles.note} ${styles[`color${note.color}`]}`}
-                initial={{ opacity: 0, scale: 0.8, y: -50 }}
-                animate={{ opacity: 1, scale: 1, y: 0, rotate: note.rotation }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                whileHover={{ scale: 1.05, zIndex: 10, rotate: 0 }}
-                drag={!isMobile}
-                dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                dragElastic={0.1}
-              >
-                <div className={styles.pin}></div>
-                <div className={styles.noteMessage}>{note.text}</div>
-                <div className={styles.noteFooter}>- {note.author}</div>
-              </motion.div>
-            ));
+            return visibleNotes.map((note) => {
+              const isOwner = note.author === 'Prathamesh Patil';
+              return (
+                <motion.div
+                  key={note.id}
+                  className={`${styles.note} ${isOwner ? styles.ownerNoteGold : styles[`color${note.color}`]}`}
+                  initial={{ opacity: 0, scale: 0.8, y: -50 }}
+                  animate={{ opacity: 1, scale: 1, y: 0, rotate: note.rotation }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+                  whileHover={{ scale: 1.05, zIndex: 10, rotate: 0 }}
+                  drag={!isMobile}
+                  dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+                  dragElastic={0.1}
+                >
+                  <div className={`${styles.pin} ${isOwner ? styles.ownerPinGold : ''}`}></div>
+                  <div className={styles.noteMessage}>{note.text}</div>
+                  <div className={`${styles.noteFooter} ${isOwner ? styles.ownerFooter : ''}`}>
+                    <span>- {note.author}</span>
+                    {isOwner && (
+                      <>
+                        <span className={styles.ownerBadgeGold}>UX Designer</span>
+                        <span className={styles.ownerBadgeGold}>Product Designer</span>
+                      </>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            });
           })()}
         </AnimatePresence>
       </motion.div>
