@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
+import { motion, useReducedMotion, AnimatePresence, useScroll, useTransform, useVelocity, useSpring, useAnimationFrame, useMotionValue } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import SignatureWall from '../sections/SignatureWall';
@@ -119,6 +119,39 @@ export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400
+  });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+    clamp: false
+  });
+
+  const baseX = useMotionValue(0);
+  const wrap = (min, max, v) => {
+    const rangeSize = max - min;
+    return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
+  };
+
+  const directionFactor = useRef(1);
+
+  useAnimationFrame((t, delta) => {
+    let moveBy = directionFactor.current * -1 * (delta / 1000); // adjusted speed for 10 copies
+
+    if (velocityFactor.get() < 0) {
+      directionFactor.current = -1;
+    } else if (velocityFactor.get() > 0) {
+      directionFactor.current = 1;
+    }
+
+    moveBy += directionFactor.current * moveBy * velocityFactor.get();
+    baseX.set(baseX.get() + moveBy);
+  });
+
+  const scrollX = useTransform(baseX, (v) => `${wrap(-10, 0, v)}%`);
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 1024);
     handleResize();
@@ -216,7 +249,27 @@ export default function Home() {
       </section>
 
       <div className={styles.curtainWrapper} ref={curtainRef}>
-        {/* Marquee Section */}
+        {/* Pill-Style Marquee Section (Scroll-Linked) */}
+        <section className={styles.marqueeSection}>
+          <div className={styles.marqueeContainer}>
+            <motion.div
+              className={styles.marqueeTrack}
+              style={{ x: scrollX }}
+            >
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((group) => (
+                <div key={group} className={styles.marqueeGroup}>
+                  <span className={styles.marqueeItem}>Figma</span>
+                  <span className={`${styles.marqueeItem} ${styles.marqueePill}`}>User Research</span>
+                  <span className={styles.marqueeItem}>Prototyping</span>
+                  <span className={`${styles.marqueeItem} ${styles.marqueePill}`}>Design Systems</span>
+                  <span className={styles.marqueeItem}>AI-Assisted Design</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ORIGINAL AUTOPLAY MARQUEE (Commented out so you can easily revert)
         <section className={styles.marqueeSection}>
           <div className={styles.marqueeContainer}>
             <motion.div
@@ -233,6 +286,7 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
+        */}
 
         {/* About Section - EXPERIMENT: Bento Grid */}
         <AboutBento />

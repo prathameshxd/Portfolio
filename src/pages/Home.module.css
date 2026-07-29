@@ -175,17 +175,31 @@
 
 .marqueeTrack {
   display: inline-flex;
+  gap: 3rem; /* Space between the two duplicated groups */
+  align-items: center;
 }
 
-.marqueeText {
-  font-family: var(--font-display);
-  font-size: 4rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--text-primary);
-  padding-right: 2rem;
-  text-transform: uppercase;
+.marqueeGroup {
+  display: inline-flex;
+  gap: 3rem; /* Space between individual items */
+  align-items: center;
+}
+
+.marqueeItem {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  opacity: 0.4;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  transition: opacity 0.3s ease;
+}
+
+.marqueePill {
+  opacity: 1;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 100px;
+  padding: 0.75rem 2rem;
 }
 
 /* About Section */
