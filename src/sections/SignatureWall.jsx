@@ -121,6 +121,8 @@ export default function SignatureWall() {
       } else {
         setNotes([]);
       }
+    }, (error) => {
+      console.error("Firebase read error:", error);
     });
 
     return () => unsubscribe();
@@ -140,6 +142,13 @@ export default function SignatureWall() {
 
     if (!sanitizedMessage || sanitizedMessage.length < 1) {
       setErrorMsg('Message is required.');
+      return;
+    }
+
+    const lastPostTime = localStorage.getItem('lastNotePostTime');
+    const timeSinceLastPost = lastPostTime ? Date.now() - parseInt(lastPostTime) : null;
+    if (timeSinceLastPost !== null && timeSinceLastPost < 60000) { // 60 seconds
+      setErrorMsg('Please wait a minute before posting another note.');
       return;
     }
 
@@ -163,6 +172,7 @@ export default function SignatureWall() {
 
       await Promise.race([pushPromise, timeoutPromise]);
       
+      localStorage.setItem('lastNotePostTime', Date.now().toString());
       setNewNote('');
       setAuthorName('');
     } catch (error) {
