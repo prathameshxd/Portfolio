@@ -136,8 +136,11 @@ export default function AboutBento() {
         {/* Availability Card */}
         <motion.div variants={cardVariants} className={`${styles.bentoCard} ${styles.cardAvailability}`}>
           <div className={styles.pingGreen}></div>
-          <h3 className={styles.statLabel} style={{ fontSize: '1.25rem', color: '#1a1a1a', fontWeight: '800' }}>Status</h3>
-          <p className={styles.statDesc} style={{ fontSize: '1.125rem', fontWeight: '500' }}>Available for<br />work</p>
+          <h3 className={styles.statLabel} style={{ fontSize: '1.25rem', color: 'var(--accent)', opacity: 1, fontWeight: '800', lineHeight: 1.2 }}>CURRENTLY AT<br />YUPE</h3>
+          <p className={styles.statDesc} style={{ fontSize: '1.125rem', color: '#ffffff', opacity: 1, fontWeight: '500', marginTop: '8px' }}>
+            UX/UI Design Intern<br />
+            Aug 2026 — Present
+          </p>
         </motion.div>
 
         {/* Hobbies Card */}

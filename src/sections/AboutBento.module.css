@@ -108,7 +108,12 @@
   grid-column: span 1;
   grid-row: span 1;
   justify-content: flex-end;
-  background-image: radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.05) 0%, transparent 60%);
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.cardAvailability:hover {
+  background: #0a0a0b;
 }
 
 .cardHobbies {
@@ -167,6 +172,7 @@
   height: 12px;
   background-color: #10B981; /* Success Green */
   border-radius: 50%;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
 }
 
 .pingGreen::after {
