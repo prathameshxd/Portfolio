@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://prathameshpatil.com/sitemap.xml
+Sitemap: https://prathameshxd.vercel.app/sitemap.xml

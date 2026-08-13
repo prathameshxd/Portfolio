@@ -6,10 +6,10 @@ export default function SEO({ title, description, name, type, image }) {
   const location = useLocation();
   const defaultTitle = "Prathamesh Patil | UI/UX Designer";
   const defaultDescription = "Portfolio of Prathamesh Patil, a UI/UX Designer crafting beautiful, user-centric, and functional digital experiences.";
-  const defaultImage = "https://prathameshpatil.com/photo.webp";
+  const defaultImage = "https://prathameshxd.vercel.app/photo.webp";
   const defaultName = "Prathamesh Patil";
   const defaultType = "website";
-  const siteUrl = "https://prathameshpatil.com";
+  const siteUrl = "https://prathameshxd.vercel.app";
 
   const seoTitle = title ? `${title} | Prathamesh Patil` : defaultTitle;
   const seoDescription = description || defaultDescription;
