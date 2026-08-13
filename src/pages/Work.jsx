@@ -37,7 +37,7 @@ export default function Work() {
         >
           <Tilt tiltMaxAngleX={3} tiltMaxAngleY={3} tiltReverse={true} style={{ display: 'block' }}>
             <Link 
-              to="/work/pathparcel" 
+              to="/projects/pathparcel" 
               className={styles.projectCard} 
               data-cursor-hover="true"
               onMouseMove={(e) => {

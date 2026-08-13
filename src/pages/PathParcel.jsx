@@ -15,7 +15,7 @@ export default function PathParcel() {
         description="A UX case study on a peer-to-peer delivery network built for daily commuters."
       />
       <div className={styles.backBtnWrapper}>
-        <Link to="/work" className={styles.backBtn} data-cursor-hover="true">
+        <Link to="/projects" className={styles.backBtn} data-cursor-hover="true">
           ← Back to Work
         </Link>
       </div>

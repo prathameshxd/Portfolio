@@ -5,7 +5,7 @@ import FloatingNoteButton from './FloatingNoteButton';
 import SideRays from '../sections/SideRays/SideRays';
 export default function Layout({ children }) {
   const location = useLocation();
-  const isWorkPage = location.pathname.startsWith('/work');
+  const isWorkPage = location.pathname.startsWith('/projects');
 
   useEffect(() => {
     // Handle scroll to top or to hash
@@ -21,7 +21,7 @@ export default function Layout({ children }) {
     }
     
     // Manage theme switching based on route
-    if (location.pathname.startsWith('/work')) {
+    if (location.pathname.startsWith('/projects')) {
       document.body.classList.add('theme-light');
     } else {
       document.body.classList.remove('theme-light');

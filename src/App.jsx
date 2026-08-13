@@ -29,7 +29,7 @@ function AnimatedRoutes() {
             } 
           />
           <Route 
-            path="work" 
+            path="projects" 
             element={
               <PageWrapper>
                 <Suspense fallback={<Loader />}>
@@ -39,7 +39,7 @@ function AnimatedRoutes() {
             } 
           />
           <Route 
-            path="work/pathparcel" 
+            path="projects/pathparcel" 
             element={
               <PageWrapper>
                 <Suspense fallback={<Loader />}>

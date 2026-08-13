@@ -29,7 +29,7 @@ export default function Nav() {
 
   const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/work', label: 'Projects' },
+    { path: '/projects', label: 'Projects' },
   ];
 
   const signatureText = "Prathamesh";
