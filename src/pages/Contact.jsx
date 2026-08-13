@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedHeading from '../components/AnimatedHeading';
 import styles from './Contact.module.css';
+import SEO from '../components/SEO';
 
 export default function Contact() {
   const [formState, setFormState] = useState('idle'); // idle, submitting, success
@@ -42,6 +43,10 @@ export default function Contact() {
 
   return (
     <div className={styles.contactSection}>
+      <SEO 
+        title="Contact" 
+        description="Get in touch with Prathamesh Patil for UI/UX design opportunities and collaborations."
+      />
       <div className={styles.contentWrapper}>
         
         <motion.div 

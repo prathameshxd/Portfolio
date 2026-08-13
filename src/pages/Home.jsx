@@ -11,6 +11,7 @@ import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCs
 import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye, FiPenTool } from 'react-icons/fi';
 import PropTypes from 'prop-types';
 import styles from './Home.module.css';
+import SEO from '../components/SEO';
 
 const WORKFLOW_STAGES = [
   {
@@ -182,6 +183,7 @@ export default function Home() {
 
   return (
     <div className={styles.home}>
+      <SEO />
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <div className={styles.heroContent}>

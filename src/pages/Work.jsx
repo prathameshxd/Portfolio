@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom';
 import Tilt from 'react-parallax-tilt';
 import Footer from '../components/Footer';
 import styles from './Work.module.css';
+import SEO from '../components/SEO';
 
 export default function Work() {
   return (
     <div className={styles.workPage}>
+      <SEO 
+        title="Work" 
+        description="Explore my recent case studies and projects in UI/UX design."
+      />
       <section className={styles.hero}>
         <motion.div 
           className={styles.heroContent}

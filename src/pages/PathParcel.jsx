@@ -4,11 +4,16 @@ import { Link } from 'react-router-dom';
 import { FiHeart, FiTarget, FiEdit3, FiPenTool, FiCheckSquare } from 'react-icons/fi';
 import Footer from '../components/Footer';
 import styles from './PathParcel.module.css';
+import SEO from '../components/SEO';
 
 
 export default function PathParcel() {
   return (
     <div className={styles.workPage}>
+      <SEO 
+        title="PathParcel Case Study" 
+        description="A UX case study on a peer-to-peer delivery network built for daily commuters."
+      />
       <div className={styles.backBtnWrapper}>
         <Link to="/work" className={styles.backBtn} data-cursor-hover="true">
           ← Back to Work
