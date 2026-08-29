@@ -10,7 +10,7 @@ export default function Developers() {
       style={{ padding: '120px 5%', maxWidth: '800px', margin: '0 auto', color: '#fff', minHeight: '100vh' }}
     >
       <SEO title="Developer Portal" description="Developer Portal and API access for Prathamesh Patil's portfolio." />
-      <h1 style={{ fontSize: '3rem', marginBottom: '2rem' }}>Developer Portal</h1>
+      <h1 style={{ fontSize: '3rem', marginBottom: '2rem' }}>Prathamesh Patil Developer Portal</h1>
       <div style={{ fontSize: '1.2rem', lineHeight: '1.6', opacity: 0.8 }}>
         <p style={{ marginBottom: '1rem' }}>
           Welcome to the Prathamesh Patil Developer Portal. This section is designed for developers, AI agents, 
