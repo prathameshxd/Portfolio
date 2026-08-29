@@ -4,7 +4,6 @@ import Tilt from 'react-parallax-tilt';
 import Footer from '../components/Footer';
 import styles from './Work.module.css';
 import SEO from '../components/SEO';
-import ProgressiveImage from '../components/ProgressiveImage';
 
 export default function Work() {
   return (
@@ -59,9 +58,9 @@ export default function Work() {
             </div>
             <div className={styles.cardImagePlaceholder}>
               <div className={styles.mockupStack}>
-                <ProgressiveImage src="/mockups/splash-screen.webp" className={`${styles.stackedMockup} ${styles.mockup1}`} alt="Splash Screen" />
-                <ProgressiveImage src="/mockups/onboarding-1.webp" className={`${styles.stackedMockup} ${styles.mockup2}`} alt="Onboarding 1" />
-                <ProgressiveImage src="/mockups/onboarding-2.webp" className={`${styles.stackedMockup} ${styles.mockup3}`} alt="Onboarding 2" />
+                <img src="/mockups/splash-screen.webp" className={`${styles.stackedMockup} ${styles.mockup1}`} alt="Splash Screen" loading="lazy" />
+                <img src="/mockups/onboarding-1.webp" className={`${styles.stackedMockup} ${styles.mockup2}`} alt="Onboarding 1" loading="lazy" />
+                <img src="/mockups/onboarding-2.webp" className={`${styles.stackedMockup} ${styles.mockup3}`} alt="Onboarding 2" loading="lazy" />
               </div>
             </div>
             </Link>

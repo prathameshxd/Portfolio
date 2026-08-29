@@ -5,7 +5,6 @@ import { FiHeart, FiTarget, FiEdit3, FiPenTool, FiCheckSquare } from 'react-icon
 import Footer from '../components/Footer';
 import styles from './PathParcel.module.css';
 import SEO from '../components/SEO';
-import ProgressiveImage from '../components/ProgressiveImage';
 
 
 export default function PathParcel() {
@@ -366,8 +365,8 @@ export default function PathParcel() {
             viewport={{ once: true }}
           >
             <div className={styles.mockupDual}>
-              <ProgressiveImage src="/mockups/home-sender.webp" alt="Home - Sender Dashboard" imgClassName={styles.mockupImg} />
-              <ProgressiveImage src="/mockups/home-commuter.webp" alt="Home - Commuter Mode" imgClassName={styles.mockupImg} />
+              <img src="/mockups/home-sender.webp" alt="Home - Sender Dashboard" className={styles.mockupImg} loading="lazy" />
+              <img src="/mockups/home-commuter.webp" alt="Home - Commuter Mode" className={styles.mockupImg} loading="lazy" />
             </div>
             <p className={styles.caption}>Dual Modes: Sender Dashboard & Commuter Mode</p>
           </motion.div>
@@ -381,8 +380,8 @@ export default function PathParcel() {
             transition={{ delay: 0.1 }}
           >
             <div className={styles.mockupDual}>
-              <ProgressiveImage src="/mockups/profile.webp" alt="User Profile" imgClassName={styles.mockupImg} />
-              <ProgressiveImage src="/mockups/profile-2.webp" alt="Trust Settings" imgClassName={styles.mockupImg} />
+              <img src="/mockups/profile.webp" alt="User Profile" className={styles.mockupImg} loading="lazy" />
+              <img src="/mockups/profile-2.webp" alt="Trust Settings" className={styles.mockupImg} loading="lazy" />
             </div>
             <p className={styles.caption}>User Profiles & Trust Settings</p>
           </motion.div>
@@ -395,7 +394,7 @@ export default function PathParcel() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <ProgressiveImage src="/mockups/tracking.webp" alt="Live Tracking & OTP" imgClassName={styles.mockupImg} />
+            <img src="/mockups/tracking.webp" alt="Live Tracking & OTP" className={styles.mockupImg} loading="lazy" />
             <p className={styles.caption}>Live Tracking & OTP</p>
           </motion.div>
 
@@ -407,7 +406,7 @@ export default function PathParcel() {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <ProgressiveImage src="/mockups/delivery-complete.webp" alt="Delivery Complete" imgClassName={styles.mockupImg} />
+            <img src="/mockups/delivery-complete.webp" alt="Delivery Complete" className={styles.mockupImg} loading="lazy" />
             <p className={styles.caption}>Delivery Complete</p>
           </motion.div>
 
@@ -419,7 +418,7 @@ export default function PathParcel() {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            <ProgressiveImage src="/mockups/activity.webp" alt="Past Deliveries" imgClassName={styles.mockupImg} />
+            <img src="/mockups/activity.webp" alt="Past Deliveries" className={styles.mockupImg} loading="lazy" />
             <p className={styles.caption}>Past Deliveries</p>
           </motion.div>
 
@@ -431,7 +430,7 @@ export default function PathParcel() {
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
           >
-            <ProgressiveImage src="/mockups/commuter-wallet.webp" alt="Commuter Earnings Wallet" imgClassName={styles.mockupImg} />
+            <img src="/mockups/commuter-wallet.webp" alt="Commuter Earnings Wallet" className={styles.mockupImg} loading="lazy" />
             <p className={styles.caption}>Commuter Earnings Wallet</p>
           </motion.div>
         </div>

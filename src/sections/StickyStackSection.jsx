@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform, AnimatePresence, useReducedMotion } fr
 import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCss, SiJavascript, SiGithub } from 'react-icons/si';
 import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye } from 'react-icons/fi';
 import styles from './StickyStackSection.module.css';
-import ProgressiveImage from '../components/ProgressiveImage';
 
 const WORKFLOW_STAGES = [
   {
@@ -120,7 +119,7 @@ const StageCard = ({ stage, index, scrollYProgress, activeStage, setActiveStage,
                 return (
                   <div key={tool.name} className={styles.toolPill}>
                     {tool.img ? (
-                      <ProgressiveImage src={tool.img} alt={tool.name} imgClassName={styles.toolImage} />
+                      <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" />
                     ) : (
                       <Icon className={styles.toolIcon} />
                     )}
