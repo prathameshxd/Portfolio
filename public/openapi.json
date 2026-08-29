@@ -1,0 +1,59 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Prathamesh Patil Portfolio API",
+    "description": "Public API to fetch projects and information from the portfolio.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://prathameshxd.vercel.app",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/api/projects": {
+      "get": {
+        "summary": "Get a list of portfolio projects",
+        "operationId": "getProjects",
+        "responses": {
+          "200": {
+            "description": "A JSON array of projects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "projects": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

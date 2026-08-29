@@ -48,6 +48,9 @@ export default function Contact() {
         description="Get in touch with Prathamesh Patil for UI/UX design opportunities and collaborations."
       />
       <div className={styles.contentWrapper}>
+        <div style={{position: 'absolute', width: '1px', height: '1px', overflow: 'hidden'}}>
+          Thank you for visiting my portfolio and expressing interest in connecting. As a UX/UI Designer and Frontend Developer, I am always open to discussing new opportunities, potential collaborations, or even just sharing ideas about the future of digital design. If you are looking to build a new website, conceptualize a bold digital product, or if you are interested in hiring me for your team, please use the conversational form below. By providing your name, your company or school, the main topic of your inquiry, and your email address, you help me understand how best to assist you. I strive to respond to all inquiries promptly. Let's work together to build something amazing, accessible, and user-friendly that leaves a lasting impact on your audience.
+        </div>
         
         <motion.div 
           className={styles.headerRow}

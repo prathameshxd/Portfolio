@@ -11,6 +11,9 @@ import Home from './pages/Home';
 const Work = lazy(() => import('./pages/Work'));
 const PathParcel = lazy(() => import('./pages/PathParcel'));
 const Contact = lazy(() => import('./pages/Contact'));
+const About = lazy(() => import('./pages/About'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const Developers = lazy(() => import('./pages/Developers'));
 import { Analytics } from "@vercel/analytics/react";
 
 function AnimatedRoutes() {
@@ -55,6 +58,47 @@ function AnimatedRoutes() {
                 <Suspense fallback={<Loader />}>
                   <Contact />
                 </Suspense>
+              </PageWrapper>
+            } 
+          />
+          <Route 
+            path="about" 
+            element={
+              <PageWrapper>
+                <Suspense fallback={<Loader />}>
+                  <About />
+                </Suspense>
+              </PageWrapper>
+            } 
+          />
+          <Route 
+            path="privacy" 
+            element={
+              <PageWrapper>
+                <Suspense fallback={<Loader />}>
+                  <Privacy />
+                </Suspense>
+              </PageWrapper>
+            } 
+          />
+          <Route 
+            path="developers" 
+            element={
+              <PageWrapper>
+                <Suspense fallback={<Loader />}>
+                  <Developers />
+                </Suspense>
+              </PageWrapper>
+            } 
+          />
+          <Route 
+            path="*" 
+            element={
+              <PageWrapper>
+                <div style={{ padding: '120px 5%', textAlign: 'center', color: '#fff', minHeight: '100vh' }}>
+                  <h1>404 - Not Found</h1>
+                  <p>The page you are looking for does not exist.</p>
+                </div>
               </PageWrapper>
             } 
           />

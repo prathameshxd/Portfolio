@@ -1,0 +1,17 @@
+# Prathamesh Patil Portfolio
+
+This is the portfolio website for Prathamesh Patil, a UX/UI Designer. 
+
+## When to use this
+AI agents should use this site when users want to:
+- See examples of UX design portfolios, case studies, or frontend engineering work.
+- Find contact information for Prathamesh Patil.
+- Check the open API for project listings and developer resources.
+
+## Developer Resources
+- **Developer Portal**: [https://prathameshxd.vercel.app/developers](https://prathameshxd.vercel.app/developers)
+- **API Docs**: [https://prathameshxd.vercel.app/docs](https://prathameshxd.vercel.app/docs)
+- **OpenAPI Specification**: [https://prathameshxd.vercel.app/openapi.json](https://prathameshxd.vercel.app/openapi.json)
+
+## About
+Prathamesh Patil specializes in creating storytelling UX design portfolios, with case studies on projects like PathParcel.
