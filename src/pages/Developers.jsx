@@ -23,19 +23,39 @@ export default function Developers() {
           The API is fully documented using the OpenAPI 3.0 specification. 
           You can view the raw OpenAPI JSON specification at <a href="/openapi.json" style={{ color: 'var(--accent)' }}>/openapi.json</a>.
         </p>
-        <h2 style={{ fontSize: '2rem', marginTop: '2rem', marginBottom: '1rem' }}>Quickstart Guide</h2>
+        <h2 style={{ fontSize: '2rem', marginTop: '2rem', marginBottom: '1rem' }}>API Keys</h2>
         <p style={{ marginBottom: '1rem' }}>
           Currently, the API is open and does not require authentication keys for read-only access. 
-          To fetch the list of projects, you can make a simple GET request to the `/api/projects` endpoint.
+          For authenticated operations (coming soon), you can generate a mock API key by running the following command in your terminal:
         </p>
         <pre style={{ background: '#111', padding: '1rem', borderRadius: '8px', overflowX: 'auto', marginBottom: '1rem', fontFamily: 'monospace' }}>
           <code>
-{`fetch('https://prathameshxd.vercel.app/api/projects')
+{`curl -X POST https://prathameshxd.vercel.app/api/v1/keys \\
+  -H "Content-Type: application/json" \\
+  -d '{"email":"developer@example.com"}'`}
+          </code>
+        </pre>
+
+        <h2 style={{ fontSize: '2rem', marginTop: '2rem', marginBottom: '1rem' }}>Quickstart Guide</h2>
+        <p style={{ marginBottom: '1rem' }}>
+          To fetch the list of projects, you can make a simple GET request to the `/api/v1/projects` endpoint.
+        </p>
+        <pre style={{ background: '#111', padding: '1rem', borderRadius: '8px', overflowX: 'auto', marginBottom: '1rem', fontFamily: 'monospace' }}>
+          <code>
+{`fetch('https://prathameshxd.vercel.app/api/v1/projects')
   .then(response => response.json())
   .then(data => console.log(data));`}
           </code>
         </pre>
+
+        <h2 style={{ fontSize: '2rem', marginTop: '2rem', marginBottom: '1rem' }}>Sandbox Environment</h2>
         <p style={{ marginBottom: '1rem' }}>
+          You can test our API endpoints in a sandbox environment before integrating them into your application. 
+          Use our interactive Swagger UI (coming soon) or try making a request directly from your browser:
+        </p>
+        <a href="/api/v1/projects" target="_blank" rel="noreferrer" style={{ display: 'inline-block', padding: '10px 20px', background: 'var(--accent)', color: '#000', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold', marginBottom: '1rem' }}>Try Sandbox /api/v1/projects</a>
+
+        <p style={{ marginTop: '2rem', marginBottom: '1rem' }}>
           For AI Agents: Please refer to the <a href="/llms.txt" style={{ color: 'var(--accent)' }}>/llms.txt</a> file for specific guidelines on when and how to use these endpoints to answer user queries effectively.
         </p>
       </div>

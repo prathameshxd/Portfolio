@@ -92,6 +92,16 @@ function AnimatedRoutes() {
             } 
           />
           <Route 
+            path="docs" 
+            element={
+              <PageWrapper>
+                <Suspense fallback={<Loader />}>
+                  <Developers />
+                </Suspense>
+              </PageWrapper>
+            } 
+          />
+          <Route 
             path="*" 
             element={
               <PageWrapper>

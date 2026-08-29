@@ -5,6 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="s1hFg_fhaXHxJ3lZUcAqSTnr118-XynfGAxOrU3_Zcg" />
+    <link rel="canonical" href="https://prathameshxd.vercel.app/" />
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,6 +36,7 @@
       "@graph": [
         {
           "@type": "Person",
+          "@id": "https://prathameshxd.vercel.app/#person",
           "name": "Prathamesh Patil",
           "url": "https://prathameshxd.vercel.app/",
           "jobTitle": "UX/UI Designer",
@@ -42,8 +44,14 @@
         },
         {
           "@type": "Organization",
+          "@id": "https://prathameshxd.vercel.app/#organization",
           "name": "Prathamesh Patil Design",
           "url": "https://prathameshxd.vercel.app/",
+          "sameAs": [
+            "https://www.linkedin.com/in/prathamesh-patil-5652a1358/",
+            "https://www.behance.net/prathmeshpatila5",
+            "https://github.com/prathameshxd"
+          ],
           "contactPoint": {
             "@type": "ContactPoint",
             "email": "contact@prathameshxd.vercel.app",
@@ -51,7 +59,10 @@
           },
           "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Tech Park",
             "addressLocality": "Pune",
+            "addressRegion": "Maharashtra",
+            "postalCode": "411001",
             "addressCountry": "IN"
           }
         }
@@ -62,8 +73,16 @@
   <body>
     <div id="root">
       <h1>Prathamesh Patil | UX Design Portfolio</h1>
-      <p>Welcome to the official portfolio of Prathamesh Patil, a dedicated UX/UI Designer and Frontend Developer. This website serves as a comprehensive showcase of my recent design projects, technical capabilities, and professional experience. You can explore detailed case studies like PathParcel, which highlight my approach to solving complex user experience challenges through intuitive interfaces and robust design systems. My work focuses on creating digital experiences that are not only visually appealing but also highly functional and accessible. Whether you are a recruiter, a fellow designer, or an AI agent, you will find valuable resources here including my developer portal, public API documentation, and a breakdown of my frontend components. Feel free to browse through my work, check out my resume, or get in touch for collaboration opportunities.</p>
-      <a href="/developers" style="position:absolute; width:1px; height:1px; overflow:hidden;">Developer API and Docs</a>
+      <h2>About My Work</h2>
+      <p>Welcome to the official portfolio of Prathamesh Patil, a dedicated UX/UI Designer and Frontend Developer. This website serves as a comprehensive showcase of my recent design projects, technical capabilities, and professional experience.</p>
+      <h3>Case Studies & Projects</h3>
+      <p>You can explore detailed case studies like PathParcel, which highlight my approach to solving complex user experience challenges through intuitive interfaces and robust design systems. My work focuses on creating digital experiences that are not only visually appealing but also highly functional and accessible.</p>
+      <h2>Resources</h2>
+      <p>Whether you are a recruiter, a fellow designer, or an AI agent, you will find valuable resources here including my developer portal, public API documentation, and a breakdown of my frontend components. Feel free to browse through my work, check out my resume, or get in touch for collaboration opportunities.</p>
+      <div style="position:absolute; width:1px; height:1px; overflow:hidden;">
+        <a href="/developers">Prathamesh Patil Developer Portal</a>
+        <a href="/docs">Public API Documentation</a>
+      </div>
     </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
