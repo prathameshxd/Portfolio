@@ -12,6 +12,7 @@ import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye, FiP
 import PropTypes from 'prop-types';
 import styles from './Home.module.css';
 import SEO from '../components/SEO';
+import ProgressiveImage from '../components/ProgressiveImage';
 
 const WORKFLOW_STAGES = [
   {
@@ -223,7 +224,7 @@ export default function Home() {
                       y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.8 }
                     }}
                   >
-                    <img src="/avatar.webp" alt="Prathamesh Patil" className={styles.heroImage} />
+                    <ProgressiveImage src="/avatar.webp" alt="Prathamesh Patil" imgClassName={styles.heroImage} />
                   </motion.div>
                 </span>
                 <SplitText>That Solve</SplitText>

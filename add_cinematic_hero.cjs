@@ -1,3 +1,4 @@
+
 const fs = require('fs');
 
 let home = fs.readFileSync('src/pages/Home.jsx', 'utf8');
