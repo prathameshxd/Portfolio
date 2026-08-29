@@ -9,6 +9,15 @@
           "value": "Accept, Accept-Encoding"
         }
       ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        }
+      ]
     }
   ],
   "rewrites": [
@@ -17,8 +26,8 @@
       "has": [
         {
           "type": "header",
-          "key": "Accept",
-          "value": "(.*text/markdown.*)"
+          "key": "accept",
+          "value": "(?i).*text/markdown.*"
         }
       ],
       "destination": "/llms.txt"
