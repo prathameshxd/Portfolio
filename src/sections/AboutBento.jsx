@@ -136,10 +136,12 @@ export default function AboutBento() {
         {/* Availability Card */}
         <motion.div variants={cardVariants} className={`${styles.bentoCard} ${styles.cardAvailability}`}>
           <div className={styles.pingGreen}></div>
-          <h3 className={styles.statLabel} style={{ fontSize: '1.25rem', color: 'var(--accent)', opacity: 1, fontWeight: '800', lineHeight: 1.2 }}>CURRENTLY AT<br />YUPE</h3>
-          <p className={styles.statDesc} style={{ fontSize: '1.125rem', color: '#ffffff', opacity: 1, fontWeight: '500', marginTop: '8px' }}>
-            UX/UI Design Intern<br />
-            Aug 2026 — Present
+          <h3 className={styles.statLabel} style={{ fontSize: '1.25rem', color: 'var(--accent)', opacity: 1, fontWeight: '800', lineHeight: 1.2 }}>AVAILABLE FOR<br />WORK</h3>
+          <p className={styles.statDesc} style={{ fontSize: '1.05rem', color: '#ffffff', opacity: 1, fontWeight: '500', marginTop: '8px', lineHeight: 1.4 }}>
+            UI/UX & Product Design<br />
+            <span style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.6)', marginTop: '4px', display: 'inline-block', fontFamily: 'var(--font-mono)' }}>
+              Prev: UX/UI Intern @ YUPE
+            </span>
           </p>
         </motion.div>
 

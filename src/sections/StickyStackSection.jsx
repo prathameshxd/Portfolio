@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCss, SiJavascript, SiGithub } from 'react-icons/si';
-import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye } from 'react-icons/fi';
+import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye, FiSearch, FiLayers, FiSliders, FiActivity } from 'react-icons/fi';
 import styles from './StickyStackSection.module.css';
 
 const WORKFLOW_STAGES = [
@@ -10,7 +10,7 @@ const WORKFLOW_STAGES = [
     number: '01',
     title: 'DISCOVER',
     philosophy: 'Understand the real problem first.',
-    color: '#8CA0B3',
+    color: '#58A6FF',
     tools: [
       { name: 'User Research', icon: FiUsers, desc: 'Qualitative and quantitative insights.' },
       { name: 'User Interviews', icon: FiUsers, desc: 'Talking to real people to uncover needs.' },
@@ -37,7 +37,7 @@ const WORKFLOW_STAGES = [
     id: 'build',
     number: '03',
     title: 'BUILD',
-    philosophy: 'Design and code converge here, with AI as a collaborator.',
+    philosophy: 'Design and code converge here, with AI as a superpower collaborator.',
     color: '#FFB84D',
     tools: [
       { name: 'HTML5', icon: SiHtml5, desc: 'Semantic markup and accessibility.' },
@@ -48,7 +48,6 @@ const WORKFLOW_STAGES = [
       { name: 'Gemini', icon: SiGooglegemini, desc: 'Multimodal analysis and rapid ideation.' },
       { name: 'ChatGPT', icon: SiOpenai, desc: 'Code generation and architectural drafting.' },
       { name: 'Antigravity', icon: FiTerminal, desc: 'Turning Figma frames into front-end code.', img: '/images/antigravity.svg' },
-      { name: 'Stitch', icon: FiLayout, desc: 'Advanced prototyping and component modeling.' },
     ]
   },
   {
@@ -61,82 +60,128 @@ const WORKFLOW_STAGES = [
       { name: 'Usability Testing', icon: FiCheckCircle, desc: 'Validating assumptions with real users.' },
       { name: 'Interaction Design', icon: FiEye, desc: 'Polishing micro-interactions and feedback.' },
       { name: 'Data Vis', icon: FiLayout, desc: 'Making complex data readable and beautiful.' },
+      { name: 'A/B Testing', icon: FiCheckCircle, desc: 'Measuring conversion and user flow impact.' },
+      { name: 'A11y Standards', icon: FiEye, desc: 'WCAG compliance and accessibility checks.' },
+      { name: 'QA Polish', icon: FiCheckCircle, desc: 'Ensuring pixel-perfect edge case behavior.' },
     ]
   }
 ];
 
-// Helper component for individual cards so they can have independent scroll transforms
-const StageCard = ({ stage, index, scrollYProgress, activeStage, setActiveStage, isMobile, handleStageInteraction }) => {
-  // Stagger the start time of each card based on its index
-  const start = 0.05 + (index * 0.1);
-  const center = start + 0.25; // When it hits the center
-  const end = center + 0.35; // When it leaves the top of the screen
-  
-  // Cards slide from below the screen, rest near center, then slide up above the viewport
-  const y = useTransform(scrollYProgress, [start, center, end], ["120vh", "0vh", "-120vh"]);
-  
-  // Opacity fades in on entry, fades out on exit
-  const opacity = useTransform(scrollYProgress, [start, start + 0.1, end - 0.1, end], [0, 1, 1, 0]);
+const CARD_RANGES = [
+  { start: 0.06, end: 0.22 }, // Card 01 (DISCOVER)
+  { start: 0.23, end: 0.39 }, // Card 02 (DESIGN)
+  { start: 0.40, end: 0.56 }, // Card 03 (BUILD)
+  { start: 0.57, end: 0.73 }, // Card 04 (REFINE)
+];
 
-  // "Cross" / Angle effect: cards come in at an angle, straighten out, then angle out
-  const angles = [-15, -5, 5, 15]; // Different angle for each card
-  const initialAngle = angles[index % angles.length];
-  const rotate = useTransform(scrollYProgress, [start, center, end], [initialAngle, 0, -initialAngle]);
+// Helper component for individual cards so they enter from outside the screen and remain pinned
+const StageCard = ({ stage, index, scrollYProgress, activeStage, setActiveStage, isMobile, handleStageInteraction }) => {
+  // Discrete sequential entrance for each card:
+  // Card 01: 0.06 -> 0.22
+  // Card 02: 0.23 -> 0.39
+  // Card 03: 0.40 -> 0.56
+  // Card 04: 0.57 -> 0.73
+  // Pinned hold window: 0.73 -> 1.00 (All 4 cards remain firmly docked side-by-side)
+  const range = CARD_RANGES[index] || { start: 0.06 + index * 0.17, end: 0.06 + index * 0.17 + 0.16 };
+  const cardStart = range.start;
+  const cardEnd = range.end;
+  const duration = cardEnd - cardStart;
+  
+  // Midpoint where the card begins its graceful settling deceleration
+  const settleMid = cardStart + duration * 0.55;
+  
+  // Cards fly in from outside the screen (100vh) from bottom, ease in, and STAY docked at 0vh
+  const y = useTransform(
+    scrollYProgress, 
+    [cardStart, cardStart + duration * 0.7, cardEnd], 
+    ["100vh", "6vh", "0vh"], 
+    { clamp: true }
+  );
+
+  // Opacity becomes 1 immediately at start of ascent so the full flight up from bottom is visible
+  const opacity = useTransform(scrollYProgress, [cardStart, cardStart + 0.012, cardEnd], [0, 1, 1], { clamp: true });
+  const scale = useTransform(scrollYProgress, [cardStart, settleMid, cardEnd], [0.86, 0.96, 1], { clamp: true });
+
+  // Dynamic 3D/2D tilt angles for the fan entrance
+  const zAngles = [-16, -7, 7, 16];
+  const initialZ = zAngles[index % zAngles.length];
+
+  const yAngles = [-12, -5, 5, 12];
+  const initialY = yAngles[index % yAngles.length];
+
+  // Rotate Z (tilt): holds strong tilt during ascent, then slowly eases into 0deg
+  const rotateZ = useTransform(
+    scrollYProgress, 
+    [cardStart, settleMid, cardEnd], 
+    [initialZ, initialZ * 0.55, 0], 
+    { clamp: true }
+  );
+
+  // Rotate X (pitch): card leans backward during flight, then slowly levels upright
+  const rotateX = useTransform(
+    scrollYProgress, 
+    [cardStart, settleMid, cardEnd], 
+    [24, 8, 0], 
+    { clamp: true }
+  );
+
+  // Rotate Y (yaw): natural 3D twist that relaxes to 0deg
+  const rotateY = useTransform(
+    scrollYProgress, 
+    [cardStart, settleMid, cardEnd], 
+    [initialY, initialY * 0.45, 0], 
+    { clamp: true }
+  );
 
   return (
     <motion.div 
       className={styles.stageCardWrapper} 
       style={{ 
-        display: "block", 
+        display: "flex", 
         flex: 1, 
         y: isMobile ? 0 : y, 
         opacity: isMobile ? 1 : opacity, 
-        rotate: isMobile ? 0 : rotate 
+        scale: isMobile ? 1 : scale,
+        rotateZ: isMobile ? 0 : rotateZ,
+        rotateX: isMobile ? 0 : rotateX,
+        rotateY: isMobile ? 0 : rotateY,
       }}
     >
       <motion.div
-        className={`${styles.stageNode} ${activeStage === stage.id ? styles.active : ''}`}
+        className={styles.stageNode}
         style={{ '--node-color': stage.color }}
         onMouseEnter={() => !isMobile && setActiveStage(stage.id)}
         onMouseLeave={() => !isMobile && setActiveStage(null)}
         onClick={() => handleStageInteraction(stage.id)}
       >
-        <div className={styles.stageNumber}>{stage.number}</div>
-        <h2 className={styles.stageTitle}>{stage.title}</h2>
-        <p className={styles.stagePhilosophy}>{stage.philosophy}</p>
+        <div className={styles.stageHeaderContent}>
+          <div className={styles.stageNumber}>{stage.number}</div>
+          <h2 className={styles.stageTitle}>{stage.title}</h2>
+          <p className={styles.stagePhilosophy}>{stage.philosophy}</p>
+        </div>
 
-        <AnimatePresence>
-          {(!isMobile || activeStage === stage.id) && (
-            <motion.div
-              className={styles.toolsList}
-              initial={isMobile ? { height: 0, opacity: 0 } : false}
-              animate={isMobile ? { height: 'auto', opacity: 1 } : false}
-              exit={isMobile ? { height: 0, opacity: 0 } : false}
-              transition={{ duration: 0.3 }}
-            >
-              {stage.tools.map(tool => {
-                const Icon = tool.icon;
-                return (
-                  <div key={tool.name} className={styles.toolPill}>
-                    {tool.img ? (
-                      <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" />
-                    ) : (
-                      <Icon className={styles.toolIcon} />
-                    )}
-                    <span>{tool.name}</span>
-                  </div>
-                );
-              })}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div className={styles.toolsList}>
+          {stage.tools.map(tool => {
+            const Icon = tool.icon;
+            return (
+              <div key={tool.name} className={styles.toolPill}>
+                {tool.img ? (
+                  <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" />
+                ) : (
+                  <Icon className={styles.toolIcon} />
+                )}
+                <span>{tool.name}</span>
+              </div>
+            );
+          })}
+        </div>
       </motion.div>
     </motion.div>
   );
 };
 
 export default function StickyStackSection() {
-  const containerRef = useRef(null);
+  const [containerNode, setContainerNode] = useState(null);
   const [activeStage, setActiveStage] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -149,14 +194,14 @@ export default function StickyStackSection() {
   }, []);
 
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: containerNode ? { current: containerNode } : undefined,
     offset: ["start start", "end end"]
   });
 
-  // Title animations: start slightly faded and lower, then snap to center quickly
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.05, 0.9, 1], [0, 1, 1, 0]);
-  const titleScale = useTransform(scrollYProgress, [0, 0.05], [0.9, 1]);
-  const titleY = useTransform(scrollYProgress, [0, 0.05], ["30px", "0px"]);
+  // Title animations: pinned cleanly at top
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.05], [0.6, 1], { clamp: true });
+  const titleScale = useTransform(scrollYProgress, [0, 0.05], [0.97, 1], { clamp: true });
+  const titleY = useTransform(scrollYProgress, [0, 0.05], ["10px", "0px"], { clamp: true });
 
   const handleStageInteraction = (id) => {
     if (isMobile) {
@@ -165,7 +210,7 @@ export default function StickyStackSection() {
   };
 
   return (
-    <section ref={containerRef} className={styles.scrollTrack}>
+    <section ref={setContainerNode} className={styles.scrollTrack}>
       <div className={styles.stickyFrame}>
         
         {/* Pinned Title */}
@@ -183,7 +228,7 @@ export default function StickyStackSection() {
 
         {/* Sliding Cards */}
         <div className={styles.cardsContainer}>
-          <div className={styles.stagesWrapper} data-has-active={activeStage !== null}>
+          <div className={styles.stagesWrapper}>
             {WORKFLOW_STAGES.map((stage, i) => (
               <StageCard 
                 key={stage.id} 

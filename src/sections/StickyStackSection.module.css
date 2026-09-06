@@ -1,10 +1,9 @@
 /* 
   The scroll track dictates how long the pinning lasts.
-  We give it a large height so the user scrolls "through" it.
 */
 .scrollTrack {
   position: relative;
-  height: 250vh; /* 2.5 screens worth of scrolling */
+  height: 280vh;
   width: 100%;
 }
 
@@ -21,151 +20,181 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  max-width: 1600px;
+  max-width: 1560px;
   margin: 0 auto;
-  padding: 0 4rem;
+  padding: calc(var(--nav-height) + 1.25rem) 2.5rem 2rem 2.5rem;
+  box-sizing: border-box;
 }
 
 .stageCardWrapper {
   flex: 1;
   display: flex;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  opacity: 1 !important;
+  filter: none !important;
 }
 
 .stackHeader {
-  position: absolute;
-  top: 30%; /* Offset slightly to make room for cards */
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  z-index: 0;
+  margin-bottom: 1.75rem;
+  z-index: 2;
 }
 
 .stackTitle {
-  font-size: 3.5rem;
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 3.2vw, 3.2rem);
   font-weight: 800;
-  margin-bottom: 1rem;
-  letter-spacing: -0.04em;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.035em;
   color: var(--text-primary);
 }
 
 .stackDesc {
-  font-size: 1.25rem;
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
   color: var(--gray);
-  max-width: 600px;
-  line-height: 1.5;
+  max-width: 620px;
+  line-height: 1.45;
 }
 
 /* 
-  Container that slides up over the title 
+  Container holding the 4 cards
 */
 .cardsContainer {
   position: relative;
   width: 100%;
+  max-width: 1520px;
   z-index: 10;
-  margin-top: 5vh; /* Greatly reduced gap before cards slide up */
+  margin-top: 0.5rem;
+  perspective: 1400px;
 }
-
-/* From here down: copied from Home.module.css to isolate the experiment */
 
 .stagesWrapper {
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
+  align-items: stretch;
+  gap: 1.35rem;
   width: 100%;
+  transform-style: preserve-3d;
 }
 
+/* 
+  Clean, Minimalist Solid Dark Card with Stage-Color Tinted Border & Glow
+*/
 .stageNode {
   width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease, background 0.4s ease;
+  border-radius: 28px;
+  padding: 2.25rem 1.75rem 2.25rem 1.75rem;
+  background: #0B0C0E;
+  border: 1px solid color-mix(in srgb, var(--node-color) 35%, rgba(255, 255, 255, 0.06));
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.03);
   cursor: pointer;
-  border: 1px solid color-mix(in srgb, var(--node-color) 40%, transparent);
-  border-radius: 24px;
-  padding: 2.5rem 2rem;
-  background: var(--bg-dark); /* Keeps the cards dark/solid so they overlap nicely */
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  opacity: 1 !important;
+  filter: none !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
 
 .stageNode:hover {
-  transform: translateY(-8px);
-  background: #000;
+  transform: translateY(-6px);
+  background: #08090a;
   border-color: var(--node-color);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.45), 0 0 30px color-mix(in srgb, var(--node-color) 18%, transparent);
 }
 
+.stageHeaderContent {
+  display: flex;
+  flex-direction: column;
+}
 
 .stageNumber {
   font-family: var(--font-mono);
-  font-size: 0.875rem;
-  color: var(--node-color, var(--accent));
-  margin-bottom: 1rem;
-  font-weight: bold;
+  font-size: 0.85rem;
+  color: var(--node-color);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+  display: inline-block;
+  align-self: flex-start;
 }
 
 .stageTitle {
-  font-size: 1.75rem;
+  font-family: var(--font-heading);
+  font-size: 1.85rem;
   font-weight: 800;
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.02em;
-  color: var(--text-dark);
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
 }
 
 .stagePhilosophy {
-  font-size: 1rem;
-  color: rgba(255,255,255,0.7);
+  font-size: 0.95rem;
+  color: #9AA0A6;
   line-height: 1.5;
-  margin-bottom: 2rem;
+  margin-bottom: 1.85rem;
 }
 
 .toolsList {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
-  margin-top: auto;
 }
 
 .toolPill {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
+  gap: 0.65rem;
+  padding: 0.85rem 1rem;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-dark);
-  transition: background 0.2s ease, transform 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #EDEDED;
+  line-height: 1.3;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .stageNode:hover .toolPill {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .toolPill:hover {
-  transform: translateX(4px);
-  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(3px);
+  background: rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
+  border-color: color-mix(in srgb, var(--node-color) 60%, rgba(255, 255, 255, 0.3));
 }
 
 .toolIcon {
   font-size: 1.25rem;
   color: var(--node-color);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.toolPill:hover .toolIcon {
+  transform: scale(1.12);
 }
 
 .toolImage {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.2rem;
+  height: 1.2rem;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 @media (max-width: 1024px) {
   .scrollTrack {
-    height: auto; /* Disable heavy scroll hijacking on mobile */
+    height: auto; /* Disable scroll hijacking on mobile */
     padding: 4rem 1.5rem;
   }
   
@@ -174,15 +203,21 @@
     height: auto;
     overflow: visible;
     padding: 0;
+    justify-content: flex-start;
   }
 
   .stackHeader {
     position: relative;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
 
   .stackTitle {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 6vw, 2.75rem);
+  }
+
+  .stackDesc {
+    font-size: 1rem;
+    padding: 0 0.5rem;
   }
 
   .cardsContainer {
@@ -195,6 +230,54 @@
   }
 
   .stageNode {
-    padding: 1.5rem;
+    padding: 1.75rem 1.5rem;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .scrollTrack {
+    padding: 3.5rem 1rem;
+  }
+
+  .stageNode {
+    padding: 1.5rem 1.15rem;
+    border-radius: 22px;
+  }
+
+  .stageTitle {
+    font-size: 1.5rem;
+  }
+
+  .stagePhilosophy {
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .toolsList {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .toolPill {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.8125rem;
+    gap: 0.45rem;
+    border-radius: 10px;
+  }
+
+  .toolIcon {
+    font-size: 1.1rem;
+  }
+
+  .toolImage {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .toolsList {
+    grid-template-columns: 1fr;
   }
 }

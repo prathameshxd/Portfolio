@@ -8,14 +8,64 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 0 4rem;
-  max-width: 1600px;
-  margin: 0 auto;
+  justify-content: center;
   width: 100%;
   padding-top: var(--nav-height);
   position: sticky;
   top: 0;
   z-index: 0;
+  overflow: hidden;
+}
+
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.heroBgMotion {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heroBgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 50% 38%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.18) 55%, rgba(245, 242, 233, 0.28) 100%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.04) 30%, rgba(245, 242, 233, 0.3) 75%, rgba(245, 242, 233, 0.85) 100%);
+  pointer-events: none;
+}
+
+.heroVignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 65%, rgba(0, 0, 0, 0.05) 100%);
+  pointer-events: none;
+}
+
+.heroBottomFade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, var(--bg-primary));
+  pointer-events: none;
 }
 
 .heroInner {
@@ -23,6 +73,11 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 2rem 4rem 4rem 4rem;
+  position: relative;
+  z-index: 1;
 }
 
 .heroContent {
@@ -34,37 +89,74 @@
   text-align: center;
 }
 
-@media (max-width: 1024px) {
-  .heroInner {
-    flex-direction: column;
-    text-align: center;
+.locationBadgeWrapper {
+  margin-bottom: 1.5rem;
+}
+
+.locationBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #111111;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 1.25rem;
+  border-radius: 100px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.badgeDot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulseDot 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.6;
   }
 }
 
 .heroTitle {
   font-size: clamp(2rem, 5vw, 5.5rem);
-  margin: 1rem 0 6rem 0;
+  margin: 0.5rem 0 4.5rem 0;
   display: flex;
   flex-direction: column;
   position: relative;
   align-items: center;
   justify-content: center;
   z-index: 1;
+  color: #0c0d0e;
+  text-shadow: 0 2px 24px rgba(255, 255, 255, 0.6);
 }
 
 .heroImageWrapper {
   position: absolute;
   top: 50%;
   left: 50%;
-  /* transform is handled by framer-motion in the component */
   width: clamp(120px, 15vw, 160px);
   height: clamp(160px, 20vw, 220px);
   border-radius: 200px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22), 0 0 0 3px rgba(255, 255, 255, 0.85);
   pointer-events: auto;
   z-index: 0;
-  /* Image behind the text */
+  backdrop-filter: blur(8px);
 }
 
 .heroImage {
@@ -80,13 +172,11 @@
   justify-content: center;
   position: relative;
   z-index: 2;
-  /* Text in front of the image */
 }
 
 .textSpacer {
   position: relative;
   width: clamp(130px, 16vw, 180px);
-  /* Slightly wider than the image to provide space */
   display: inline-block;
 }
 
@@ -94,7 +184,6 @@
   overflow: hidden;
   display: inline-block;
   padding-bottom: 0.2em;
-  /* prevent clipping on descenders */
   margin-bottom: -0.2em;
 }
 
@@ -109,7 +198,6 @@
   max-width: 800px;
   color: var(--text-primary);
   opacity: 0.8;
-  /* off-white with opacity */
   margin-bottom: 3rem;
 }
 
@@ -120,34 +208,49 @@
 
 .btnPrimary,
 .btnSecondary {
-  padding: 1.25rem 2.5rem;
+  padding: 1.15rem 2.5rem;
   border-radius: 100px;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  transition: all 0.3s ease;
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.2s ease, background-color 0.2s ease;
   position: relative;
   overflow: hidden;
 }
 
 .btnPrimary {
   background-color: var(--accent);
-  color: var(--bg-dark);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(233, 79, 55, 0.32), 0 2px 6px rgba(233, 79, 55, 0.2);
 }
 
 .btnPrimary:hover {
-  opacity: 0.9;
   transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(233, 79, 55, 0.4);
+}
+
+.btnPrimary:active {
+  transform: scale(0.97);
 }
 
 .btnSecondary {
-  background-color: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--text-primary);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #111111;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .btnSecondary:hover {
-  color: var(--bg-primary);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.btnSecondary:active {
+  transform: scale(0.97);
 }
 
 .curtainWrapper {
@@ -305,7 +408,17 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 2rem;
+    padding: 1rem 0;
+  }
+
+  .heroInner {
+    padding: 2rem 1.25rem 3rem 1.25rem;
+  }
+
+  .locationBadge {
+    font-size: 0.6875rem;
+    padding: 0.4rem 0.9rem;
+    gap: 0.4rem;
   }
 
   .about,
@@ -314,7 +427,8 @@
   }
 
   .heroTitle {
-    font-size: 11vw;
+    font-size: 10.5vw;
+    margin: 0.5rem 0 3.5rem 0;
   }
 
   .splitTextLine {
@@ -322,12 +436,12 @@
   }
 
   .textSpacer {
-    width: 90px;
+    width: 80px;
   }
 
   .heroImageWrapper {
-    width: 80px;
-    height: 110px;
+    width: 75px;
+    height: 100px;
   }
 
   .heroSubtext {
@@ -336,6 +450,8 @@
 
   .ctaGroup {
     flex-direction: column;
+    width: 100%;
+    max-width: 320px;
   }
 
   .btnPrimary,
@@ -418,181 +534,4 @@
     padding: 2rem;
   }
 }
-
-.stagesWrapper {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  z-index: 1;
-  gap: 2rem;
-}
-
-.stageNode {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease, background 0.4s ease;
-  cursor: pointer;
-  border: 1px solid color-mix(in srgb, var(--node-color) 40%, transparent);
-  border-radius: 16px;
-  padding: 2rem;
-  background: var(--bg-dark);
-}
-
-.stageNode:hover {
-  transform: translateY(-4px);
-  background: #000;
-  border-color: var(--node-color);
-}
-
-.stagesWrapper[data-has-active="true"] .stageNode:not(.active) {
-  opacity: 0.4;
-  filter: grayscale(0.5);
-}
-
-
-
-.stageNumber {
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  color: var(--node-color, var(--accent));
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-.stageTitle {
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  letter-spacing: -0.02em;
-}
-
-.stagePhilosophy {
-  font-size: 1rem;
-  color: var(--gray);
-  line-height: 1.5;
-  margin-bottom: 2rem;
-  min-height: 4.5rem;
-  /* Reserve space for desktop so nodes align */
-  transition: color 0.3s ease;
-}
-
-.stageNode.active .stagePhilosophy,
-.stageNode:hover .stagePhilosophy {
-  color: var(--text-dark);
-}
-
-.toolsList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.toolPill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--text-dark);
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.toolPill:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.toolImage {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  transition: transform 0.2s ease;
-}
-
-.toolPill:hover .toolImage {
-  transform: scale(1.1);
-}
-
-.toolIcon {
-  font-size: 0.9rem;
-}
-
-.tooltip {
-  position: absolute;
-  bottom: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  background: var(--text-dark);
-  color: var(--bg-dark);
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-family: var(--font-display);
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s, transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  z-index: 10;
-  font-weight: 500;
-}
-
-.tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 5px;
-  border-style: solid;
-  border-color: var(--text-dark) transparent transparent transparent;
-}
-
-.toolPill:hover .tooltip {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
-@media (max-width: 1024px) {
-  .header {
-    padding: 4rem 2rem 2rem;
-  }
-
-  .flowcaption {
-    padding: 0 2rem;
-  }
-
-  .flowContainer {
-    padding: 0 2rem;
-    margin-top: 2rem;
-  }
-
-  .stagesWrapper {
-    flex-direction: column;
-    gap: 3rem;
-  }
-
-  .stageNode {
-    padding: 1.5rem;
-    width: 100%;
-  }
-
-  .stagePhilosophy {
-    min-height: auto;
-    margin-bottom: 1rem;
-  }
-
-  .toolsList {
-    overflow: hidden;
-  }
-}
+

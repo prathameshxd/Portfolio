@@ -296,15 +296,43 @@
 
 @media (max-width: 768px) {
   .bentoSection {
-    padding: 4rem 2rem;
+    padding: 4rem 1.5rem;
   }
   .bentoGrid {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
+    gap: 1.25rem;
   }
   .cardMain, .cardEdu, .cardAvailability, .cardHobbies {
     grid-column: span 1;
     grid-row: auto;
-    min-height: 250px;
+    min-height: 220px;
+  }
+  .glassPill, .hobbiesText {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .cardHobbies::after {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .bentoSection {
+    padding: 3.5rem 1rem;
+  }
+  .sectionTitle {
+    font-size: 2rem;
+    margin-bottom: 1.75rem;
+  }
+  .bentoCard {
+    padding: 1.75rem 1.25rem;
+    border-radius: 20px;
+  }
+  .cardMainText {
+    font-size: 1.35rem;
+  }
+  .statValue {
+    font-size: 2.5rem;
   }
 }

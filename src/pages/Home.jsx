@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import SignatureWall from '../sections/SignatureWall';
 import StickyStackSection from '../sections/StickyStackSection';
+import WorkExperience from '../sections/WorkExperience';
 import AboutBento from '../sections/AboutBento';
 import HoverTiltCard from '../components/HoverTiltCard';
 import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCss, SiJavascript, SiGithub } from 'react-icons/si';
@@ -185,17 +186,38 @@ export default function Home() {
     <div className={styles.home}>
       <SEO />
       <section className={styles.hero}>
+        <div className={styles.heroBackground}>
+          <motion.div
+            className={styles.heroBgMotion}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <img
+              src="/images/hero-anime-meadow-4k.jpg"
+              alt="Lush green meadow under bright painted clouds"
+              className={styles.heroBgImage}
+            />
+            <div className={styles.heroOverlay} />
+            <div className={styles.heroVignette} />
+            <div className={styles.heroBottomFade} />
+          </motion.div>
+        </div>
+
         <div className={styles.heroInner}>
           <div className={styles.heroContent}>
-            <motion.p
-              className="label-mono"
+            <motion.div
+              className={styles.locationBadgeWrapper}
               initial="hidden"
               animate="visible"
               custom={0}
               variants={textVariant}
             >
-              UI/UX DESIGNER · KALYAN, MAHARASHTRA, INDIA
-            </motion.p>
+              <div className={styles.locationBadge}>
+                <span className={styles.badgeDot}></span>
+                <span>UI/UX DESIGNER · KALYAN, MAHARASHTRA, INDIA</span>
+              </div>
+            </motion.div>
 
             <motion.h1
               className={`h1-display ${styles.heroTitle}`}
@@ -230,7 +252,6 @@ export default function Home() {
               </span>
               <SplitText>Human Problems.</SplitText>
             </motion.h1>
-
 
             <motion.div
               className={styles.ctaGroup}
@@ -348,6 +369,9 @@ export default function Home() {
 
         {/* Stack Section */}
         <StickyStackSection />
+
+        {/* Experience Section */}
+        <WorkExperience />
 
         <SignatureWall />
 

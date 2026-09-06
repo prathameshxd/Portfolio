@@ -12,9 +12,12 @@
   
   --accent: #E94F37; /* A nice red/orange that pops on cream */
   --gray: #666666;
-  --font-display: 'Inter', sans-serif;
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-space: 'Space Grotesk', sans-serif;
+  --font-syne: 'Syne', sans-serif;
+  --font-outfit: 'Outfit', sans-serif;
   --nav-height: 80px;
   --cursor-color: var(--text-light);
 }
@@ -40,6 +43,7 @@
   }
 }
 
+
 html {
   background-color: var(--bg-primary);
 }
@@ -50,7 +54,6 @@ body {
   background-size: 400% 400%;
   animation: darkGradientAnim 15s ease infinite;
   color: var(--text-primary);
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -74,11 +77,15 @@ ul {
 }
 
 /* Base typography utilities */
+h1, h2, h3, h4, .h1-display {
+  font-family: var(--font-heading);
+  letter-spacing: -0.035em;
+}
+
 .h1-display {
   font-size: clamp(3rem, 8vw, 8rem);
   font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  line-height: 1.05;
 }
 
 .label-mono {
