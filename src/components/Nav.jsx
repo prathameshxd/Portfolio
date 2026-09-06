@@ -77,7 +77,7 @@ export default function Nav() {
               )}
             </NavLink>
           ))}
-          <a href="/Prathamesh_Patil_resume.pdf" target="_blank" rel="noopener noreferrer" className={styles.resumeButton}>
+          <a href="/Prathamesh_UXDesign.pdf" target="_blank" rel="noopener noreferrer" className={styles.resumeButton}>
             Resume
           </a>
           <NavLink to="/contact" className={styles.ctaButton}>
@@ -128,7 +128,7 @@ export default function Nav() {
                 transition={{ delay: 0.3 + navLinks.length * 0.1 }}
               >
                 <a
-                  href="/Prathamesh_Patil_resume.pdf"
+                  href="/Prathamesh_UXDesign.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.mobileResumeButton}

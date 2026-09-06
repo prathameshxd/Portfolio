@@ -49,7 +49,7 @@ export default function Footer() {
 
             <div className={styles.navColumn}>
               <span className={styles.colTitle}>Resources</span>
-              <a href="/Prathamesh_Patil_resume.pdf" target="_blank" rel="noopener noreferrer" className={styles.navLink}>Resume</a>
+              <a href="/Prathamesh_UXDesign.pdf" target="_blank" rel="noopener noreferrer" className={styles.navLink}>Resume</a>
               <a href="https://github.com/prathameshxd" target="_blank" rel="noopener noreferrer" className={styles.navLink}>GitHub</a>
             </div>
           </div>

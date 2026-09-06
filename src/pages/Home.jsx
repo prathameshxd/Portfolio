@@ -263,7 +263,7 @@ export default function Home() {
               <Link to="/projects" className={`${styles.btnPrimary} btn-wave-hover`} style={{ '--wave-color': '#111', '--wave-text-color': '#fff' }} data-cursor-hover="true">
                 <span className="btn-wave-text">View Projects</span>
               </Link>
-              <a href="/Prathamesh_Patil_resume.pdf" target="_blank" rel="noopener noreferrer" className={`${styles.btnSecondary} btn-wave-hover`} style={{ '--wave-color': '#111', '--wave-text-color': '#fff' }} data-cursor-hover="true">
+              <a href="/Prathamesh_UXDesign.pdf" target="_blank" rel="noopener noreferrer" className={`${styles.btnSecondary} btn-wave-hover`} style={{ '--wave-color': '#111', '--wave-text-color': '#fff' }} data-cursor-hover="true">
                 <span className="btn-wave-text">Resume</span>
               </a>
             </motion.div>
