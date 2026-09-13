@@ -94,7 +94,7 @@
     fill: transparent;
     opacity: 0;
   }
-  4% {
+  2% {
     opacity: 1;
   }
   24% {
@@ -107,13 +107,23 @@
     fill: currentColor;
     opacity: 1;
   }
-  78% {
+  68% {
     stroke-dashoffset: 0;
     fill: currentColor;
     opacity: 1;
   }
-  88% {
+  74% {
     stroke-dashoffset: 0;
+    fill: transparent;
+    opacity: 1;
+  }
+  92% {
+    stroke-dashoffset: 200;
+    fill: transparent;
+    opacity: 1;
+  }
+  96% {
+    stroke-dashoffset: 200;
     fill: transparent;
     opacity: 0;
   }
