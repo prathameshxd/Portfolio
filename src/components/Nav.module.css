@@ -71,42 +71,56 @@
 
 .logoTextGroup {
   font-family: 'Sacramento', cursive;
-  font-size: 1.6rem;
+  font-size: 1.65rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
 }
 
 .charDraw {
   fill: transparent;
   stroke: currentColor;
-  stroke-width: 0.8px;
+  stroke-width: 0.45px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   stroke-dasharray: 200;
   stroke-dashoffset: 200;
-  animation: charDrawAnim 6s ease-in-out infinite;
+  opacity: 0;
+  animation: charDrawAnim 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes charDrawAnim {
   0% {
     stroke-dashoffset: 200;
     fill: transparent;
+    opacity: 0;
   }
-  15% {
+  4% {
+    opacity: 1;
+  }
+  24% {
     stroke-dashoffset: 0;
     fill: transparent;
+    opacity: 1;
   }
-  25% {
+  32% {
     stroke-dashoffset: 0;
     fill: currentColor;
+    opacity: 1;
   }
-  75% {
+  78% {
     stroke-dashoffset: 0;
     fill: currentColor;
+    opacity: 1;
   }
-  85% {
+  88% {
     stroke-dashoffset: 0;
     fill: transparent;
+    opacity: 0;
   }
   100% {
     stroke-dashoffset: 200;
     fill: transparent;
+    opacity: 0;
   }
 }
 

@@ -42,7 +42,7 @@ export default function Nav() {
                 <tspan
                   key={index}
                   className={styles.charDraw}
-                  style={{ animationDelay: `${index * 0.15}s` }}
+                  style={{ animationDelay: `${index * 0.12}s` }}
                 >
                   {char}
                 </tspan>
