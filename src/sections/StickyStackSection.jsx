@@ -203,7 +203,6 @@ export default function StickyStackSection() {
   const [containerNode, setContainerNode] = useState(null);
   const [activeStage, setActiveStage] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 1024);
