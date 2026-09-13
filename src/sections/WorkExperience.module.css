@@ -5,6 +5,8 @@
   width: 100%;
   position: relative;
   background-color: var(--bg-primary);
+  content-visibility: auto;
+  contain-intrinsic-size: 500px;
 }
 
 .sectionHeader {

@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMapPin, FiCamera, FiBookOpen } from 'react-icons/fi';
+import { FiCamera, FiBookOpen } from 'react-icons/fi';
 import styles from './AboutBento.module.css';
 
 const hobbiesImages = [
-  { src: '/images/20250108_173040.jpg', position: 'center' },
-  { src: '/images/20250109_071622.jpg', position: 'center' },
-  { src: '/images/20251125_071838.jpg', position: 'center' },
-  { src: '/images/20260202_123630.jpg', position: 'center' },
-  { src: '/images/20260202_144804.jpg', position: 'center' },
-  { src: '/images/20260203_162926.jpg', position: 'bottom' }, // Focuses on the bottom of the image (or top if needed)
-  { src: '/images/IMG-20250716-WA0049.jpg', position: 'center' },
-  { src: '/images/IMG-20250716-WA0145.jpg', position: 'center' }
+  { src: '/images/20250108_173040.webp', position: 'center' },
+  { src: '/images/20250109_071622.webp', position: 'center' },
+  { src: '/images/20251125_071838.webp', position: 'center' },
+  { src: '/images/20260202_123630.webp', position: 'center' },
+  { src: '/images/20260202_144804.webp', position: 'center' },
+  { src: '/images/20260203_162926.webp', position: 'bottom' },
+  { src: '/images/IMG-20250716-WA0049.webp', position: 'center' },
+  { src: '/images/IMG-20250716-WA0145.webp', position: 'center' }
 ];
 
 const containerVariants = {
@@ -19,34 +19,30 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
+      staggerChildren: 0.08
     }
   }
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, scale: 0.95, filter: 'blur(10px)', y: 30 },
+  hidden: { opacity: 0, scale: 0.96, y: 24 },
   visible: { 
     opacity: 1, 
     scale: 1, 
-    filter: 'blur(0px)',
     y: 0,
     transition: { 
-      type: 'spring', stiffness: 100, damping: 20,
-      filter: { type: 'tween', duration: 0.6, ease: 'easeOut' }
+      type: 'spring', stiffness: 120, damping: 20
     }
   }
 };
 
 const wordVariants = {
-  hidden: { opacity: 0, y: 10, filter: 'blur(5px)' },
+  hidden: { opacity: 0, y: 8 },
   visible: { 
     opacity: 1, 
     y: 0, 
-    filter: 'blur(0px)',
     transition: { 
-      type: 'spring', stiffness: 120, damping: 14,
-      filter: { type: 'tween', duration: 0.4, ease: 'easeOut' }
+      type: 'spring', stiffness: 140, damping: 16
     }
   }
 };
@@ -55,7 +51,7 @@ const textContainerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.05, delayChildren: 0.4 }
+    transition: { staggerChildren: 0.03, delayChildren: 0.2 }
   }
 };
 
@@ -63,22 +59,28 @@ const textString = "My foundation in computer science allows me to approach UX d
 
 export default function AboutBento() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const gridRef = useRef(null);
+  const rafRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % hobbiesImages.length);
-    }, 4000); // Change image every 4 seconds
+    }, 4500);
     return () => clearInterval(interval);
   }, []);
 
   const handleMouseMove = (e) => {
     if (!gridRef.current) return;
-    const rect = gridRef.current.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+    const grid = gridRef.current;
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+    
+    rafRef.current = requestAnimationFrame(() => {
+      const rect = grid.getBoundingClientRect();
+      grid.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
+      grid.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
     });
   };
 
@@ -88,7 +90,8 @@ export default function AboutBento() {
         className={styles.sectionTitle}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, margin: "-200px" }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
       >
         About
       </motion.h2>
@@ -97,14 +100,10 @@ export default function AboutBento() {
         ref={gridRef}
         onMouseMove={handleMouseMove}
         className={styles.bentoGrid}
-        style={{
-          '--mouse-x': `${mousePosition.x}px`,
-          '--mouse-y': `${mousePosition.y}px`,
-        }}
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.15 }}
       >
         {/* Main Statement Card */}
         <motion.div variants={cardVariants} className={`${styles.bentoCard} ${styles.cardMain}`}>
@@ -113,7 +112,7 @@ export default function AboutBento() {
             variants={textContainerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.4 }}
+            viewport={{ once: true, amount: 0.2 }}
           >
             {textString.split(" ").map((word, i) => (
               <span key={i} style={{ display: 'inline-block', marginRight: '0.25em' }}>
@@ -159,7 +158,7 @@ export default function AboutBento() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.7 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 1.5 }}
+              transition={{ duration: 1.2 }}
             />
           </AnimatePresence>
 

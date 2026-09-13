@@ -419,6 +419,22 @@
     font-size: 0.6875rem;
     padding: 0.4rem 0.9rem;
     gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .btnSecondary {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .heroImageWrapper {
+    width: 75px;
+    height: 100px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .about,

@@ -80,7 +80,7 @@
   stroke-width: 0.8px;
   stroke-dasharray: 200;
   stroke-dashoffset: 200;
-  animation: charDrawAnim 4.6s ease-in-out forwards;
+  animation: charDrawAnim 6s ease-in-out infinite;
 }
 
 @keyframes charDrawAnim {
@@ -394,11 +394,17 @@
 @media (max-width: 768px) {
   .header.top .navContainer {
     padding: 0 1.5rem;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
   .header.scrolled .navContainer {
     padding: 0 1rem;
     height: 56px;
     max-width: 95vw;
+  }
+  .mobileMenu {
+    will-change: transform;
+    transform: translateZ(0);
   }
   .desktopNav {
     display: none;

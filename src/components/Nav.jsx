@@ -7,21 +7,19 @@ export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const [animKey, setAnimKey] = useState(0);
-
   useEffect(() => {
+    let lastScrolled = window.scrollY > 50;
+    if (lastScrolled) setIsScrolled(true);
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const scrolled = window.scrollY > 50;
+      if (scrolled !== lastScrolled) {
+        lastScrolled = scrolled;
+        setIsScrolled(scrolled);
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setAnimKey(prev => prev + 1);
-    }, 6000);
-    return () => clearInterval(interval);
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -38,7 +36,7 @@ export default function Nav() {
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : styles.top}`}>
       <div className={styles.navContainer}>
         <NavLink to="/" className={styles.logo} onClick={closeMenu} aria-label="Home">
-          <svg key={animKey} width="200" height="40" viewBox="0 0 200 40" className={styles.logoSvg}>
+          <svg width="200" height="40" viewBox="0 0 200 40" className={styles.logoSvg}>
             <text x="0" y="26" className={styles.logoTextGroup}>
               {signatureText.split("").map((char, index) => (
                 <tspan

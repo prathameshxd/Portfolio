@@ -4,51 +4,68 @@ import { ref, onValue, push } from 'firebase/database';
 import { db } from '../utils/firebase';
 import { sanitizeInput } from '../utils/sanitizeInput';
 import styles from './SignatureWall.module.css';
-import BadWordsNext from 'bad-words-next';
-import en from 'bad-words-next/lib/en';
-import es from 'bad-words-next/lib/es';
-import fr from 'bad-words-next/lib/fr';
-import de from 'bad-words-next/lib/de';
-import ru from 'bad-words-next/lib/ru';
-import rl from 'bad-words-next/lib/ru_lat';
-import ua from 'bad-words-next/lib/ua';
-import pl from 'bad-words-next/lib/pl';
-import ch from 'bad-words-next/lib/ch';
 
-const badwords = new BadWordsNext();
-badwords.add(en);
-badwords.add(es);
-badwords.add(fr);
-badwords.add(de);
-badwords.add(ru);
-badwords.add(rl);
-badwords.add(ua);
-badwords.add(pl);
-badwords.add(ch);
+let badwordsInstance = null;
+async function getBadWordsFilter() {
+  if (badwordsInstance) return badwordsInstance;
+  const { default: BadWordsNext } = await import('bad-words-next');
+  const [
+    { default: en },
+    { default: es },
+    { default: fr },
+    { default: de },
+    { default: ru },
+    { default: rl },
+    { default: ua },
+    { default: pl },
+    { default: ch }
+  ] = await Promise.all([
+    import('bad-words-next/lib/en'),
+    import('bad-words-next/lib/es'),
+    import('bad-words-next/lib/fr'),
+    import('bad-words-next/lib/de'),
+    import('bad-words-next/lib/ru'),
+    import('bad-words-next/lib/ru_lat'),
+    import('bad-words-next/lib/ua'),
+    import('bad-words-next/lib/pl'),
+    import('bad-words-next/lib/ch')
+  ]);
 
-// Custom Indonesian dictionary
-badwords.add({
-  id: 'id',
-  words: [
-    'jancok', 'jancuk', 'dancok', 'dancuk', 'yancok', 'yancuk',
-    'kontol', 'memek', 'jembut', 'pepek',
-    'bangsat', 'bajingan', 'anjing', 'babi', 'monyet', 'kunyuk',
-    'tai', 'ngentot', 'ngewe', 'pantek', 'perek', 'lonte',
-    'kampret', 'tolol', 'goblok', 'bego', 'idiot', 'bodoh', 'geblek',
-    'asu', 'celeng', 'jingan', 'kimak', 'puki', 'pukimak', 'koentol'
-  ],
-  lookalike: {
-    '@': 'a',
-    '0': 'o',
-    '1': 'i',
-    '3': 'e',
-    '4': 'a',
-    '5': 's',
-    '7': 't',
-    '8': 'b',
-    '$': 's'
-  }
-});
+  const bw = new BadWordsNext();
+  bw.add(en);
+  bw.add(es);
+  bw.add(fr);
+  bw.add(de);
+  bw.add(ru);
+  bw.add(rl);
+  bw.add(ua);
+  bw.add(pl);
+  bw.add(ch);
+  bw.add({
+    id: 'id',
+    words: [
+      'jancok', 'jancuk', 'dancok', 'dancuk', 'yancok', 'yancuk',
+      'kontol', 'memek', 'jembut', 'pepek',
+      'bangsat', 'bajingan', 'anjing', 'babi', 'monyet', 'kunyuk',
+      'tai', 'ngentot', 'ngewe', 'pantek', 'perek', 'lonte',
+      'kampret', 'tolol', 'goblok', 'bego', 'idiot', 'bodoh', 'geblek',
+      'asu', 'celeng', 'jingan', 'kimak', 'puki', 'pukimak', 'koentol'
+    ],
+    lookalike: {
+      '@': 'a',
+      '0': 'o',
+      '1': 'i',
+      '3': 'e',
+      '4': 'a',
+      '5': 's',
+      '7': 't',
+      '8': 'b',
+      '$': 's'
+    }
+  });
+  badwordsInstance = bw;
+  return badwordsInstance;
+}
 
 const COLORS = ['Yellow', 'Pink', 'Blue', 'Green'];
 
@@ -83,7 +100,7 @@ export default function SignatureWall() {
       setNotesPerPage(mobile ? 4 : 8);
     };
     checkMobile();
-    window.addEventListener('resize', checkMobile);
+    window.addEventListener('resize', checkMobile, { passive: true });
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
   const rotationInterval = 3000; // 3 seconds
@@ -132,9 +149,14 @@ export default function SignatureWall() {
     e.preventDefault();
     setErrorMsg('');
 
-    if (badwords.check(newNote) || (authorName && badwords.check(authorName))) {
-      setErrorMsg('Please keep the language clean! Vulgar words are not allowed.');
-      return;
+    try {
+      const badwords = await getBadWordsFilter();
+      if (badwords.check(newNote) || (authorName && badwords.check(authorName))) {
+        setErrorMsg('Please keep the language clean! Vulgar words are not allowed.');
+        return;
+      }
+    } catch {
+      // Continue if filter fails to load
     }
 
     const sanitizedMessage = sanitizeInput(newNote, 200);

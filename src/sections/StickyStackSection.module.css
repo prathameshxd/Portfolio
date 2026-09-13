@@ -30,6 +30,7 @@
   flex: 1;
   display: flex;
   transform-style: preserve-3d;
+  backface-visibility: hidden;
   will-change: transform, opacity;
   opacity: 1 !important;
   filter: none !important;

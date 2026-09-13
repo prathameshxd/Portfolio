@@ -29,33 +29,19 @@
   cursor: none;
 }
 
-@keyframes darkGradientAnim {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-
 html {
   background-color: var(--bg-primary);
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-display);
-  background: linear-gradient(-45deg, #F5F2E9, #EBE6D8, #F7F4EB, #E2DCC8);
-  background-size: 400% 400%;
-  animation: darkGradientAnim 15s ease infinite;
+  background: #F5F2E9;
+  background: linear-gradient(135deg, #F5F2E9 0%, #EBE6D8 35%, #F7F4EB 70%, #E8E2D2 100%);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Light Theme overrides - handled via class */

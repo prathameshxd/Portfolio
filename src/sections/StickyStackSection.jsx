@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence, useReducedMotion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCss, SiJavascript, SiGithub } from 'react-icons/si';
-import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye, FiSearch, FiLayers, FiSliders, FiActivity } from 'react-icons/fi';
+import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye } from 'react-icons/fi';
 import styles from './StickyStackSection.module.css';
 
 const WORKFLOW_STAGES = [
@@ -74,84 +74,12 @@ const CARD_RANGES = [
   { start: 0.57, end: 0.73 }, // Card 04 (REFINE)
 ];
 
-// Helper component for individual cards so they enter from outside the screen and remain pinned
-const StageCard = ({ stage, index, scrollYProgress, activeStage, setActiveStage, isMobile, handleStageInteraction }) => {
-  // Discrete sequential entrance for each card:
-  // Card 01: 0.06 -> 0.22
-  // Card 02: 0.23 -> 0.39
-  // Card 03: 0.40 -> 0.56
-  // Card 04: 0.57 -> 0.73
-  // Pinned hold window: 0.73 -> 1.00 (All 4 cards remain firmly docked side-by-side)
-  const range = CARD_RANGES[index] || { start: 0.06 + index * 0.17, end: 0.06 + index * 0.17 + 0.16 };
-  const cardStart = range.start;
-  const cardEnd = range.end;
-  const duration = cardEnd - cardStart;
-  
-  // Midpoint where the card begins its graceful settling deceleration
-  const settleMid = cardStart + duration * 0.55;
-  
-  // Cards fly in from outside the screen (100vh) from bottom, ease in, and STAY docked at 0vh
-  const y = useTransform(
-    scrollYProgress, 
-    [cardStart, cardStart + duration * 0.7, cardEnd], 
-    ["100vh", "6vh", "0vh"], 
-    { clamp: true }
-  );
-
-  // Opacity becomes 1 immediately at start of ascent so the full flight up from bottom is visible
-  const opacity = useTransform(scrollYProgress, [cardStart, cardStart + 0.012, cardEnd], [0, 1, 1], { clamp: true });
-  const scale = useTransform(scrollYProgress, [cardStart, settleMid, cardEnd], [0.86, 0.96, 1], { clamp: true });
-
-  // Dynamic 3D/2D tilt angles for the fan entrance
-  const zAngles = [-16, -7, 7, 16];
-  const initialZ = zAngles[index % zAngles.length];
-
-  const yAngles = [-12, -5, 5, 12];
-  const initialY = yAngles[index % yAngles.length];
-
-  // Rotate Z (tilt): holds strong tilt during ascent, then slowly eases into 0deg
-  const rotateZ = useTransform(
-    scrollYProgress, 
-    [cardStart, settleMid, cardEnd], 
-    [initialZ, initialZ * 0.55, 0], 
-    { clamp: true }
-  );
-
-  // Rotate X (pitch): card leans backward during flight, then slowly levels upright
-  const rotateX = useTransform(
-    scrollYProgress, 
-    [cardStart, settleMid, cardEnd], 
-    [24, 8, 0], 
-    { clamp: true }
-  );
-
-  // Rotate Y (yaw): natural 3D twist that relaxes to 0deg
-  const rotateY = useTransform(
-    scrollYProgress, 
-    [cardStart, settleMid, cardEnd], 
-    [initialY, initialY * 0.45, 0], 
-    { clamp: true }
-  );
-
+const MobileStageCard = ({ stage, handleStageInteraction }) => {
   return (
-    <motion.div 
-      className={styles.stageCardWrapper} 
-      style={{ 
-        display: "flex", 
-        flex: 1, 
-        y: isMobile ? 0 : y, 
-        opacity: isMobile ? 1 : opacity, 
-        scale: isMobile ? 1 : scale,
-        rotateZ: isMobile ? 0 : rotateZ,
-        rotateX: isMobile ? 0 : rotateX,
-        rotateY: isMobile ? 0 : rotateY,
-      }}
-    >
-      <motion.div
+    <div className={styles.stageCardWrapper}>
+      <div
         className={styles.stageNode}
         style={{ '--node-color': stage.color }}
-        onMouseEnter={() => !isMobile && setActiveStage(stage.id)}
-        onMouseLeave={() => !isMobile && setActiveStage(null)}
         onClick={() => handleStageInteraction(stage.id)}
       >
         <div className={styles.stageHeaderContent}>
@@ -166,7 +94,98 @@ const StageCard = ({ stage, index, scrollYProgress, activeStage, setActiveStage,
             return (
               <div key={tool.name} className={styles.toolPill}>
                 {tool.img ? (
-                  <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" />
+                  <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" decoding="async" />
+                ) : (
+                  <Icon className={styles.toolIcon} />
+                )}
+                <span>{tool.name}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Helper component for desktop cards with 3D entry animation
+const DesktopStageCard = ({ stage, index, scrollYProgress, setActiveStage }) => {
+  const range = CARD_RANGES[index] || { start: 0.06 + index * 0.17, end: 0.06 + index * 0.17 + 0.16 };
+  const cardStart = range.start;
+  const cardEnd = range.end;
+  const duration = cardEnd - cardStart;
+  const settleMid = cardStart + duration * 0.55;
+  
+  const y = useTransform(
+    scrollYProgress, 
+    [cardStart, cardStart + duration * 0.7, cardEnd], 
+    ["100vh", "6vh", "0vh"], 
+    { clamp: true }
+  );
+
+  const opacity = useTransform(scrollYProgress, [cardStart, cardStart + 0.012, cardEnd], [0, 1, 1], { clamp: true });
+  const scale = useTransform(scrollYProgress, [cardStart, settleMid, cardEnd], [0.86, 0.96, 1], { clamp: true });
+
+  const zAngles = [-16, -7, 7, 16];
+  const initialZ = zAngles[index % zAngles.length];
+
+  const yAngles = [-12, -5, 5, 12];
+  const initialY = yAngles[index % yAngles.length];
+
+  const rotateZ = useTransform(
+    scrollYProgress, 
+    [cardStart, settleMid, cardEnd], 
+    [initialZ, initialZ * 0.55, 0], 
+    { clamp: true }
+  );
+
+  const rotateX = useTransform(
+    scrollYProgress, 
+    [cardStart, settleMid, cardEnd], 
+    [24, 8, 0], 
+    { clamp: true }
+  );
+
+  const rotateY = useTransform(
+    scrollYProgress, 
+    [cardStart, settleMid, cardEnd], 
+    [initialY, initialY * 0.45, 0], 
+    { clamp: true }
+  );
+
+  return (
+    <motion.div 
+      className={styles.stageCardWrapper} 
+      style={{ 
+        display: "flex", 
+        flex: 1, 
+        y, 
+        opacity, 
+        scale,
+        rotateZ,
+        rotateX,
+        rotateY,
+      }}
+    >
+      <motion.div
+        className={styles.stageNode}
+        style={{ '--node-color': stage.color }}
+        onMouseEnter={() => setActiveStage(stage.id)}
+        onMouseLeave={() => setActiveStage(null)}
+      >
+        <div className={styles.stageHeaderContent}>
+          <div className={styles.stageNumber}>{stage.number}</div>
+          <h2 className={styles.stageTitle}>{stage.title}</h2>
+          <p className={styles.stagePhilosophy}>{stage.philosophy}</p>
+        </div>
+
+        <div className={styles.toolsList}>
+          {stage.tools.map(tool => {
+            const Icon = tool.icon;
+            return (
+              <div key={tool.name} className={styles.toolPill}>
+                {tool.img ? (
+                  <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" decoding="async" />
                 ) : (
                   <Icon className={styles.toolIcon} />
                 )}
@@ -229,18 +248,23 @@ export default function StickyStackSection() {
         {/* Sliding Cards */}
         <div className={styles.cardsContainer}>
           <div className={styles.stagesWrapper}>
-            {WORKFLOW_STAGES.map((stage, i) => (
-              <StageCard 
-                key={stage.id} 
-                stage={stage} 
-                index={i} 
-                scrollYProgress={scrollYProgress}
-                activeStage={activeStage}
-                setActiveStage={setActiveStage}
-                isMobile={isMobile}
-                handleStageInteraction={handleStageInteraction}
-              />
-            ))}
+            {isMobile
+              ? WORKFLOW_STAGES.map((stage) => (
+                  <MobileStageCard 
+                    key={stage.id} 
+                    stage={stage} 
+                    handleStageInteraction={handleStageInteraction}
+                  />
+                ))
+              : WORKFLOW_STAGES.map((stage, i) => (
+                  <DesktopStageCard 
+                    key={stage.id} 
+                    stage={stage} 
+                    index={i} 
+                    scrollYProgress={scrollYProgress}
+                    setActiveStage={setActiveStage}
+                  />
+                ))}
           </div>
         </div>
         

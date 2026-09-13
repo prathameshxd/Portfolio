@@ -34,10 +34,11 @@ export default function Footer() {
       {/* Soft Dusk Meadow Landscape Layer */}
       <div className={styles.duskBackground}>
         <img
-          src="/images/footer-anime-meadow-dusk.jpg"
+          src="/images/footer-anime-meadow-dusk.webp"
           alt="Peaceful sunset painted meadow with warm dusk clouds"
           className={styles.duskImage}
           loading="lazy"
+          decoding="async"
         />
         <div className={styles.duskTopFade} />
         <div className={styles.duskWarmGlow} />

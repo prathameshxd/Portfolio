@@ -1,70 +1,85 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 import styles from './CustomCursor.module.css';
 
 export default function CustomCursor() {
-  const [hasMoved, setHasMoved] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
+  const cursorRef = useRef(null);
 
   useEffect(() => {
-    const updateMousePosition = (e) => {
-      setHasMoved(true);
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
+    // Disable on touch devices
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      return;
+    }
 
-    const handleMouseOver = (e) => {
-      if (
-        e.target.tagName.toLowerCase() === 'a' ||
-        e.target.tagName.toLowerCase() === 'button' ||
-        e.target.closest('a') ||
-        e.target.closest('button') ||
-        e.target.dataset.cursorHover === 'true'
-      ) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
+    const cursor = cursorRef.current;
+    if (!cursor) return;
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let currentX = -100;
+    let currentY = -100;
+    let isHovering = false;
+    let isVisible = false;
+    let rafId = null;
+
+    const onMouseMove = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!isVisible) {
+        isVisible = true;
+        cursor.classList.add(styles.visible);
       }
     };
 
-    window.addEventListener('mousemove', updateMousePosition, { passive: true });
-    window.addEventListener('mouseover', handleMouseOver, { passive: true });
+    const onMouseOver = (e) => {
+      const target = e.target;
+      if (!target) return;
+      
+      const isInteractive = Boolean(
+        target.tagName === 'A' ||
+        target.tagName === 'BUTTON' ||
+        target.closest?.('a') ||
+        target.closest?.('button') ||
+        target.dataset?.cursorHover === 'true' ||
+        target.closest?.('[data-cursor-hover="true"]')
+      );
+
+      if (isInteractive !== isHovering) {
+        isHovering = isInteractive;
+        if (isHovering) {
+          cursor.classList.add(styles.hovering);
+        } else {
+          cursor.classList.remove(styles.hovering);
+        }
+      }
+    };
+
+    const onMouseLeaveDoc = () => {
+      isVisible = false;
+      cursor.classList.remove(styles.visible);
+    };
+
+    const render = () => {
+      // Spring lerp factor (0.35 gives tight responsive tracking)
+      const offset = isHovering ? 20 : 8;
+      currentX += (mouseX - offset - currentX) * 0.35;
+      currentY += (mouseY - offset - currentY) * 0.35;
+
+      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+      rafId = requestAnimationFrame(render);
+    };
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('mouseover', onMouseOver, { passive: true });
+    document.addEventListener('mouseleave', onMouseLeaveDoc, { passive: true });
+    rafId = requestAnimationFrame(render);
 
     return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
-      window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseover', onMouseOver);
+      document.removeEventListener('mouseleave', onMouseLeaveDoc);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
-  // Hide on touch devices
-  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
-    return null;
-  }
-
-  if (!hasMoved) return null;
-
-  return (
-    <motion.div
-      className={styles.cursor}
-      initial={{
-        opacity: 0,
-        x: mousePosition.x - 8,
-        y: mousePosition.y - 8,
-      }}
-      animate={{
-        opacity: 1,
-        x: mousePosition.x - (isHovering ? 20 : 8),
-        y: mousePosition.y - (isHovering ? 20 : 8),
-        scale: isHovering ? 2.5 : 1,
-        backgroundColor: isHovering ? 'var(--accent)' : 'var(--cursor-color)',
-        mixBlendMode: isHovering ? 'difference' : 'normal',
-      }}
-      transition={{
-        type: 'spring',
-        stiffness: 500,
-        damping: 28,
-        mass: 0.5,
-      }}
-    />
-  );
+  return <div ref={cursorRef} className={styles.cursor} />;
 }

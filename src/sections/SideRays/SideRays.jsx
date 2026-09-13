@@ -64,6 +64,15 @@ const SideRays = ({
   useEffect(() => {
     if (!isVisible || !containerRef.current) return;
 
+    // On mobile devices (low spec / small screens), avoid heavy full-screen WebGL fragment shader
+    const isMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
+    if (isMobile) {
+      if (containerRef.current) {
+        containerRef.current.style.background = 'radial-gradient(ellipse at 85% 10%, rgba(0, 22, 54, 0.85) 0%, rgba(2, 15, 38, 0.6) 45%, transparent 75%)';
+      }
+      return;
+    }
+
     if (cleanupFunctionRef.current) {
       cleanupFunctionRef.current();
       cleanupFunctionRef.current = null;
@@ -77,9 +86,10 @@ const SideRays = ({
       if (!containerRef.current) return;
 
       let renderer;
+      const targetDpr = Math.min(Math.max(window.devicePixelRatio * 0.5, 0.5), 1.0);
       try {
         renderer = new Renderer({
-          dpr: Math.min(window.devicePixelRatio, 2),
+          dpr: targetDpr,
           alpha: true
         });
       } catch (error) {
@@ -96,6 +106,7 @@ const SideRays = ({
       const gl = renderer.gl;
       gl.canvas.style.width = '100%';
       gl.canvas.style.height = '100%';
+      gl.canvas.style.transform = 'translateZ(0)';
 
       while (containerRef.current.firstChild) {
         containerRef.current.removeChild(containerRef.current.firstChild);
@@ -108,7 +119,7 @@ void main() {
   gl_Position = vec4(position, 0.0, 1.0);
 }`;
 
-      const frag = `precision highp float;
+      const frag = `precision mediump float;
 
 uniform float iTime;
 uniform vec2 iResolution;
@@ -195,14 +206,25 @@ void main() {
 
       const updateSize = () => {
         if (!containerRef.current || !renderer) return;
-        renderer.dpr = Math.min(window.devicePixelRatio, 2);
+        renderer.dpr = targetDpr;
         const { clientWidth: w, clientHeight: h } = containerRef.current;
         renderer.setSize(w, h);
         uniforms.iResolution.value = [w * renderer.dpr, h * renderer.dpr];
       };
 
+      let isPaused = false;
+      const handleVisibility = () => {
+        isPaused = document.hidden;
+        if (!isPaused && !animationIdRef.current) {
+          animationIdRef.current = requestAnimationFrame(loop);
+        }
+      };
+
       const loop = t => {
-        if (!rendererRef.current || !uniformsRef.current || !meshRef.current) return;
+        if (isPaused || !rendererRef.current || !uniformsRef.current || !meshRef.current) {
+          animationIdRef.current = null;
+          return;
+        }
         uniforms.iTime.value = t * 0.001;
         try {
           renderer.render({ scene: mesh });
@@ -212,7 +234,8 @@ void main() {
         }
       };
 
-      window.addEventListener('resize', updateSize);
+      window.addEventListener('resize', updateSize, { passive: true });
+      document.addEventListener('visibilitychange', handleVisibility);
       updateSize();
       animationIdRef.current = requestAnimationFrame(loop);
 
@@ -222,6 +245,7 @@ void main() {
           animationIdRef.current = null;
         }
         window.removeEventListener('resize', updateSize);
+        document.removeEventListener('visibilitychange', handleVisibility);
         if (renderer) {
           try {
             const loseCtx = renderer.gl.getExtension('WEBGL_lose_context');

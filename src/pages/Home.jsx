@@ -1,79 +1,14 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, useReducedMotion, AnimatePresence, useScroll, useTransform, useVelocity, useSpring, useAnimationFrame, useMotionValue } from 'framer-motion';
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform, useVelocity, useSpring, useAnimationFrame, useMotionValue } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import SignatureWall from '../sections/SignatureWall';
 import StickyStackSection from '../sections/StickyStackSection';
 import WorkExperience from '../sections/WorkExperience';
 import AboutBento from '../sections/AboutBento';
-import HoverTiltCard from '../components/HoverTiltCard';
-import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCss, SiJavascript, SiGithub } from 'react-icons/si';
-
-import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye, FiPenTool } from 'react-icons/fi';
 import PropTypes from 'prop-types';
 import styles from './Home.module.css';
 import SEO from '../components/SEO';
-
-const WORKFLOW_STAGES = [
-  {
-    id: 'discover',
-    number: '01',
-    title: 'DISCOVER',
-    philosophy: 'Understand the real problem first.',
-    color: '#8CA0B3',
-    tools: [
-      { name: 'User Research', icon: FiUsers, desc: 'Qualitative and quantitative insights.' },
-      { name: 'User Interviews', icon: FiUsers, desc: 'Talking to real people to uncover needs.' },
-      { name: 'Personas', icon: FiUsers, desc: 'Mapping user archetypes.' },
-      { name: 'Journey Mapping', icon: FiMap, desc: 'Visualizing the end-to-end user experience.' },
-      { name: 'Information Arch', icon: FiList, desc: 'Structuring content logically.' },
-    ]
-  },
-  {
-    id: 'design',
-    number: '02',
-    title: 'DESIGN',
-    philosophy: 'Shape it in Figma before it\'s anywhere else.',
-    color: '#D4FF3F',
-    tools: [
-      { name: 'Figma', icon: SiFigma, desc: 'End-to-end UI design and interactive prototyping.', img: '/images/figma.svg' },
-      { name: 'Framer', icon: SiFramer, desc: 'High-fidelity interactions and web publishing.' },
-      { name: 'Wireframing', icon: FiLayout, desc: 'Low-fidelity structural layouts.' },
-      { name: 'Prototyping', icon: FiLayout, desc: 'Connecting screens for user testing.' },
-      { name: 'Design Systems', icon: FiLayout, desc: 'Building scalable UI component libraries.' },
-    ]
-  },
-  {
-    id: 'build',
-    number: '03',
-    title: 'BUILD',
-    philosophy: 'Design and code converge here, with AI as a collaborator.',
-    color: '#FFB84D',
-    tools: [
-      { name: 'HTML5', icon: SiHtml5, desc: 'Semantic markup and accessibility.' },
-      { name: 'CSS3', icon: SiCss, desc: 'Styling, layout, and animations.' },
-      { name: 'JavaScript', icon: SiJavascript, desc: 'Client-side logic and interactions.' },
-      { name: 'GitHub', icon: SiGithub, desc: 'Version control and collaboration.' },
-      { name: 'Claude', icon: SiAnthropic, desc: 'Drafting UX copy and case study writing.', img: '/images/claude.svg' },
-      { name: 'Gemini', icon: SiGooglegemini, desc: 'Multimodal analysis and rapid ideation.' },
-      { name: 'ChatGPT', icon: SiOpenai, desc: 'Code generation and architectural drafting.' },
-      { name: 'Antigravity', icon: FiTerminal, desc: 'Turning Figma frames into front-end code.', img: '/images/antigravity.svg' },
-      { name: 'Stitch', icon: FiLayout, desc: 'Advanced prototyping and component modeling.' },
-    ]
-  },
-  {
-    id: 'refine',
-    number: '04',
-    title: 'REFINE',
-    philosophy: 'Test it on real users, then tighten it.',
-    color: '#FF7B9C',
-    tools: [
-      { name: 'Usability Testing', icon: FiCheckCircle, desc: 'Validating assumptions with real users.' },
-      { name: 'Interaction Design', icon: FiEye, desc: 'Polishing micro-interactions and feedback.' },
-      { name: 'Data Vis', icon: FiLayout, desc: 'Making complex data readable and beautiful.' },
-    ]
-  }
-];
 
 const textVariant = {
   hidden: { opacity: 0, y: 50 },
@@ -117,9 +52,8 @@ SplitText.propTypes = {
 
 export default function Home() {
   const curtainRef = useRef(null);
-  const [activeStage, setActiveStage] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
+  const marqueeRef = useRef(null);
+  const isMarqueeInView = useInView(marqueeRef, { margin: "200px" });
 
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -140,7 +74,9 @@ export default function Home() {
   const directionFactor = useRef(1);
 
   useAnimationFrame((t, delta) => {
-    let moveBy = directionFactor.current * -1 * (delta / 1000); // adjusted speed for 10 copies
+    if (!isMarqueeInView) return;
+
+    let moveBy = directionFactor.current * -1 * (delta / 1000);
 
     if (velocityFactor.get() < 0) {
       directionFactor.current = -1;
@@ -154,34 +90,6 @@ export default function Home() {
 
   const scrollX = useTransform(baseX, (v) => `${wrap(-10, 0, v)}%`);
 
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 1024);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const handleStageInteraction = (id) => {
-    if (isMobile) {
-      setActiveStage(activeStage === id ? null : id);
-    }
-  };
-
-  const nodeVariants = {
-    hidden: { opacity: 0, scale: 0.8, y: 20 },
-    visible: (i) => ({
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { delay: prefersReducedMotion ? 0 : 0.15 * i + 0.2, duration: 0.5 }
-    })
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.5 } }
-  };
-
   return (
     <div className={styles.home}>
       <SEO />
@@ -194,9 +102,11 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <img
-              src="/images/hero-anime-meadow-4k.jpg"
+              src="/images/hero-anime-meadow-4k.webp"
               alt="Lush green meadow under bright painted clouds"
               className={styles.heroBgImage}
+              fetchPriority="high"
+              decoding="async"
             />
             <div className={styles.heroOverlay} />
             <div className={styles.heroVignette} />
@@ -245,7 +155,7 @@ export default function Home() {
                       y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.8 }
                     }}
                   >
-                    <img src="/avatar.webp" alt="Prathamesh Patil" className={styles.heroImage} />
+                    <img src="/avatar.webp" alt="Prathamesh Patil" className={styles.heroImage} width="160" height="220" />
                   </motion.div>
                 </span>
                 <SplitText>That Solve</SplitText>
@@ -273,7 +183,7 @@ export default function Home() {
 
       <div className={styles.curtainWrapper} ref={curtainRef}>
         {/* Pill-Style Marquee Section (Scroll-Linked) */}
-        <section className={styles.marqueeSection}>
+        <section ref={marqueeRef} className={styles.marqueeSection}>
           <div className={styles.marqueeContainer}>
             <motion.div
               className={styles.marqueeTrack}

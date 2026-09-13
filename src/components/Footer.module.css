@@ -10,6 +10,8 @@
   align-items: center;
   z-index: 10;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
+  content-visibility: auto;
+  contain-intrinsic-size: 500px;
 }
 
 /* THE DUSK MEADOW BACKGROUND LAYER - BALANCED & ATMOSPHERIC */
@@ -367,8 +369,17 @@
     padding-top: 1.5rem;
   }
 
+  .statusBadge {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
   .backToTopBtn {
     align-self: flex-start;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .duskImage {
