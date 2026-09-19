@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowDownRight } from 'react-icons/fi';
+import TextAnimate from '../components/TextAnimate';
 import styles from './WorkExperience.module.css';
 
 const EXPERIENCES = [
@@ -28,15 +29,9 @@ export default function WorkExperience() {
   return (
     <section className={styles.experienceSection}>
       <div className={styles.sectionHeader}>
-        <motion.h2
-          className={styles.sectionTitle}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
-        >
+        <TextAnimate as="h2" by="character" className={styles.sectionTitle}>
           Work Experiences
-        </motion.h2>
+        </TextAnimate>
       </div>
 
       <div className={styles.experienceList}>

@@ -52,19 +52,14 @@ export default function Contact() {
           Thank you for visiting my portfolio and expressing interest in connecting. As a UX/UI Designer and Frontend Developer, I am always open to discussing new opportunities, potential collaborations, or even just sharing ideas about the future of digital design. If you are looking to build a new website, conceptualize a bold digital product, or if you are interested in hiring me for your team, please use the conversational form below. By providing your name, your company or school, the main topic of your inquiry, and your email address, you help me understand how best to assist you. I strive to respond to all inquiries promptly. Let's work together to build something amazing, accessible, and user-friendly that leaves a lasting impact on your audience.
         </div>
         
-        <motion.div 
-          className={styles.headerRow}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
+        <div className={styles.headerRow}>
           <AnimatedHeading className={styles.title} />
           <div className={styles.socials}>
             <a href="mailto:prathmeshpatila5@gmail.com" className={`${styles.socialLink} btn-wave-hover`} style={{ '--wave-color': '#111', '--wave-text-color': '#fff' }}><span className="btn-wave-text">Email</span></a>
             <a href="https://www.linkedin.com/in/prathamesh-patil-5652a1358/" target="_blank" rel="noopener noreferrer" className={`${styles.socialLink} btn-wave-hover`} style={{ '--wave-color': '#111', '--wave-text-color': '#fff' }}><span className="btn-wave-text">LinkedIn</span></a>
             <a href="https://www.behance.net/prathmeshpatila5" target="_blank" rel="noopener noreferrer" className={`${styles.socialLink} btn-wave-hover`} style={{ '--wave-color': '#111', '--wave-text-color': '#fff' }}><span className="btn-wave-text">Behance</span></a>
           </div>
-        </motion.div>
+        </div>
 
         {formState === 'success' ? (
           <motion.div 

@@ -6,6 +6,7 @@ import SignatureWall from '../sections/SignatureWall';
 import StickyStackSection from '../sections/StickyStackSection';
 import WorkExperience from '../sections/WorkExperience';
 import AboutBento from '../sections/AboutBento';
+import TextAnimate from '../components/TextAnimate';
 import PropTypes from 'prop-types';
 import styles from './Home.module.css';
 import SEO from '../components/SEO';
@@ -293,7 +294,7 @@ export default function Home() {
               whileHover={{ scale: 0.98, opacity: 0.8 }}
               transition={{ duration: 0.3 }}
             >
-              Let's build something <span className={styles.arrow}>→</span>
+              <TextAnimate by="character">Let's build something</TextAnimate> <span className={styles.arrow}>→</span>
             </motion.h2>
           </Link>
         </section>

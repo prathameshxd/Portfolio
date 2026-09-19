@@ -1,80 +1,90 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { SiAnthropic, SiGooglegemini, SiOpenai, SiFigma, SiFramer, SiHtml5, SiCss, SiJavascript, SiGithub } from 'react-icons/si';
-import { FiLayout, FiTerminal, FiUsers, FiCheckCircle, FiMap, FiList, FiEye } from 'react-icons/fi';
+import { 
+  SiAnthropic, 
+  SiGooglegemini, 
+  SiOpenai, 
+  SiFigma, 
+  SiFramer, 
+  SiHtml5, 
+  SiGithub,
+  SiReact
+} from 'react-icons/si';
+import { 
+  FiLayout, 
+  FiTerminal, 
+  FiUsers, 
+  FiCheckCircle, 
+  FiMap, 
+  FiList, 
+  FiEye,
+  FiLayers,
+  FiZap
+} from 'react-icons/fi';
+import TextAnimate from '../components/TextAnimate';
 import styles from './StickyStackSection.module.css';
 
 const WORKFLOW_STAGES = [
   {
     id: 'discover',
     number: '01',
+    category: 'RESEARCH & STRATEGY',
     title: 'DISCOVER',
-    philosophy: 'Understand the real problem first.',
-    color: '#58A6FF',
+    philosophy: 'Uncover real human needs, map journeys, and validate foundational assumptions.',
+    color: '#38BDF8', // Cyan
     tools: [
-      { name: 'User Research', icon: FiUsers, desc: 'Qualitative and quantitative insights.' },
-      { name: 'User Interviews', icon: FiUsers, desc: 'Talking to real people to uncover needs.' },
-      { name: 'Personas', icon: FiUsers, desc: 'Mapping user archetypes.' },
-      { name: 'Journey Mapping', icon: FiMap, desc: 'Visualizing the end-to-end user experience.' },
-      { name: 'Information Arch', icon: FiList, desc: 'Structuring content logically.' },
+      { name: 'User Research', icon: FiUsers },
+      { name: 'User Interviews', icon: FiUsers },
+      { name: 'Persona Mapping', icon: FiUsers },
+      { name: 'Journey Mapping', icon: FiMap },
+      { name: 'Information Arch', icon: FiList },
+      { name: 'Usability Testing', icon: FiCheckCircle },
     ]
   },
   {
     id: 'design',
     number: '02',
+    category: 'CRAFT & SYSTEMS',
     title: 'DESIGN',
-    philosophy: 'Shape it in Figma before it\'s anywhere else.',
-    color: '#D4FF3F',
+    philosophy: 'Craft pixel-perfect interfaces, scalable design systems, and responsive layouts.',
+    color: '#D4FF3F', // Electric Neon Lime
     tools: [
-      { name: 'Figma', icon: SiFigma, desc: 'End-to-end UI design and interactive prototyping.', img: '/images/figma.svg' },
-      { name: 'Framer', icon: SiFramer, desc: 'High-fidelity interactions and web publishing.' },
-      { name: 'Wireframing', icon: FiLayout, desc: 'Low-fidelity structural layouts.' },
-      { name: 'Prototyping', icon: FiLayout, desc: 'Connecting screens for user testing.' },
-      { name: 'Design Systems', icon: FiLayout, desc: 'Building scalable UI component libraries.' },
+      { name: 'Figma', icon: SiFigma, img: '/images/figma.svg' },
+      { name: 'Framer', icon: SiFramer },
+      { name: 'Design Systems', icon: FiLayers },
+      { name: 'Interactive Proto', icon: FiLayout },
+      { name: 'Wireframing', icon: FiLayout },
+      { name: 'Motion & UX', icon: FiEye },
     ]
   },
   {
     id: 'build',
     number: '03',
-    title: 'BUILD',
-    philosophy: 'Design and code converge here, with AI as a superpower collaborator.',
-    color: '#FFB84D',
+    category: 'DEVELOPMENT & AI',
+    title: 'BUILD & AI',
+    philosophy: 'Design and code converge into shipping software, amplified by agentic AI.',
+    color: '#FFB84D', // Radiant Amber Gold
     tools: [
-      { name: 'HTML5', icon: SiHtml5, desc: 'Semantic markup and accessibility.' },
-      { name: 'CSS3', icon: SiCss, desc: 'Styling, layout, and animations.' },
-      { name: 'JavaScript', icon: SiJavascript, desc: 'Client-side logic and interactions.' },
-      { name: 'GitHub', icon: SiGithub, desc: 'Version control and collaboration.' },
-      { name: 'Claude', icon: SiAnthropic, desc: 'Drafting UX copy and case study writing.', img: '/images/claude.svg' },
-      { name: 'Gemini', icon: SiGooglegemini, desc: 'Multimodal analysis and rapid ideation.' },
-      { name: 'ChatGPT', icon: SiOpenai, desc: 'Code generation and architectural drafting.' },
-      { name: 'Antigravity', icon: FiTerminal, desc: 'Turning Figma frames into front-end code.', img: '/images/antigravity.svg' },
-    ]
-  },
-  {
-    id: 'refine',
-    number: '04',
-    title: 'REFINE',
-    philosophy: 'Test it on real users, then tighten it.',
-    color: '#FF7B9C',
-    tools: [
-      { name: 'Usability Testing', icon: FiCheckCircle, desc: 'Validating assumptions with real users.' },
-      { name: 'Interaction Design', icon: FiEye, desc: 'Polishing micro-interactions and feedback.' },
-      { name: 'Data Vis', icon: FiLayout, desc: 'Making complex data readable and beautiful.' },
-      { name: 'A/B Testing', icon: FiCheckCircle, desc: 'Measuring conversion and user flow impact.' },
-      { name: 'A11y Standards', icon: FiEye, desc: 'WCAG compliance and accessibility checks.' },
-      { name: 'QA Polish', icon: FiCheckCircle, desc: 'Ensuring pixel-perfect edge case behavior.' },
+      { name: 'Claude', icon: SiAnthropic, img: '/images/claude.svg' },
+      { name: 'Antigravity', icon: FiTerminal, img: '/images/antigravity.svg' },
+      { name: 'Gemini', icon: SiGooglegemini },
+      { name: 'ChatGPT', icon: SiOpenai },
+      { name: 'React & JS', icon: SiReact },
+      { name: 'HTML5 & CSS3', icon: SiHtml5 },
+      { name: 'GitHub', icon: SiGithub },
+      { name: 'Live Prototyping', icon: FiZap },
     ]
   }
 ];
 
+// Staggered sequential scroll ranges: all 3 cards start early and rise from ground with smooth wave overlap
 const CARD_RANGES = [
-  { start: 0.06, end: 0.22 }, // Card 01 (DISCOVER)
-  { start: 0.23, end: 0.39 }, // Card 02 (DESIGN)
-  { start: 0.40, end: 0.56 }, // Card 03 (BUILD)
-  { start: 0.57, end: 0.73 }, // Card 04 (REFINE)
+  { start: 0.06, end: 0.38 }, // Card 01 (DISCOVER)
+  { start: 0.18, end: 0.50 }, // Card 02 (DESIGN)
+  { start: 0.30, end: 0.62 }, // Card 03 (BUILD & AI)
 ];
 
-const MobileStageCard = ({ stage, handleStageInteraction }) => {
+const MobileStageCard = ({ stage, index, handleStageInteraction }) => {
   return (
     <div className={styles.stageCardWrapper}>
       <div
@@ -82,9 +92,20 @@ const MobileStageCard = ({ stage, handleStageInteraction }) => {
         style={{ '--node-color': stage.color }}
         onClick={() => handleStageInteraction(stage.id)}
       >
+        <div className={styles.topBeam} />
+
         <div className={styles.stageHeaderContent}>
-          <div className={styles.stageNumber}>{stage.number}</div>
-          <h2 className={styles.stageTitle}>{stage.title}</h2>
+          <div className={styles.stageNumber}>
+            {stage.number} · {stage.category}
+          </div>
+          <TextAnimate 
+            as="h2" 
+            by="character" 
+            className={styles.stageTitle}
+            delayOffset={index * 2}
+          >
+            {stage.title}
+          </TextAnimate>
           <p className={styles.stagePhilosophy}>{stage.philosophy}</p>
         </div>
 
@@ -92,13 +113,15 @@ const MobileStageCard = ({ stage, handleStageInteraction }) => {
           {stage.tools.map(tool => {
             const Icon = tool.icon;
             return (
-              <div key={tool.name} className={styles.toolPill}>
-                {tool.img ? (
-                  <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" decoding="async" />
-                ) : (
-                  <Icon className={styles.toolIcon} />
-                )}
-                <span>{tool.name}</span>
+              <div key={tool.name} className={styles.toolItem}>
+                <div className={styles.toolIconContainer}>
+                  {tool.img ? (
+                    <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" decoding="async" />
+                  ) : (
+                    <Icon className={styles.toolIcon} />
+                  )}
+                </div>
+                <span className={styles.toolName}>{tool.name}</span>
               </div>
             );
           })}
@@ -108,48 +131,54 @@ const MobileStageCard = ({ stage, handleStageInteraction }) => {
   );
 };
 
-// Helper component for desktop cards with 3D entry animation
+// Desktop cards with staggered rising-from-ground 3D motion and Magic UI character-pop headings
 const DesktopStageCard = ({ stage, index, scrollYProgress, setActiveStage }) => {
-  const range = CARD_RANGES[index] || { start: 0.06 + index * 0.17, end: 0.06 + index * 0.17 + 0.16 };
+  const range = CARD_RANGES[index] || { start: 0.06 + index * 0.12, end: 0.38 + index * 0.12 };
   const cardStart = range.start;
   const cardEnd = range.end;
   const duration = cardEnd - cardStart;
-  const settleMid = cardStart + duration * 0.55;
+  const settleMid = cardStart + duration * 0.7;
   
+  // Smoothly rises up from below the viewport (110vh) up to resting position (0vh)
   const y = useTransform(
     scrollYProgress, 
-    [cardStart, cardStart + duration * 0.7, cardEnd], 
-    ["100vh", "6vh", "0vh"], 
+    [cardStart, settleMid, cardEnd], 
+    ["110vh", "3vh", "0vh"], 
     { clamp: true }
   );
 
-  const opacity = useTransform(scrollYProgress, [cardStart, cardStart + 0.012, cardEnd], [0, 1, 1], { clamp: true });
-  const scale = useTransform(scrollYProgress, [cardStart, settleMid, cardEnd], [0.86, 0.96, 1], { clamp: true });
+  const scale = useTransform(
+    scrollYProgress, 
+    [cardStart, settleMid, cardEnd], 
+    [0.88, 0.98, 1], 
+    { clamp: true }
+  );
 
-  const zAngles = [-16, -7, 7, 16];
-  const initialZ = zAngles[index % zAngles.length];
+  // Symmetrical fan angles: Left (-12°), Center (0°), Right (+12°)
+  const zAngles = [-12, 0, 12];
+  const initialZ = zAngles[index] ?? 0;
 
-  const yAngles = [-12, -5, 5, 12];
-  const initialY = yAngles[index % yAngles.length];
+  const yAngles = [-10, 0, 10];
+  const initialY = yAngles[index] ?? 0;
 
   const rotateZ = useTransform(
     scrollYProgress, 
     [cardStart, settleMid, cardEnd], 
-    [initialZ, initialZ * 0.55, 0], 
+    [initialZ, initialZ * 0.3, 0], 
     { clamp: true }
   );
 
   const rotateX = useTransform(
     scrollYProgress, 
     [cardStart, settleMid, cardEnd], 
-    [24, 8, 0], 
+    [24, 6, 0], 
     { clamp: true }
   );
 
   const rotateY = useTransform(
     scrollYProgress, 
     [cardStart, settleMid, cardEnd], 
-    [initialY, initialY * 0.45, 0], 
+    [initialY, initialY * 0.3, 0], 
     { clamp: true }
   );
 
@@ -160,7 +189,7 @@ const DesktopStageCard = ({ stage, index, scrollYProgress, setActiveStage }) => 
         display: "flex", 
         flex: 1, 
         y, 
-        opacity, 
+        opacity: 1, // Strictly 100% solid opacity - never white/translucent
         scale,
         rotateZ,
         rotateX,
@@ -173,9 +202,20 @@ const DesktopStageCard = ({ stage, index, scrollYProgress, setActiveStage }) => 
         onMouseEnter={() => setActiveStage(stage.id)}
         onMouseLeave={() => setActiveStage(null)}
       >
+        <div className={styles.topBeam} />
+
         <div className={styles.stageHeaderContent}>
-          <div className={styles.stageNumber}>{stage.number}</div>
-          <h2 className={styles.stageTitle}>{stage.title}</h2>
+          <div className={styles.stageNumber}>
+            {stage.number} · {stage.category}
+          </div>
+          <TextAnimate 
+            as="h2" 
+            by="character" 
+            className={styles.stageTitle}
+            delayOffset={index * 3}
+          >
+            {stage.title}
+          </TextAnimate>
           <p className={styles.stagePhilosophy}>{stage.philosophy}</p>
         </div>
 
@@ -183,13 +223,15 @@ const DesktopStageCard = ({ stage, index, scrollYProgress, setActiveStage }) => 
           {stage.tools.map(tool => {
             const Icon = tool.icon;
             return (
-              <div key={tool.name} className={styles.toolPill}>
-                {tool.img ? (
-                  <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" decoding="async" />
-                ) : (
-                  <Icon className={styles.toolIcon} />
-                )}
-                <span>{tool.name}</span>
+              <div key={tool.name} className={styles.toolItem}>
+                <div className={styles.toolIconContainer}>
+                  {tool.img ? (
+                    <img src={tool.img} alt={tool.name} className={styles.toolImage} loading="lazy" decoding="async" />
+                  ) : (
+                    <Icon className={styles.toolIcon} />
+                  )}
+                </div>
+                <span className={styles.toolName}>{tool.name}</span>
               </div>
             );
           })}
@@ -201,7 +243,7 @@ const DesktopStageCard = ({ stage, index, scrollYProgress, setActiveStage }) => 
 
 export default function StickyStackSection() {
   const [containerNode, setContainerNode] = useState(null);
-  const [activeStage, setActiveStage] = useState(null);
+  const [_activeStage, setActiveStage] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -216,42 +258,27 @@ export default function StickyStackSection() {
     offset: ["start start", "end end"]
   });
 
-  // Title animations: pinned cleanly at top
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.05], [0.6, 1], { clamp: true });
-  const titleScale = useTransform(scrollYProgress, [0, 0.05], [0.97, 1], { clamp: true });
-  const titleY = useTransform(scrollYProgress, [0, 0.05], ["10px", "0px"], { clamp: true });
-
-  const handleStageInteraction = (id) => {
-    if (isMobile) {
-      setActiveStage(prev => prev === id ? null : id);
-    }
-  };
-
   return (
     <section ref={setContainerNode} className={styles.scrollTrack}>
       <div className={styles.stickyFrame}>
         
-        {/* Pinned Title */}
-        <motion.div 
-          className={styles.stackHeader}
-          style={{ 
-            opacity: isMobile ? 1 : titleOpacity, 
-            scale: isMobile ? 1 : titleScale, 
-            y: isMobile ? 0 : titleY 
-          }}
-        >
-          <h2 className={styles.stackTitle}>The Arsenal</h2>
-          <p className={styles.stackDesc}>Where design precision meets engineering scale. The instruments I use to forge digital experiences.</p>
-        </motion.div>
+        {/* Pinned Title with Magic UI Character Animation */}
+        <div className={styles.stackHeader}>
+          <TextAnimate as="h2" by="character" className={styles.stackTitle}>
+            The Arsenal
+          </TextAnimate>
+          <p className={styles.stackDesc}>Where design precision meets engineering scale. The instruments and intelligence I use to forge digital experiences.</p>
+        </div>
 
         {/* Sliding Cards */}
         <div className={styles.cardsContainer}>
           <div className={styles.stagesWrapper}>
             {isMobile
-              ? WORKFLOW_STAGES.map((stage) => (
+              ? WORKFLOW_STAGES.map((stage, i) => (
                   <MobileStageCard 
                     key={stage.id} 
                     stage={stage} 
+                    index={i}
                     handleStageInteraction={handleStageInteraction}
                   />
                 ))

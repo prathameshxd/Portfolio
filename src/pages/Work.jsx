@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Tilt from 'react-parallax-tilt';
 import Footer from '../components/Footer';
+import TextAnimate from '../components/TextAnimate';
 import styles from './Work.module.css';
 import SEO from '../components/SEO';
 
@@ -13,19 +14,21 @@ export default function Work() {
         description="Explore my recent case studies and projects in UI/UX design."
       />
       <section className={styles.hero}>
-        <motion.div 
-          className={styles.heroContent}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="h1-display" style={{ marginBottom: '1rem' }}>
+        <div className={styles.heroContent}>
+          <TextAnimate 
+            as="h1" 
+            by="character" 
+            className="h1-display" 
+            startDelay={0.7} 
+            stagger={0.05}
+            style={{ marginBottom: '1rem' }}
+          >
             Selected Work
-          </h1>
+          </TextAnimate>
           <p className={styles.subtitle}>
             A showcase of my recent case studies and projects. More coming soon.
           </p>
-        </motion.div>
+        </div>
       </section>
 
       <section className={styles.projectsSection}>

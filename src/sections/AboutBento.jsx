@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiCamera, FiBookOpen } from 'react-icons/fi';
+import TextAnimate from '../components/TextAnimate';
 import styles from './AboutBento.module.css';
 
 const hobbiesImages = [
@@ -86,15 +87,9 @@ export default function AboutBento() {
 
   return (
     <section className={styles.bentoSection}>
-      <motion.h2
-        className={styles.sectionTitle}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
-      >
+      <TextAnimate as="h2" by="character" className={styles.sectionTitle}>
         About
-      </motion.h2>
+      </TextAnimate>
 
       <motion.div 
         ref={gridRef}

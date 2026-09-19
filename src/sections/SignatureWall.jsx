@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useInView, useAnimation } from 'framer-motion'
 import { ref, onValue, push } from 'firebase/database';
 import { db } from '../utils/firebase';
 import { sanitizeInput } from '../utils/sanitizeInput';
+import TextAnimate from '../components/TextAnimate';
 import styles from './SignatureWall.module.css';
 
 let badwordsInstance = null;
@@ -212,15 +213,9 @@ export default function SignatureWall() {
         initial="hidden"
         animate={controls}
       >
-        <motion.h2 
-          className={styles.title}
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-          }}
-        >
+        <TextAnimate as="h2" by="character" className={styles.title}>
           Leave a Note for Me
-        </motion.h2>
+        </TextAnimate>
         
         <motion.p 
           className={styles.subtitle}
