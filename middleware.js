@@ -13,7 +13,9 @@ export default async function middleware(request) {
         status: 200,
         headers: {
           'Content-Type': 'text/markdown; charset=utf-8',
-          'Vary': 'Accept, Accept-Encoding'
+          'Vary': 'Accept, Accept-Encoding',
+          'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+          'Link': '</llms-full.txt>; rel="alternate"; type="text/markdown"; title="Extended LLM Context"'
         }
       });
     }

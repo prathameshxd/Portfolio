@@ -1,23 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
   <url>
     <loc>https://prathameshxd.vercel.app/</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/photo.webp</image:loc>
+      <image:title>Prathamesh Patil - UI/UX Designer</image:title>
+      <image:caption>Portfolio of Prathamesh Patil, UI/UX Designer based in Kalyan, Maharashtra, India</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/avatar.webp</image:loc>
+      <image:title>Prathamesh Patil Avatar</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/images/hero-anime-meadow-4k.webp</image:loc>
+      <image:title>Hero Background - Anime Meadow</image:title>
+    </image:image>
   </url>
+
+  <!-- Projects Listing -->
   <url>
     <loc>https://prathameshxd.vercel.app/projects</loc>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/mockups/splash-screen.webp</image:loc>
+      <image:title>PathParcel Splash Screen Mockup</image:title>
+      <image:caption>High-fidelity mockup of the PathParcel mobile app splash screen</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/mockups/onboarding-1.webp</image:loc>
+      <image:title>PathParcel Onboarding Screen 1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/mockups/onboarding-2.webp</image:loc>
+      <image:title>PathParcel Onboarding Screen 2</image:title>
+    </image:image>
   </url>
+
+  <!-- PathParcel Case Study -->
   <url>
     <loc>https://prathameshxd.vercel.app/projects/pathparcel</loc>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/mockups/home-sender.webp</image:loc>
+      <image:title>PathParcel Sender Dashboard</image:title>
+      <image:caption>Sender dashboard showing dual-mode interface for parcel dispatch</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/mockups/home-commuter.webp</image:loc>
+      <image:title>PathParcel Commuter Mode</image:title>
+      <image:caption>Commuter mode dashboard for accepting delivery requests</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/mockups/tracking.webp</image:loc>
+      <image:title>PathParcel Live Tracking and OTP</image:title>
+      <image:caption>Real-time parcel tracking with OTP verification interface</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/mockups/delivery-complete.webp</image:loc>
+      <image:title>PathParcel Delivery Complete</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/mockups/profile.webp</image:loc>
+      <image:title>PathParcel User Profile</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/mockups/activity.webp</image:loc>
+      <image:title>PathParcel Past Deliveries</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/mockups/commuter-wallet.webp</image:loc>
+      <image:title>PathParcel Commuter Earnings Wallet</image:title>
+    </image:image>
   </url>
+
+  <!-- Contact Page -->
   <url>
     <loc>https://prathameshxd.vercel.app/contact</loc>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- About Page -->
+  <url>
+    <loc>https://prathameshxd.vercel.app/about</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://prathameshxd.vercel.app/photo.webp</image:loc>
+      <image:title>Prathamesh Patil - About</image:title>
+    </image:image>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://prathameshxd.vercel.app/privacy</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Developer Portal -->
+  <url>
+    <loc>https://prathameshxd.vercel.app/developers</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- API Documentation -->
+  <url>
+    <loc>https://prathameshxd.vercel.app/docs</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>

@@ -1,4 +1,27 @@
+# Robots.txt for prathameshxd.vercel.app
+# Portfolio of Prathamesh Patil — UI/UX Designer
+
 User-agent: *
 Allow: /
+Allow: /projects
+Allow: /projects/pathparcel
+Allow: /contact
+Allow: /about
+Allow: /developers
+Allow: /docs
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /openapi.json
+Allow: /sitemap.xml
 
+# Block search engines from indexing raw image assets & non-content paths
+Disallow: /api/
+Disallow: /*.heic$
+Disallow: /*.jpg$
+
+# Sitemaps
 Sitemap: https://prathameshxd.vercel.app/sitemap.xml
+
+# AI/LLM agents: see /llms.txt for portfolio context
+# Developer integrations: see /openapi.json for API spec
+# Human-readable docs: see /developers

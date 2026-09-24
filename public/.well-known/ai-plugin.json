@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Prathamesh Patil Portfolio",
+  "name_for_model": "prathamesh_patil_portfolio",
+  "description_for_human": "Explore the UI/UX design portfolio of Prathamesh Patil — case studies, projects, and contact information.",
+  "description_for_model": "This plugin provides access to Prathamesh Patil's UI/UX design portfolio. Use it to retrieve project information, case studies (like PathParcel), contact details, and professional background. Prathamesh is a UI/UX Designer and Frontend Developer based in Kalyan, Maharashtra, India, specializing in storytelling design portfolios, design systems, and mobile app design. He is available for hire (freelance and full-time). The API returns structured project data. For extended context, read /llms-full.txt.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://prathameshxd.vercel.app/openapi.json",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://prathameshxd.vercel.app/favicon.svg",
+  "contact_email": "prathmeshpatila5@gmail.com",
+  "legal_info_url": "https://prathameshxd.vercel.app/privacy"
+}
