@@ -267,7 +267,7 @@ export default function StickyStackSection() {
           <TextAnimate as="h2" by="character" className={styles.stackTitle}>
             The Arsenal
           </TextAnimate>
-          <p className={styles.stackDesc}>Where design precision meets engineering scale. The instruments and intelligence I use to forge digital experiences.</p>
+          <p className={styles.stackDesc}>The tools I use to explore ideas, try things out, and learn as I go.</p>
         </div>
 
         {/* Sliding Cards */}
