@@ -129,9 +129,21 @@ export default function AboutBento() {
 
         {/* Current Role Card */}
         <motion.div variants={cardVariants} className={`${styles.bentoCard} ${styles.cardAvailability}`}>
-          <div className={styles.pingGreen}></div>
-          <img src="/intelgrader-logo.png" alt="Intelgrader" style={{ width: '140px', height: 'auto', marginBottom: '12px', filter: 'brightness(1.1)', borderRadius: '6px' }} />
-          <h3 className={styles.statLabel} style={{ fontSize: '1.1rem', color: '#ffffff', opacity: 1, fontWeight: '700', lineHeight: 1.3 }}>Product Design Intern</h3>
+          <div className={styles.availMesh}></div>
+          <div className={styles.availHeader}>
+            <div className={styles.statusBadge}>
+              <span className={styles.statusDot}></span>
+              <span className={styles.statusText}>Currently</span>
+            </div>
+          </div>
+          <div className={styles.availBody}>
+            <div className={styles.availLogoWrap}>
+              <img src="/intelgrader-logo.png" alt="Intelgrader" className={styles.availLogo} />
+            </div>
+            <h3 className={styles.availRole}>Product Design Intern</h3>
+            <p className={styles.availCompany}>@ Intelgrader</p>
+          </div>
+          <div className={styles.availAccent}></div>
         </motion.div>
 
         {/* Hobbies Card */}
