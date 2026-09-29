@@ -127,16 +127,11 @@ export default function AboutBento() {
           <p className={styles.statDesc}>Mumbai University (2023–2026)</p>
         </motion.div>
 
-        {/* Availability Card */}
+        {/* Current Role Card */}
         <motion.div variants={cardVariants} className={`${styles.bentoCard} ${styles.cardAvailability}`}>
           <div className={styles.pingGreen}></div>
-          <h3 className={styles.statLabel} style={{ fontSize: '1.25rem', color: 'var(--accent)', opacity: 1, fontWeight: '800', lineHeight: 1.2 }}>AVAILABLE FOR<br />WORK</h3>
-          <p className={styles.statDesc} style={{ fontSize: '1.05rem', color: '#ffffff', opacity: 1, fontWeight: '500', marginTop: '8px', lineHeight: 1.4 }}>
-            UI/UX & Product Design<br />
-            <span style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.6)', marginTop: '4px', display: 'inline-block', fontFamily: 'var(--font-mono)' }}>
-              Prev: UX/UI Intern @ YUPE
-            </span>
-          </p>
+          <img src="/intelgrader-logo.png" alt="Intelgrader" style={{ width: '140px', height: 'auto', marginBottom: '12px', filter: 'brightness(1.1)', borderRadius: '6px' }} />
+          <h3 className={styles.statLabel} style={{ fontSize: '1.1rem', color: '#ffffff', opacity: 1, fontWeight: '700', lineHeight: 1.3 }}>Product Design Intern</h3>
         </motion.div>
 
         {/* Hobbies Card */}
